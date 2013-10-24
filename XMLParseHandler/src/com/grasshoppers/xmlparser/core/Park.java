@@ -1,4 +1,4 @@
-package XMLParser;
+package com.grasshoppers.xmlparser.core;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class Park{
 	private int 			id;
 	private String 			name;
 	//Note: 0/F means not official. 1/T means official
-	private boolean 		isOfficial;
+	private int 			isOfficial;
 	private int				streetNum;
 	private String			streetName;
 	private String			ewStreet;
@@ -57,16 +57,16 @@ public class Park{
 		this.name = name;
 	}
 
-	public boolean isOfficial() {
+	public int isOfficial() {
 		return isOfficial;
 	}
 
 	//Note: 0/F means not official. 1/T means official
 	public void setOfficial(String isOfficial) {
 		if (Integer.parseInt(isOfficial) == 0)
-			this.isOfficial = false;
+			this.isOfficial = 0;
 		else
-			this.isOfficial = true;
+			this.isOfficial = 1;
 	}
 
 	public int getStreetNum() {
