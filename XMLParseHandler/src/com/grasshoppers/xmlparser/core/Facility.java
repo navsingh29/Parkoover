@@ -1,4 +1,4 @@
-package XMLParser;
+package com.grasshoppers.xmlparser.core;
 
 public class Facility {
 

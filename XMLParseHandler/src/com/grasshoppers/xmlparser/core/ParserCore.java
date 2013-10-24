@@ -1,4 +1,4 @@
-package XMLParser;
+package com.grasshoppers.xmlparser.core;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,8 +30,8 @@ public class ParserCore extends DefaultHandler {
 	private List<Facility> 	facList;
 
 	
-	public void processSource (String url) {
-		this.srcLink = url;
+	public  ParserCore (String url) {
+		srcLink = url;
 		parkList = new ArrayList<Park>(300);
 		parse();
 	}
@@ -115,6 +115,7 @@ public class ParserCore extends DefaultHandler {
 			}
 		} else if (qName.equalsIgnoreCase("SpecialFeature")) {
 			tempFac = null;
+			tempFac = new Facility(2);
 			tempFac.setFeature(tempStore);
 			facList.add(tempFac);
 			tempFac = null;
@@ -146,7 +147,8 @@ public class ParserCore extends DefaultHandler {
 	
 	@Override
 	public void characters (char[] ch, int start, int length) throws SAXException{
-		tempStore = new String(ch, start, length);
+		String temp = new String(ch, start, length);
+		tempStore = temp.replaceAll("'", "");
 	}
 	
 	public List<Park> get() {
