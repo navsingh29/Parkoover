@@ -16,13 +16,28 @@ public class ParkModel extends DBManager {
 	
 	
 	
-	public static void findParks() {
+	public static void findParks(String name, String neighbourhood) {
 		Connection conn = getConnection();
 		
-		String query = "SELECT * FROM "+DBNAME;
+		String query;
 		
+		if (name!=null&&neighbourhood==null) {
+		query = "SELECT * FROM "+DBNAME
+				+ "WHERE name LIKE "+name;
+		} else if (name==null&&neighbourhood!=null) {
+			query = "SELECT * FROM "+TABLE_NEIGHBOURHOOD
+					+ "WHERE name LIKE "+neighbourhood;	
+		} else if (name!=null&&neighbourhood!=null) {
+			query = "SELECT * FROM "+TABLE_NEIGHBOURHOOD
+					+","+DBNAME
+					+ "WHERE name LIKE "+neighbourhood;	
+		} 
 		
 		
 	}
+	
+	
+	
+	
 	
 }
