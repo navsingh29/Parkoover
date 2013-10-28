@@ -342,6 +342,7 @@ public class DBAdmin extends DBManager {
 	}
 
 	public static void dropAllTables() {
+	/*
 		Connection con = getConnection();
 
 		try {
@@ -353,10 +354,12 @@ public class DBAdmin extends DBManager {
 			stmt.execute("DROP TABLE "+ParkModel.DBNAME+";");			
 			
 			System.out.println("All tables successfully dropped.");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 
 		}
+		*/
 	}
 
 }
