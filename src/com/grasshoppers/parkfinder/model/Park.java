@@ -9,7 +9,11 @@ import java.util.List;
 public class Park implements Serializable {
 
 	
-// Park	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2001485435540597595L;
+	// Park	
 	private int parkId;
 	private String name;
 	private int official;

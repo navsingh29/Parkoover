@@ -32,13 +32,19 @@ public class ParkFinder implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
+	//private final GreetingServiceAsync greetingService = GWT
+	//		.create(GreetingService.class);
 
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		ServiceController clientImpl = new ServiceController(GWT.getModuleBaseURL() + "parksearch");
+		RootPanel.get().add(clientImpl.getGUIController());
+		
+		
+		
+	/*
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -90,14 +96,14 @@ public class ParkFinder implements EntryPoint {
 			/**
 			 * Fired when the user clicks on the sendButton.
 			 */
-			public void onClick(ClickEvent event) {
+	/*		public void onClick(ClickEvent event) {
 				sendNameToServer();
 			}
 
 			/**
 			 * Fired when the user types in the nameField.
 			 */
-			public void onKeyUp(KeyUpEvent event) {
+	/*		public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					sendNameToServer();
 				}
@@ -106,7 +112,7 @@ public class ParkFinder implements EntryPoint {
 			/**
 			 * Send the name from the nameField to the server and wait for a response.
 			 */
-			private void sendNameToServer() {
+	/*		private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
 				String textToServer = nameField.getText();
@@ -148,5 +154,7 @@ public class ParkFinder implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+		
+*/
 	}
 }

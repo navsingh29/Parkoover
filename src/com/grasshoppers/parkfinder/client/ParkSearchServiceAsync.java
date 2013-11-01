@@ -9,6 +9,6 @@ import com.grasshoppers.parkfinder.model.Park;
  * The async counterpart of <code>GreetingService</code>.
  */
 public interface ParkSearchServiceAsync {
-	void findParkServer(String name, String neighbourhood, String facility, AsyncCallback<List<Park>> callback)
-			throws IllegalArgumentException;
+//	void findParkServer(String name, String neighbourhood, String facility, AsyncCallback<List<Park>> callback)	throws IllegalArgumentException;
+	void getPark(AsyncCallback<String> callback);
 }
