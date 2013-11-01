@@ -34,7 +34,7 @@ public class ParkSorter {
  * @param fac Facility type
  * @return Filtered list containing only Parks that have the selected Facility type
  */
-	public List<Park> filterByFacility(List<Park> parklist, Facility fac){
+	public List<Park> filterByFacilityType(List<Park> parklist, String fac){
 		
 		List<Park> parklist2 = new ArrayList<Park>();
 		for (int i = 0; i < parklist.size(); i++){
@@ -42,7 +42,7 @@ public class ParkSorter {
 			List<Facility> faclist = park.getFacilityList();
 			if (!park.getFacilityList().isEmpty()){
 				for (int j = 0; j < faclist.size(); j++){
-					if(faclist.get(j).getType() == fac.getType()){
+					if(faclist.get(j).getType().equalsIgnoreCase(fac)){
 						parklist2.add(park);
 						break;
 					}
@@ -52,4 +52,29 @@ public class ParkSorter {
 		return parklist2;
 		
 	}
+	
+	/**
+	 *  Filters a list of Parks based on the given Facility's feature
+	 * @param parklist List of parks to be filtered
+	 * @param fac Facility Feature
+	 * @return Filtered list containing only Parks that have the selected Facility feature
+	 */
+		public List<Park> filterByFacilityFeature(List<Park> parklist, String fac){
+			
+			List<Park> parklist2 = new ArrayList<Park>();
+			for (int i = 0; i < parklist.size(); i++){
+				Park park = parklist.get(i);
+				List<Facility> faclist = park.getFacilityList();
+				if (!park.getFacilityList().isEmpty()){
+					for (int j = 0; j < faclist.size(); j++){
+						if(faclist.get(j).getFeature().equalsIgnoreCase(fac)){
+							parklist2.add(park);
+							break;
+						}
+					}
+				}
+			}
+			return parklist2;
+			
+		}
 }
