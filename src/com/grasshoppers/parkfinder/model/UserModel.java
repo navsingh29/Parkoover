@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserModel extends DBManager {
 
@@ -21,11 +23,11 @@ public class UserModel extends DBManager {
 	 * @param address
 	 * @param city
 	 */
-	public static void createNewUser(String name, String password, String firstName, String lastName, String address, String city) {
+	public static void createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country) {
 		Connection con = getConnection();
 		
-		String query = "INSERT INTO "+USER_TABLE+"(user_name,password,fname,lname,address,city) "
-				+ "VALUES (?,?,?,?,?,?);";
+		String query = "INSERT INTO "+USER_TABLE+"(user_name,password,fname,lname,address,city,province,country) "
+				+ "VALUES (?,?,?,?,?,?,?,?);";
 		try {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setString(1, name);
@@ -34,6 +36,8 @@ public class UserModel extends DBManager {
 		ps.setString(4, lastName);
 		ps.setString(5, address);
 		ps.setString(6, city);
+		ps.setString(7, province);
+		ps.setString(8, country);
 		ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,22 +50,29 @@ public class UserModel extends DBManager {
 	 * @param password
 	 * 
 	 */
-	public static void getUser(String name, String password) {
+	public static User getUser(String name, String password) {
 		Connection con = getConnection();
 		ResultSet rs;
-		String query = "SELECT * FROM "+USER_TABLE+" WHERE user_name=? AND password = ?";
+		User user = null;
+		String query = "SELECT id,user_name,fname,lname,address,city,Province,Country"
+				+ " FROM "+USER_TABLE+" WHERE user_name=? AND password = ?";
 		try {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setString(1, name);
 		ps.setString(2, password);
 		rs = ps.executeQuery();
-		while(rs.next()){
-			System.out.println(rs.getString("user_name"));
-		}
+		
+		if(rs.next()){
+			user = new User(rs);
+		} else return null;
+		
+		user.addPreferences(getParkRatings(user.getId()));
+		
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return user;
 	}
 	
 	public static void createNewParkRating(int userId, int parkId, int rating, String comment) {
@@ -85,26 +96,59 @@ public class UserModel extends DBManager {
 	 * Obtain the park ratings and comments for a particular user.
 	 * @param userId
 	 */
-	public static void getParkRatings(int userId) {
+	public static List<PreferencePark> getParkRatings(int userId) {
 		Connection con = getConnection();
 		ResultSet rs;
+		List<PreferencePark> parks = new ArrayList<PreferencePark>();
 		String query = "SELECT * FROM "+PREFS_TABLE+" pr,"+ParkModel.DBNAME+" p WHERE p.id=pr.park_id AND user_id=?";
+		query = "SELECT p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
+				+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url,"
+				+ " pr.rating,pr.comment"
+				+ " FROM "+PREFS_TABLE+" pr,"+ParkModel.DBNAME+" p,"+ParkModel.TABLE_FACILITY+" f,"+ParkModel.TABLE_HAS_FACILITY+" h,"
+				+ParkModel.TABLE_NEIGHBORHOOD+" n, "+ParkModel.TABLE_IN_NEIGHBORHOOD+" i"
+				+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"
+				+ " AND p.id=pr.park_id AND user_id=?"
+				+ " ORDER BY p.name";
+		
+		
 		try {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, userId);
 		rs = ps.executeQuery();
+
+
+		List<Integer> ids = new ArrayList<Integer>();
+		PreferencePark parkToAdd = null;
 		while(rs.next()){
-			System.out.println(rs.getString("comment"));
+			int id = rs.getInt("Park_Id");
+			if(!ids.contains(id)){
+				parkToAdd = new PreferencePark(rs);
+				ids.add(id);
+				parks.add(parkToAdd);
+			} else {
+				// TODO Check to see if parkToAdd is null or not
+				parkToAdd.addFacility(rs);
+			}
 		}
+		
+		
+		
+		
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return parks;
 	}
 	
+	
 	public static void main(String[] args) {
-		createNewParkRating(1,2,5,"This park is awesome.");
-		getParkRatings(1);
+//		createNewUser("superman","kryptonite","Clark","Kent","843 248th street","Langley","BC","Canada");
+//		createNewParkRating(1,2,5,"This park is awesome.");
+//		getParkRatings(1);
+		getUser("superman","kryptonite");
+		
 	}
 	
 }
