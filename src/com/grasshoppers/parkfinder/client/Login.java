@@ -62,6 +62,7 @@ public class Login extends Composite {
 		Button btnNewButton = new Button("New button");
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				
 				if (textBoxUsername.getText().length() == 0
 						|| textBoxPassword.getText().length() == 0) {
 						Window.alert("Username or password is empty."); 
@@ -74,6 +75,7 @@ public class Login extends Composite {
 					 else {
 						 textBoxUsername.setText(user.getFname());
 					}
+						
 			}
 		});
 		btnNewButton.setStyleName("gwt-Label-Login");

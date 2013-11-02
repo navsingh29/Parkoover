@@ -1,6 +1,9 @@
 package com.grasshoppers.parkfinder.client;
 
 
+import java.util.List;
+import java.util.Random;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -10,6 +13,7 @@ public class ServiceController {
 
 	private ParkSearchServiceAsync service;
 	private GUIController maingui;
+//	Random rnd = new Random();
 
 	public ServiceController(String url) {
 		this.service = GWT.create(ParkSearchService.class);
@@ -40,6 +44,28 @@ public class ServiceController {
 			}
 			
 		});
+	}
+	
+	public void getParkList() {
+		
+		service.findParkServer("ridge", null, null, new AsyncCallback<List<Park>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				maingui.setResultLabel(caught.toString());
+				
+			}
+
+			@Override
+			public void onSuccess(List<Park> result) {
+				int size = result.size();
+				int i = size-1;//rnd.nextInt(size);
+				maingui.setResultLabel(size+" parks found. Random park found is:"+ result.get(i).getName());
+			}
+			
+			
+		});
+		
 	}
 	
 	

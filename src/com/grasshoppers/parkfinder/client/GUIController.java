@@ -13,6 +13,8 @@ public class GUIController extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
 	private TextBox textBox1;
 	private Label resultLbl;
+	
+	
 	private ServiceController service;
 	
 	
@@ -22,8 +24,14 @@ public class GUIController extends Composite{
 	Button button1 = new Button("Click For Park");
 	button1.addClickHandler(new Button1ClickHandler());
 	
+	
+	
 		vPanel.add(textBox1);
 		vPanel.add(button1);
+		
+		resultLbl = new Label("A label");
+		vPanel.add(resultLbl);
+		
 	//	vPanel.add(new Login());
 	//	vPanel.add(new Search());
 		
@@ -36,13 +44,19 @@ public class GUIController extends Composite{
 		textBox1.setText(text);
 	}
 	
+	public void setResultLabel(String text) {
+		resultLbl.setText(text);
+	}
+	
 	private class Button1ClickHandler implements ClickHandler {
 
 		@Override
 		public void onClick(ClickEvent event) {
 			service.getParkName();
-			
+			service.getParkList();
 		}
+		
+		
 		
 		
 		

@@ -10,7 +10,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("parksearch")
 public interface ParkSearchService extends RemoteService {
-//	List<Park> findParkServer(String name, String neighbourhood, String facility) throws IllegalArgumentException;
+	List<Park> findParkServer(String name, String neighbourhood, String facility) throws IllegalArgumentException;
 	String getPark();
 	
 	

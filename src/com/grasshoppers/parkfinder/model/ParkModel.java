@@ -37,7 +37,7 @@ public class ParkModel extends DBManager {
 						+ " FROM "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
 						+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"
-						+ " p.name LIKE ?"
+						+ " AND p.name LIKE ?"
 						+ " ORDER BY p.name";
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+park+"%");

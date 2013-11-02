@@ -15,14 +15,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		ParkSearchService {
-/*
+
 	@Override
 	public List<Park> findParkServer(String name, String neighbourhood,
 			String facility) throws IllegalArgumentException {
-		  List<Park> parks = ParkModel.findParks(name, neighbourhood, facility);
+		  List<Park> parks = new ParkModel().findParks(name, neighbourhood, facility);
 		return parks;
 	}
-*/
+
 	
 	public String getPark() {
 	//	User user = UserModel.getUser("superman", "kryptonite");
