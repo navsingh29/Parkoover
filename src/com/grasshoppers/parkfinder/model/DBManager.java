@@ -8,7 +8,7 @@ public class DBManager {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = ConnectionManager.getInstance().getConnection();
+			con = new ConnectionManager().getInstance().getConnection();
 		} catch (ClassNotFoundException e2) {
 			e2.printStackTrace();
 		}

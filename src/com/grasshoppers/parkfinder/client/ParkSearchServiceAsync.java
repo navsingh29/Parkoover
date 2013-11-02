@@ -3,7 +3,6 @@ package com.grasshoppers.parkfinder.client;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.grasshoppers.parkfinder.model.Park;
 
 /**
  * The async counterpart of <code>GreetingService</code>.

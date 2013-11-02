@@ -1,2 +1,0 @@
-serviceClass: com.grasshoppers.parkfinder.client.GreetingService
-path: 72BE0C1A7217A5FA1637B6D31C74BB39.gwt.rpc

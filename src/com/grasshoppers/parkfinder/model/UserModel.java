@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.grasshoppers.parkfinder.client.PreferencePark;
+import com.grasshoppers.parkfinder.client.User;
+
 public class UserModel extends DBManager {
 
 	public static final String USER_TABLE = "user";
@@ -63,7 +66,7 @@ public class UserModel extends DBManager {
 		rs = ps.executeQuery();
 		
 		if(rs.next()){
-			user = new User(rs);
+			user = ModelFactory.makeUser(rs);
 		} else return null;
 		
 		user.addPreferences(getParkRatings(user.getId()));
@@ -123,19 +126,14 @@ public class UserModel extends DBManager {
 		while(rs.next()){
 			int id = rs.getInt("Park_Id");
 			if(!ids.contains(id)){
-				parkToAdd = new PreferencePark(rs);
+				parkToAdd = ModelFactory.makePreferencPark(rs);
 				ids.add(id);
 				parks.add(parkToAdd);
 			} else {
 				// TODO Check to see if parkToAdd is null or not
-				parkToAdd.addFacility(rs);
+				parkToAdd.addFacility(ModelFactory.makeFacility(rs));
 			}
 		}
-		
-		
-		
-		
-		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

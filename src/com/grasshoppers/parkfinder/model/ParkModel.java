@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.grasshoppers.parkfinder.client.Facility;
+import com.grasshoppers.parkfinder.client.Park;
+
 import sun.font.CreatedFontTracker;
 
 public class ParkModel extends DBManager {
@@ -20,7 +23,7 @@ public class ParkModel extends DBManager {
 	public static final String TABLE_IN_NEIGHBORHOOD = "In_Neighborhood";	
 	
 	
-	public static List<Park> findParks(String park, String neighbourhood, String facility) {
+	public List<Park> findParks(String park, String neighbourhood, String facility) {
 		Connection con = getConnection();
 		String query;
 		PreparedStatement ps = null;
@@ -130,16 +133,56 @@ public class ParkModel extends DBManager {
 			while(rs.next()){
 				int id = rs.getInt("Park_Id");
 				if(!ids.contains(id)){
-					parkToAdd = new Park(rs);
+					parkToAdd = ModelFactory.makePark(rs);
+				/*	
+					facilityList.add(new Facility(rs));
+					
+					parkToAdd.setParkId(rs.getInt("Park_Id"));
+					parkToAdd.setName(rs.getString("name"));
+					parkToAdd.setOfficial(rs.getInt("official"));
+					parkToAdd.setStreet_number(rs.getInt("street_number"));
+					parkToAdd.setStreet_name(rs.getString("street_name"));
+					parkToAdd.setEw_street(rs.getString("ew_street"));
+					parkToAdd.setNs_street(rs.getString("ns_street"));
+					parkToAdd.setMap_x_loc(rs.getDouble("map_x_loc"));
+					parkToAdd.setHectares(rs.getDouble("hectares"));
+					
+					parkToAdd.setNeighbourhoodId(rs.getInt("Neighborhood_Id"));
+					parkToAdd.setNeighbourhoodName(rs.getString("Neighborhood_Name"));
+					parkToAdd.setUrl(rs.getString("Neighborhood_Name"));
+					
+					Facility facilityToAdd = new Facility(rs);
+					
+					facilityToAdd.setFacilityId(rs.getInt("Facility_Id"));
+					facilityToAdd.setType(rs.getString("type"));
+					facilityToAdd.setFeature(rs.getString("feature"));
+					facilityToAdd.setLocation(rs.getString("location"));
+					facilityToAdd.setNote(rs.getString("note"));
+					facilityToAdd.setSummer_hours(rs.getString("summer_hours"));
+					facilityToAdd.setWinter_hours(rs.getString("winter_hours"));
+			*/		
+					
 					ids.add(id);
 					parks.add(parkToAdd);
+					
+					
+					
 				} else {
 					// TODO Check to see if parkToAdd is null or not
-					parkToAdd.addFacility(rs);
+					parkToAdd.addFacility(ModelFactory.makeFacility(rs));
 				}
 			}
 		} catch(SQLException e){
 			e.printStackTrace();
+		} finally {
+			if (con!=null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		return parks;
@@ -208,7 +251,12 @@ public class ParkModel extends DBManager {
 	
 	public static void main(String[] args){
 		
-		findParks(null, "ridge","ball");
+		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+		
 	}
 
 }

@@ -24,13 +24,10 @@ public class GUIController extends Composite{
 	
 		vPanel.add(textBox1);
 		vPanel.add(button1);
-		vPanel.add(new Login());
-		vPanel.add(new Search());
+	//	vPanel.add(new Login());
+	//	vPanel.add(new Search());
 		
 		this.service = service;
-	
-	
-	
 	}
 	
 	

@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class ConnectionManager {
 
-	private static ConnectionManager instance = null;
+	private ConnectionManager instance = null;
 	
 	private final String CONN_STRING = "jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/parkfinder";
 	private final String USERNAME = "grasshoppers";
@@ -14,10 +14,10 @@ public class ConnectionManager {
 	
 	private Connection conn = null;
 	
-	private ConnectionManager(){
+	ConnectionManager(){
 	}
 	
-	public static ConnectionManager getInstance() {
+	public ConnectionManager getInstance() {
 		
 		if(instance==null){
 			instance = new ConnectionManager();

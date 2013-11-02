@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List; 
 
+import com.grasshoppers.parkfinder.client.Facility;
+import com.grasshoppers.parkfinder.client.Park;
+
 public class ParkSorter {
 
 	
