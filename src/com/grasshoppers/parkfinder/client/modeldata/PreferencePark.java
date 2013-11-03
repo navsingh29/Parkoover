@@ -1,10 +1,10 @@
-package com.grasshoppers.parkfinder.client;
+package com.grasshoppers.parkfinder.client.modeldata;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Park implements Serializable {
+public class PreferencePark implements Serializable {
 
 	
 // Park	
@@ -27,7 +27,12 @@ public class Park implements Serializable {
 // Facilities
 	private List<Facility> facilityList = new ArrayList<Facility>();
 	
-	public Park() {
+// Preference Stuff
+	private int rating;
+	private String comment;
+	
+	public PreferencePark() {
+	
 	}
 
 	public void addFacility(Facility facility) {
@@ -142,13 +147,27 @@ public class Park implements Serializable {
 		this.url = url;
 	}
 
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return name+":"+parkId;
 	}
-	
-	
-	
 	
 }

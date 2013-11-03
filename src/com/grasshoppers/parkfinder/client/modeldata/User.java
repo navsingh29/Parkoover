@@ -1,4 +1,4 @@
-package com.grasshoppers.parkfinder.client;
+package com.grasshoppers.parkfinder.client.modeldata;
 
 import java.io.Serializable;
 import java.util.ArrayList;

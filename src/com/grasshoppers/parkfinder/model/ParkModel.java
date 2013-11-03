@@ -9,8 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grasshoppers.parkfinder.client.Facility;
-import com.grasshoppers.parkfinder.client.Park;
+import com.grasshoppers.parkfinder.client.modeldata.Facility;
+import com.grasshoppers.parkfinder.client.modeldata.Park;
 
 import sun.font.CreatedFontTracker;
 

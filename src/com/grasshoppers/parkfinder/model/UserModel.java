@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grasshoppers.parkfinder.client.PreferencePark;
-import com.grasshoppers.parkfinder.client.User;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class UserModel extends DBManager {
 

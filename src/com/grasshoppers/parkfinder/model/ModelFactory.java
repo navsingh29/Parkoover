@@ -3,10 +3,10 @@ package com.grasshoppers.parkfinder.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.grasshoppers.parkfinder.client.Facility;
-import com.grasshoppers.parkfinder.client.Park;
-import com.grasshoppers.parkfinder.client.PreferencePark;
-import com.grasshoppers.parkfinder.client.User;
+import com.grasshoppers.parkfinder.client.modeldata.Facility;
+import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class ModelFactory {
 

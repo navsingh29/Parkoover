@@ -8,6 +8,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Widget;
+import com.grasshoppers.parkfinder.client.modeldata.Park;
 
 public class ServiceController {
 

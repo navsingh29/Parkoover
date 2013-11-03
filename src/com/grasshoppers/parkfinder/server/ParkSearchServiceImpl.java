@@ -2,9 +2,9 @@ package com.grasshoppers.parkfinder.server;
 
 import java.util.List;
 
-import com.grasshoppers.parkfinder.client.Park;
 import com.grasshoppers.parkfinder.client.ParkSearchService;
-import com.grasshoppers.parkfinder.client.User;
+import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.User;
 import com.grasshoppers.parkfinder.model.ParkModel;
 import com.grasshoppers.parkfinder.model.UserModel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
