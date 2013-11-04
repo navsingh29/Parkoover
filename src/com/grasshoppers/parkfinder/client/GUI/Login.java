@@ -1,4 +1,4 @@
-package com.grasshoppers.parkfinder.client;
+package com.grasshoppers.parkfinder.client.GUI;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -13,13 +13,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.Window;
-import com.grasshoppers.parkfinder.client.modeldata.User;
-import com.grasshoppers.parkfinder.model.UserModel;
 
 public class Login extends Composite {
 	private TextBox textBoxUsername;
 	private TextBox textBoxPassword;
-
+	private CheckBox chckbxRememberMe;
+	
 	public Login() {
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -56,27 +55,15 @@ public class Login extends Composite {
 		flexTable.getCellFormatter().setWidth(2, 0, "");
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
-		CheckBox chckbxRememberMe = new CheckBox("remember me");
+		chckbxRememberMe = new CheckBox("remember me");
 		chckbxRememberMe.setStyleName("gwt-Label-Login");
 		flexTable.setWidget(3, 0, chckbxRememberMe);
 		
 		Button btnNewButton = new Button("New button");
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
-				if (textBoxUsername.getText().length() == 0
-						|| textBoxPassword.getText().length() == 0) {
-						Window.alert("Username or password is empty."); 
-					};
-					
-					User user = UserModel.getUser(textBoxUsername.getText(), textBoxPassword.getText());
-						if (user==null){
-						Window.alert("Username or password mismatch."); 
-						}
-					 else {
-						 textBoxUsername.setText(user.getFname());
-					}
-						
+				GUIHub.buttonDoSignIn(textBoxUsername.getText(), textBoxPassword.getText(),
+						chckbxRememberMe.getValue());				
 			}
 		});
 		btnNewButton.setStyleName("gwt-Label-Login");
@@ -88,6 +75,21 @@ public class Login extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_MIDDLE);
+		
+		Button button = new Button("New button");
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				GUIHub.goToSignUp();
+			}
+		});
+		button.setText("don't have an account? sign up");
+		button.setStyleName("gwt-Label-Login");
+		flexTable.setWidget(5, 0, button);
+		button.setWidth("25%");
+		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
+	
+	
+	
 
 }
