@@ -20,10 +20,19 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.Command;
+import com.grasshoppers.parkfinder.client.GUIController;
 
 public class Search extends Composite {
 
-	public Search() {
+	private TextBox tbParkSearch;
+	private ListBox lbNeighborhood;
+	private ListBox cbFacility;
+	private GUIController controller;
+	
+	
+	public Search(GUIController controller) {
+		this.controller = controller;
+		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -64,43 +73,30 @@ public class Search extends Composite {
 		menuBar.addItem(mntmMenu);
 		mntmMenu.setWidth("100px");
 		
-		TextBox textBox = new TextBox();
-		flexTable.setWidget(2, 0, textBox);
-		textBox.setWidth("75%");
+		tbParkSearch = new TextBox();
+		flexTable.setWidget(2, 0, tbParkSearch);
+		tbParkSearch.setWidth("75%");
 		
-		ListBox comboBox = new ListBox();
-		comboBox.addItem("facility type");
-		comboBox.addItem("soccer field");
-		comboBox.addItem("park");
-		comboBox.addItem("dog park");
-		comboBox.setStyleName("gwt-Label-Login");
-		flexTable.setWidget(3, 0, comboBox);
-		comboBox.setWidth("75%");
+		cbFacility = new ListBox();
+		cbFacility.addItem("");
+		cbFacility.addItem("soccer field");
+		cbFacility.addItem("park");
+		cbFacility.addItem("dog park");
+		cbFacility.setStyleName("gwt-Label-Login");
+		flexTable.setWidget(3, 0, cbFacility);
+		cbFacility.setWidth("75%");
 		
-		ListBox listBox = new ListBox();
-		listBox.addItem("neighbourhood");
-		listBox.addItem("a");
-		listBox.addItem("b");
-		listBox.addItem("c");
-		listBox.setStyleName("gwt-Label-Login");
-		flexTable.setWidget(4, 0, listBox);
-		listBox.setWidth("75%");
+		lbNeighborhood = new ListBox();
+		lbNeighborhood.addItem("");
+		lbNeighborhood.addItem("a");
+		lbNeighborhood.addItem("b");
+		lbNeighborhood.addItem("c");
+		lbNeighborhood.setStyleName("gwt-Label-Login");
+		flexTable.setWidget(4, 0, lbNeighborhood);
+		lbNeighborhood.setWidth("75%");
 		
 		Button btnNewButton = new Button("New button");
-		btnNewButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				List<String> list = new ArrayList<String>();
-				list.add("0");
-				list.add("holy");
-				list.add("shyt");
-				list.add("it");
-				list.add("works!");
-				list.add("want");
-				list.add("a");
-				list.add("cake? =3=");
-				GUIHub.doSearch(list);
-			}
-		});
+		btnNewButton.addClickHandler(new SearchClickHandler());
 		btnNewButton.setStyleName("gwt-Label-Login");
 		btnNewButton.setText("search");
 		flexTable.setWidget(5, 0, btnNewButton);
@@ -113,6 +109,23 @@ public class Search extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(4, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_CENTER);
+	}
+	
+	
+	private class SearchClickHandler implements ClickHandler {
+		 
+				public void onClick(ClickEvent event) {
+					String park = tbParkSearch.getText();
+					
+					String facility = cbFacility.getItemText(cbFacility.getSelectedIndex());
+					String neighborhood = lbNeighborhood.getItemText(lbNeighborhood.getSelectedIndex());
+					
+					controller.doSearch(park,facility,neighborhood);
+					
+					
+				}
+		
+		
 	}
 
 }

@@ -24,10 +24,13 @@ import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.Command;
+import com.grasshoppers.parkfinder.client.modeldata.Park;
 
 public class Results extends Composite {
 
-	public Results(List<String> list) {
+	public Results(List<Park> parks) {
+		
+		
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -75,14 +78,14 @@ public class Results extends Composite {
 		
 		MenuItem mntmSort_1 = new MenuItem("sort", false, menuBar_5);
 		
-		final List<String> toSort = list;
+		
+		
 		MenuItem mntmAlphabetical = new MenuItem("alphabetical", false, new Command() {
 			public void execute() {
-				Collections.sort(toSort);
-				List<String> newList = toSort;
-				GUIHub.doSearch(newList);
 			}
 		});
+		
+		
 		mntmAlphabetical.setHTML("ABC");
 		menuBar_5.addItem(mntmAlphabetical);
 		menuBar_4.addItem(mntmSort_1);
@@ -115,26 +118,27 @@ public class Results extends Composite {
 		verticalPanel_1.add(chckbxNewCheckBox);
 		*/
 		
-		for (int i = 0; i< list.size(); i++ ) {
+	//	for (int i = 0; i< parks.size(); i++ ) {
+		for (Park park: parks) {
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
-			decoratedStackPanel.add(verticalPanel_2, list.get(i), false);
+			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
 			
-			Label label = new Label("facility type: "+list.get(i));
+			Label label = new Label("Address: "+park.getStreet_name());
 			label.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(label);
 			
-			Label label_1 = new Label("neighbourhood: "+list.get(i));
+			Label label_1 = new Label("Neighbourhood: "+park.getNeighbourhoodName());
 			label_1.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(label_1);
 			
-			final String curr = list.get(i);
 			CheckBox chckbxFavourite = new CheckBox("favourite");
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
-					Window.alert("changed: "+curr);
+					Window.alert("changed: ");
 				}
 			});
+			
 			chckbxFavourite.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(chckbxFavourite);
 		}

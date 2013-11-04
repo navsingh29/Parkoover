@@ -142,10 +142,10 @@ public class UserModel extends DBManager {
 	
 	
 	public static void main(String[] args) {
-//		createNewUser("superman","kryptonite","Clark","Kent","843 248th street","Langley","BC","Canada");
+		createNewUser("batman","batmobile","Bruce","Wayne",null,"Gotham City",null,"USA");
 //		createNewParkRating(1,2,5,"This park is awesome.");
 //		getParkRatings(1);
-		getUser("superman","kryptonite");
+//		getUser("superman","kryptonite");
 		
 	}
 	

@@ -13,14 +13,16 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.Window;
+import com.grasshoppers.parkfinder.client.GUIController;
 
 public class Login extends Composite {
 	private TextBox textBoxUsername;
 	private TextBox textBoxPassword;
 	private CheckBox chckbxRememberMe;
+//	private GUIController controller;
 	
-	public Login() {
-		
+	public Login(final GUIController controller) {
+//		this.controller = controller;
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -62,7 +64,7 @@ public class Login extends Composite {
 		Button btnNewButton = new Button("New button");
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				GUIHub.buttonDoSignIn(textBoxUsername.getText(), textBoxPassword.getText(),
+				controller.buttonDoSignIn(textBoxUsername.getText(), textBoxPassword.getText(),
 						chckbxRememberMe.getValue());				
 			}
 		});
@@ -88,6 +90,7 @@ public class Login extends Composite {
 		button.setWidth("25%");
 		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
+	
 	
 	
 	

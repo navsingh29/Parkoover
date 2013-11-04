@@ -49,10 +49,10 @@ public class GUIHub implements EntryPoint {
 		rootPanel.add(horizontalPanel, 0, 0);
 		horizontalPanel.setSize("450px", "300px");
 		
-		Login log = new Login();
-		horizontalPanel.add(log);
+	//	Login log = new Login();
+	//	horizontalPanel.add(log);
 		
-		clientImpl = new ServiceController(GWT.getModuleBaseURL() + "parksearch");
+	//	clientImpl = new ServiceController();
 		
 	}
 	
@@ -70,8 +70,8 @@ public class GUIHub implements EntryPoint {
 
 	public static void goToLogIn() {
 		horizontalPanel.clear();
-		Login login = new Login();
-		horizontalPanel.add(login);
+	//	Login login = new Login();
+	//	horizontalPanel.add(login);
 	}
 	
 
@@ -93,8 +93,8 @@ public class GUIHub implements EntryPoint {
 			Window.alert("Query check on: "+username+", "+password+", with Remember Me: "+rememberMe);
 			System.out.println("Query check on: "+username+", "+password+", with Remember Me: "+rememberMe);
 			horizontalPanel.clear();
-			Search search = new Search();
-			horizontalPanel.add(search);
+	//		Search search = new Search();
+	//		horizontalPanel.add(search);
 		}
 	}
 	
@@ -111,9 +111,12 @@ public class GUIHub implements EntryPoint {
 
 
 	public static void doSearch(List<String> list) {
+		
 		horizontalPanel.clear();
-		Results results = new Results(list);
-		horizontalPanel.add(results);
+	//	Results results = new Results(list);
+	//	horizontalPanel.add(results);
+		
+		
 	}
 
 

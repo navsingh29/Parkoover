@@ -20,8 +20,8 @@
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
-  <!-- <entry-point class='com.grasshoppers.parkfinder.client.ParkFinder'/>-->
-  <entry-point class='com.grasshoppers.parkfinder.client.GUI.GUIHub'/>
+ <entry-point class='com.grasshoppers.parkfinder.client.ParkFinder'/>
+ <!--   <entry-point class='com.grasshoppers.parkfinder.client.GUI.GUIHub'/>-->
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>

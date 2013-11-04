@@ -2,9 +2,8 @@ package com.grasshoppers.parkfinder.client;
 
 
 import java.util.List;
-import java.util.Random;
 
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Widget;
@@ -14,13 +13,14 @@ public class ServiceController {
 
 	private ParkSearchServiceAsync service;
 	private GUIController maingui;
-//	Random rnd = new Random();
 
-	public ServiceController(String url) {
+	public ServiceController() {
+		String url = GWT.getModuleBaseURL() + "parksearch";
 		this.service = GWT.create(ParkSearchService.class);
 		ServiceDefTarget endpoint = (ServiceDefTarget) this.service;
 		endpoint.setServiceEntryPoint(url);
 		this.maingui = new GUIController(this);
+		
 	}
 
 	public Widget getGUIController() {
@@ -34,34 +34,33 @@ public class ServiceController {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				maingui.setTextBox(caught.toString());
+				
 				
 			}
 
 			@Override
 			public void onSuccess(String result) {
-				maingui.setTextBox(result);
+				
 				
 			}
 			
 		});
 	}
 	
-	public void getParkList() {
+	public void getParkList(String park, String facility, String neighborhood) {
 		
-		service.findParkServer("ridge", null, null, new AsyncCallback<List<Park>>(){
+			service.findParkServer(park, neighborhood, facility, new AsyncCallback<List<Park>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
-				maingui.setResultLabel(caught.toString());
+				
 				
 			}
 
 			@Override
 			public void onSuccess(List<Park> result) {
-				int size = result.size();
-				int i = size-1;//rnd.nextInt(size);
-				maingui.setResultLabel(size+" parks found. Random park found is:"+ result.get(i).getName());
+				maingui.displayParks(result);
+		
 			}
 			
 			
