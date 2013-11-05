@@ -19,15 +19,12 @@ import com.grasshoppers.parkfinder.client.GUI.Results;
 import com.grasshoppers.parkfinder.client.GUI.Search;
 import com.grasshoppers.parkfinder.client.GUI.Signup;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.shared.StringMethods;
 
 public class GUIController extends Composite{
 
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
-
-	
 	private ServiceController service;
-	
-	
 	public GUIController(ServiceController service) {
 	initWidget(horizontalPanel);
 	this.service = service;
@@ -42,9 +39,9 @@ public class GUIController extends Composite{
 	
 
 
-	//=============================================================================================================
+//=============================================================================================================
 //		GOTOs
-	//=============================================================================================================
+//=============================================================================================================
 		
 		public void goToSignUp() {
 			horizontalPanel.clear();
@@ -66,9 +63,9 @@ public class GUIController extends Composite{
 			horizontalPanel.add(pList);
 		}
 		
-	//=============================================================================================================
+//=============================================================================================================
 //		OnClick Triggers
-	//=============================================================================================================
+//=============================================================================================================
 		
 		public void buttonDoSignIn(String username, String password, Boolean rememberMe ) {
 			if (username.length() == 0 || password.length() == 0) {
@@ -96,16 +93,10 @@ public class GUIController extends Composite{
 
 
 		public void doSearch(String park, String facility, String neighborhood) {
-		//	park = retString(park);
-		//	facility = retString(facility);
-		//	neighborhood = retString(neighborhood);
-			
-			
+			park = StringMethods.retString(park);
+			facility = StringMethods.retString(facility);
+			neighborhood = StringMethods.retString(neighborhood);
 			service.getParkList(park, neighborhood, facility);
-			
-		
-			
-			
 		}
 
 		public void displayParks(List<Park> parks) {
@@ -113,19 +104,7 @@ public class GUIController extends Composite{
 			Results results = new Results(parks);
 			horizontalPanel.add(results);
 			
-		}
-		
-		
-		public String retString (String string) {
-			string = string.trim();
-			if (string.equals(""))
-				return null;
-			else return string;
-		}
-		
-		
-		
-		
+		}		
 	}
 	
 	

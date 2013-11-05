@@ -18,15 +18,8 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public List<Park> findParkServer(String name, String neighbourhood,
-			String facility) throws IllegalArgumentException {
-			name = retString(name);
-			facility = retString(facility);
-			neighbourhood = retString(neighbourhood);
-				
-		
-		
-		
-		  List<Park> parks = new ParkModel().findParks(name, neighbourhood, facility);
+		String facility) throws IllegalArgumentException {
+		 List<Park> parks = new ParkModel().findParks(name, neighbourhood, facility);
 		return parks;
 	}
 
@@ -39,12 +32,7 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 	}
 
 	
-	public String retString (String string) {
-		string = string.trim();
-		if (string.equals(""))
-			return null;
-		else return string;
-	}
+	
 	
 
 }

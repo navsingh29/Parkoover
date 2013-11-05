@@ -113,8 +113,6 @@ public class UserModel extends DBManager {
 				+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"
 				+ " AND p.id=pr.park_id AND user_id=?"
 				+ " ORDER BY p.name";
-		
-		
 		try {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, userId);
@@ -142,7 +140,7 @@ public class UserModel extends DBManager {
 	
 	
 	public static void main(String[] args) {
-		createNewUser("batman","batmobile","Bruce","Wayne",null,"Gotham City",null,"USA");
+//		createNewUser("batman","batmobile","Bruce","Wayne",null,"Gotham City",null,"USA");
 //		createNewParkRating(1,2,5,"This park is awesome.");
 //		getParkRatings(1);
 //		getUser("superman","kryptonite");

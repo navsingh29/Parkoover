@@ -59,7 +59,7 @@ public class ParkModel extends DBManager {
 						+ " FROM "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
 						+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"
-						+ " AND f.type LIKE ?"
+						+ " AND p.id IN (SELECT p.id FROM park p,facility f, has_facility h WHERE f.id=h.facility_id AND p.id=h.park_id AND f.type LIKE ?)"
 						+ " ORDER BY p.name";
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+facility+"%");
@@ -82,7 +82,8 @@ public class ParkModel extends DBManager {
 						+ " FROM "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
 						+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"
-						+ " AND p.name LIKE ? AND f.type LIKE ?"
+						+ " AND p.name LIKE ?"
+						+ " AND p.id IN (SELECT p.id FROM park p,facility f, has_facility h WHERE f.id=h.facility_id AND p.id=h.park_id AND f.type LIKE ?)"
 						+ " ORDER BY p.name";
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+park+"%");
@@ -94,7 +95,8 @@ public class ParkModel extends DBManager {
 						+ " FROM "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
 						+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"
-						+ " AND n.name LIKE ? AND f.type LIKE ?"
+						+ " AND n.name LIKE ?"
+						+ " AND p.id IN (SELECT p.id FROM park p,facility f, has_facility h WHERE f.id=h.facility_id AND p.id=h.park_id AND f.type LIKE ?)"
 						+ " ORDER BY p.name";
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+neighbourhood+"%");
@@ -106,7 +108,9 @@ public class ParkModel extends DBManager {
 						+ " FROM "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
 						+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"
-						+ " AND n.name LIKE ? AND f.type LIKE ? AND p.name LIKE ?"
+						+ " AND n.name LIKE ?"
+						+ " AND p.id IN (SELECT p.id FROM park p,facility f, has_facility h WHERE f.id=h.facility_id AND p.id=h.park_id AND f.type LIKE ?)"
+						+ " AND p.name LIKE ?"
 						+ " ORDER BY p.name";
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+neighbourhood+"%");
@@ -131,34 +135,6 @@ public class ParkModel extends DBManager {
 				int id = rs.getInt("Park_Id");
 				if(!ids.contains(id)){
 					parkToAdd = ModelFactory.makePark(rs);
-				/*	
-					facilityList.add(new Facility(rs));
-					
-					parkToAdd.setParkId(rs.getInt("Park_Id"));
-					parkToAdd.setName(rs.getString("name"));
-					parkToAdd.setOfficial(rs.getInt("official"));
-					parkToAdd.setStreet_number(rs.getInt("street_number"));
-					parkToAdd.setStreet_name(rs.getString("street_name"));
-					parkToAdd.setEw_street(rs.getString("ew_street"));
-					parkToAdd.setNs_street(rs.getString("ns_street"));
-					parkToAdd.setMap_x_loc(rs.getDouble("map_x_loc"));
-					parkToAdd.setHectares(rs.getDouble("hectares"));
-					
-					parkToAdd.setNeighbourhoodId(rs.getInt("Neighborhood_Id"));
-					parkToAdd.setNeighbourhoodName(rs.getString("Neighborhood_Name"));
-					parkToAdd.setUrl(rs.getString("Neighborhood_Name"));
-					
-					Facility facilityToAdd = new Facility(rs);
-					
-					facilityToAdd.setFacilityId(rs.getInt("Facility_Id"));
-					facilityToAdd.setType(rs.getString("type"));
-					facilityToAdd.setFeature(rs.getString("feature"));
-					facilityToAdd.setLocation(rs.getString("location"));
-					facilityToAdd.setNote(rs.getString("note"));
-					facilityToAdd.setSummer_hours(rs.getString("summer_hours"));
-					facilityToAdd.setWinter_hours(rs.getString("winter_hours"));
-			*/		
-					
 					ids.add(id);
 					parks.add(parkToAdd);
 					
