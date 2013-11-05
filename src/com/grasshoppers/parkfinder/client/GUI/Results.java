@@ -24,12 +24,16 @@ import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.Command;
+import com.grasshoppers.parkfinder.client.GUIController;
+import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 
 public class Results extends Composite {
 
-	public Results(List<Park> parks) {
-		
+	private GUIController controller;
+	
+	public Results(final GUIController controller, List<Park> parks) {
+		this.controller = controller;
 		
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -63,14 +67,14 @@ public class Results extends Composite {
 		
 		MenuItem mntmSignOut = new MenuItem("sign out", false, new Command() {
 			public void execute() {
-				GUIHub.goToLogIn();
+				controller.goToLogIn();
 			}
 		});
 		menuBar_4.addItem(mntmSignOut);
 		
 		MenuItem mntmPreferenceList_1 = new MenuItem("preference list", false, new Command() {
 			public void execute() {
-				GUIHub.goToPrefList();
+				controller.goToPrefList();
 			}
 		});
 		menuBar_4.addItem(mntmPreferenceList_1);
@@ -121,16 +125,29 @@ public class Results extends Composite {
 	//	for (int i = 0; i< parks.size(); i++ ) {
 		for (Park park: parks) {
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
-			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
+			decoratedStackPanel.add(verticalPanel_2, park.getParkId()+ ". "+ park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
 			
-			Label label = new Label("Address: "+park.getStreet_name());
-			label.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(label);
+			Label address = new Label("Address: "+park.getStreet_number()+" "+park.getStreet_name());
+			address.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(address);
 			
-			Label label_1 = new Label("Neighbourhood: "+park.getNeighbourhoodName());
-			label_1.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(label_1);
+			
+			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
+			neighbourhood.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(neighbourhood);
+			
+			Label hectares = new Label("Size: "+park.getHectares()+" Hectares");
+			hectares.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(hectares);			
+			
+			String listFacName = "";
+			for (Facility fac : park.getFacilityList()) {
+				listFacName.concat(fac.getType());
+			}
+			Label label_FacilityNames = new Label("Available Facilities: "+listFacName);
+			label_FacilityNames.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(label_FacilityNames);
 			
 			CheckBox chckbxFavourite = new CheckBox("favourite");
 			chckbxFavourite.addClickHandler(new ClickHandler() {

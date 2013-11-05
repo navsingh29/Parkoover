@@ -30,7 +30,7 @@ public class Search extends Composite {
 	private GUIController controller;
 	
 	
-	public Search(GUIController controller) {
+	public Search(final GUIController controller) {
 		this.controller = controller;
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -59,14 +59,14 @@ public class Search extends Composite {
 		
 		MenuItem mntmSignOut = new MenuItem("sign out", false, new Command() {
 			public void execute() {
-				GUIHub.goToLogIn();
+				controller.goToLogIn();
 			}
 		});
 		menuBar_1.addItem(mntmSignOut);
 		
 		MenuItem mntmPreferenceList = new MenuItem("preference list", false, new Command() {
 			public void execute() {
-				GUIHub.goToPrefList();
+				controller.goToPrefList();
 			}
 		});
 		menuBar_1.addItem(mntmPreferenceList);
