@@ -38,6 +38,10 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		return parks.get(0).getName();
 	}
 
+	public User getUser(String username, String password) {
+		User user = new UserModel().getUser(username, password);
+		return user;
+	}
 	
 	public String retString (String string) {
 		string = string.trim();

@@ -19,6 +19,7 @@ import com.grasshoppers.parkfinder.client.GUI.Results;
 import com.grasshoppers.parkfinder.client.GUI.Search;
 import com.grasshoppers.parkfinder.client.GUI.Signup;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class GUIController extends Composite{
 
@@ -42,9 +43,9 @@ public class GUIController extends Composite{
 	
 
 
-	//=============================================================================================================
+//=============================================================================================================
 //		GOTOs
-	//=============================================================================================================
+//=============================================================================================================
 		
 		public void goToSignUp() {
 			horizontalPanel.clear();
@@ -66,17 +67,20 @@ public class GUIController extends Composite{
 			horizontalPanel.add(pList);
 		}
 		
-	//=============================================================================================================
-//		OnClick Triggers
-	//=============================================================================================================
+//=============================================================================================================
+//		Triggers
+//=============================================================================================================
 		
 		public void buttonDoSignIn(String username, String password, Boolean rememberMe ) {
-			if (username.length() == 0 || password.length() == 0) {
-				Window.alert("Username or password is empty."); 
+			service.getUserLogIn(username, password, rememberMe);
+		}
+		
+		public void signIntoAcc(User user, boolean remembered) {
+			if (user == null) {
+				Window.alert("Username or password is wrong."); 
 			} else {
-				
-				Window.alert("Query check on: "+username+", "+password+", with Remember Me: "+rememberMe);
-				System.out.println("Query check on: "+username+", "+password+", with Remember Me: "+rememberMe);
+				Window.alert("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
+				System.out.println("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
 				horizontalPanel.clear();
 				Search search = new Search(this);
 				horizontalPanel.add(search);
@@ -98,19 +102,13 @@ public class GUIController extends Composite{
 		public void doSearch(String park, String facility, String neighborhood) {
 		//	park = retString(park);
 		//	facility = retString(facility);
-		//	neighborhood = retString(neighborhood);
-			
-			
-			service.getParkList(park, neighborhood, facility);
-			
-		
-			
-			
+		//	neighborhood = retString(neighborhood);		
+			service.getParkList(park, neighborhood, facility);	
 		}
 
 		public void displayParks(List<Park> parks) {
 			horizontalPanel.clear();
-			Results results = new Results(parks);
+			Results results = new Results(this, parks);
 			horizontalPanel.add(results);
 			
 		}
@@ -123,7 +121,9 @@ public class GUIController extends Composite{
 			else return string;
 		}
 		
-		
+		public void warnPopup (String warning) {
+			Window.alert(warning);
+		}
 		
 		
 	}

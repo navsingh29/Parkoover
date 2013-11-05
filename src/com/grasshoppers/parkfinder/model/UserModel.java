@@ -53,7 +53,7 @@ public class UserModel extends DBManager {
 	 * @param password
 	 * 
 	 */
-	public static User getUser(String name, String password) {
+	public User getUser(String name, String password) {
 		Connection con = getConnection();
 		ResultSet rs;
 		User user = null;

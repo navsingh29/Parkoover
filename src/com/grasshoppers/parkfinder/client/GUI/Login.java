@@ -19,10 +19,10 @@ public class Login extends Composite {
 	private TextBox textBoxUsername;
 	private TextBox textBoxPassword;
 	private CheckBox chckbxRememberMe;
-//	private GUIController controller;
+	private GUIController controller;
 	
 	public Login(final GUIController controller) {
-//		this.controller = controller;
+		this.controller = controller;
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -61,11 +61,15 @@ public class Login extends Composite {
 		chckbxRememberMe.setStyleName("gwt-Label-Login");
 		flexTable.setWidget(3, 0, chckbxRememberMe);
 		
-		Button btnNewButton = new Button("New button");
+		Button btnNewButton = new Button("Sign In");
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				controller.buttonDoSignIn(textBoxUsername.getText(), textBoxPassword.getText(),
-						chckbxRememberMe.getValue());				
+				if (textBoxUsername.getText().length() == 0 || textBoxPassword.getText().length() == 0) {
+					Window.alert("Username or password is empty."); 
+				} else {
+					controller.buttonDoSignIn(textBoxUsername.getText(), textBoxPassword.getText(),
+							chckbxRememberMe.getValue());	
+				}
 			}
 		});
 		btnNewButton.setStyleName("gwt-Label-Login");
@@ -78,10 +82,10 @@ public class Login extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_MIDDLE);
 		
-		Button button = new Button("New button");
+		Button button = new Button("Sign Up");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				GUIHub.goToSignUp();
+				controller.goToSignUp();
 			}
 		});
 		button.setText("don't have an account? sign up");

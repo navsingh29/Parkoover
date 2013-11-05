@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Widget;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class ServiceController {
 
@@ -66,6 +67,24 @@ public class ServiceController {
 			
 		});
 		
+	}
+	
+	public void getUserLogIn(String username, String password, boolean remember) {
+		
+		service.getUser(username, password, new AsyncCallback<User>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				
+			}
+
+			@Override
+			public void onSuccess(User result) {
+				maingui.signIntoAcc(result, false);
+				
+			}
+		});
 	}
 	
 	
