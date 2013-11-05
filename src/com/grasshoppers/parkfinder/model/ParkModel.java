@@ -215,6 +215,47 @@ public class ParkModel extends DBManager {
 		return 0;
 	}
 	
+	public List<String> getAllFacilityTypes() {
+		Connection conn = getConnection();
+		
+		try {
+			List<String> typeList = new ArrayList<String>();
+			Statement stmt = conn.createStatement();
+			String query = "SELECT DISTINCT type FROM " + 
+								TABLE_FACILITY;
+			
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				typeList.add(rs.getString("type"));
+				//System.out.println("Type added: " + rs.getString("type"));
+			}
+			return typeList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<String> getAllNeighborhoodNames() {
+		Connection conn = getConnection();
+		
+		try {
+			List<String> nameList = new ArrayList<String>();
+			Statement stmt = conn.createStatement();
+			String query = "SELECT DISTINCT name FROM " + 
+					TABLE_NEIGHBORHOOD;
+			
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				nameList.add(rs.getString("name"));
+			}
+			return nameList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * 
 	 * @param type
@@ -248,11 +289,11 @@ public class ParkModel extends DBManager {
 	
 	public static void main(String[] args){
 		
-		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
-		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
-		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
-		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
-		System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+			System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+			System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+			System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+			System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
+			System.out.println(new ParkModel().findParks(null, "ridge","ball").get(0).getName());
 		
 	}
 

@@ -21,11 +21,18 @@ import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.Command;
+import com.grasshoppers.parkfinder.client.GUIController;
+import com.grasshoppers.parkfinder.client.modeldata.Facility;
+import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 
 public class PreferenceList extends Composite {
 
-	public PreferenceList() {
-
+	private GUIController controller;
+	
+	public PreferenceList(final GUIController controller, List<PreferencePark> prefPark) {
+		this.controller = controller;
+		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -57,31 +64,26 @@ public class PreferenceList extends Composite {
 		
 		MenuItem mntmSignOut = new MenuItem("sign out", false, new Command() {
 			public void execute() {
+				controller.goToLogIn();
 			}
 		});
 		menuBar_4.addItem(mntmSignOut);
 		
 		MenuItem mntmPreferenceList_1 = new MenuItem("preference list", false, new Command() {
 			public void execute() {
-				List<String> list = new ArrayList<String>();
-				list.add("geaf");
-				list.add("feag");
-				list.add("ddaf");
-				list.add("gea");
-				list.add("beafr!");
-				list.add("32432");
-				list.add("123d");
-				list.add("tututut? =3=");
-				GUIHub.doSearch(list);
+				controller.buttonToSearch();
 			}
 		});
-		mntmPreferenceList_1.setHTML("results");
+		mntmPreferenceList_1.setHTML("search");
 		menuBar_4.addItem(mntmPreferenceList_1);
 		MenuBar menuBar_5 = new MenuBar(true);
 		
 		MenuItem mntmSort_1 = new MenuItem("sort", false, menuBar_5);
 		
-		MenuItem mntmAlphabetical = new MenuItem("alphabetical", false, (Command) null);
+		MenuItem mntmAlphabetical = new MenuItem("alphabetical", false, new Command() {
+			public void execute() {
+			}
+		});
 		mntmAlphabetical.setHTML("ABC");
 		menuBar_5.addItem(mntmAlphabetical);
 		menuBar_4.addItem(mntmSort_1);
@@ -92,37 +94,38 @@ public class PreferenceList extends Composite {
 		flexTable.setWidget(3, 0, decoratedStackPanel);
 		decoratedStackPanel.setWidth("100%");
 
-		VerticalPanel verticalPanel_1 = new VerticalPanel();
-		decoratedStackPanel.add(verticalPanel_1, "Tynehead", false);
-		verticalPanel_1.setSize("100%", "100%");
-
-		Label lblNeighbourhood = new Label("facility type:");
-		lblNeighbourhood.setStyleName("gwt-Label-Login");
-		verticalPanel_1.add(lblNeighbourhood);
-
-		Label lblNeighbourhood_1 = new Label("neighbourhood:");
-		lblNeighbourhood_1.setStyleName("gwt-Label-Login");
-		verticalPanel_1.add(lblNeighbourhood_1);
-
-		CheckBox chckbxNewCheckBox = new CheckBox("remove");
-		chckbxNewCheckBox.setStyleName("gwt-Label-Login");
-		verticalPanel_1.add(chckbxNewCheckBox);
-
-		VerticalPanel verticalPanel_2 = new VerticalPanel();
-		decoratedStackPanel.add(verticalPanel_2, "Park Name", false);
-		verticalPanel_2.setSize("100%", "100%");
-
-		Label label = new Label("facility type:");
-		label.setStyleName("gwt-Label-Login");
-		verticalPanel_2.add(label);
-
-		Label label_1 = new Label("neighbourhood:");
-		label_1.setStyleName("gwt-Label-Login");
-		verticalPanel_2.add(label_1);
-
-		CheckBox chckbxFavourite = new CheckBox("remove");
-		chckbxFavourite.setStyleName("gwt-Label-Login");
-		verticalPanel_2.add(chckbxFavourite);
+		for (PreferencePark park: prefPark) {
+			VerticalPanel verticalPanel_2 = new VerticalPanel();
+			decoratedStackPanel.add(verticalPanel_2, park.getParkId()+ ". "+ park.getName(), false);
+			verticalPanel_2.setSize("100%", "100%");
+			
+			Label address = new Label("Address: "+park.getStreet_number()+" "+park.getStreet_name());
+			address.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(address);
+			
+			
+			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
+			neighbourhood.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(neighbourhood);
+			
+			Label hectares = new Label("Size: "+park.getHectares()+" Hectares");
+			hectares.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(hectares);			
+			
+			Label Comment = new Label("Comment: "+park.getComment());
+			Comment.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(Comment);	
+			
+			CheckBox chckbxFavourite = new CheckBox("remove");
+			chckbxFavourite.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					Window.alert("changed: ");
+				}
+			});
+			
+			chckbxFavourite.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(chckbxFavourite);
+		}
 		flexTable.getFlexCellFormatter().setColSpan(3, 0, 1);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);

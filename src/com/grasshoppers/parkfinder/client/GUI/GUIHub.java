@@ -77,8 +77,8 @@ public class GUIHub implements EntryPoint {
 
 	public static void goToPrefList() {
 		horizontalPanel.clear();
-		PreferenceList pList = new PreferenceList();
-		horizontalPanel.add(pList);
+		//PreferenceList pList = new PreferenceList();
+		//horizontalPanel.add(pList);
 	}
 	
 //=============================================================================================================

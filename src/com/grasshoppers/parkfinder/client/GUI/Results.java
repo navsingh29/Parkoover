@@ -74,7 +74,7 @@ public class Results extends Composite {
 		
 		MenuItem mntmPreferenceList_1 = new MenuItem("preference list", false, new Command() {
 			public void execute() {
-				controller.goToPrefList();
+				controller.buttonToPrefList(1);
 			}
 		});
 		menuBar_4.addItem(mntmPreferenceList_1);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.grasshoppers.parkfinder.client.ParkSearchService;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
 import com.grasshoppers.parkfinder.model.ParkModel;
 import com.grasshoppers.parkfinder.model.UserModel;
@@ -29,6 +30,12 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		  List<Park> parks = new ParkModel().findParks(name, neighbourhood, facility);
 		return parks;
 	}
+	
+	public List<PreferencePark> findPrefParks(int UID) throws IllegalArgumentException {
+		
+		  List<PreferencePark> parks = new UserModel().getParkRatings(UID);
+		return parks;
+	}
 
 	
 	public String getPark() {
@@ -41,6 +48,16 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 	public User getUser(String username, String password) {
 		User user = new UserModel().getUser(username, password);
 		return user;
+	}
+	
+	public List<String> getAllFacTypes() {
+		List<String> facList = new ParkModel().getAllFacilityTypes();
+		return facList;
+	}
+	
+	public List<String> getAllHoodNames() {
+		List<String> hoodNames = new ParkModel().getAllNeighborhoodNames();
+		return hoodNames;
 	}
 	
 	public String retString (String string) {

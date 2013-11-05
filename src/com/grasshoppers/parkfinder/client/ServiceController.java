@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Widget;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class ServiceController {
@@ -69,7 +70,59 @@ public class ServiceController {
 		
 	}
 	
+	public void getPrefList(int UID) {
+		
+		service.findPrefParks(UID, new AsyncCallback<List<PreferencePark>>(){
+
+		@Override
+		public void onFailure(Throwable caught) {
+			
+			
+		}
+
+		@Override
+		public void onSuccess(List<PreferencePark> result) {
+			maingui.goToPrefList(result);
+	
+		}
+		
+		
+	});
+	
+}
 	public void getUserLogIn(String username, String password, boolean remember) {
+		
+		service.getAllHoodNames(new AsyncCallback<List<String>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				
+			}
+
+			@Override
+			public void onSuccess(List<String> result) {
+				maingui.setHoodList(result);
+				
+			}
+
+		});
+		
+		service.getAllFacTypes(new AsyncCallback<List<String>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				
+			}
+
+			@Override
+			public void onSuccess(List<String> result) {
+				maingui.setFacList(result);
+				
+			}
+
+		});
 		
 		service.getUser(username, password, new AsyncCallback<User>() {
 			
@@ -87,7 +140,39 @@ public class ServiceController {
 		});
 	}
 	
-	
-	
-	
+	public void getSearchAssets() {
+		
+		service.getAllHoodNames(new AsyncCallback<List<String>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				
+			}
+
+			@Override
+			public void onSuccess(List<String> result) {
+				maingui.setHoodList(result);
+				
+			}
+
+		});
+		
+		service.getAllFacTypes(new AsyncCallback<List<String>>() {
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				
+			}
+
+			@Override
+			public void onSuccess(List<String> result) {
+				maingui.setFacList(result);
+				maingui.goToSearch();
+			}
+
+		});
+		
+	}
 }

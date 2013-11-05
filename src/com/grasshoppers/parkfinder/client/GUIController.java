@@ -1,5 +1,6 @@
 package com.grasshoppers.parkfinder.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,6 +20,7 @@ import com.grasshoppers.parkfinder.client.GUI.Results;
 import com.grasshoppers.parkfinder.client.GUI.Search;
 import com.grasshoppers.parkfinder.client.GUI.Signup;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class GUIController extends Composite{
@@ -27,7 +29,10 @@ public class GUIController extends Composite{
 
 	
 	private ServiceController service;
-	
+	private List<String> facList = null;
+
+
+	private List<String> hoodList = null;
 	
 	public GUIController(ServiceController service) {
 	initWidget(horizontalPanel);
@@ -61,10 +66,12 @@ public class GUIController extends Composite{
 		}
 		
 
-		public void goToPrefList() {
-			horizontalPanel.clear();
-			PreferenceList pList = new PreferenceList();
-			horizontalPanel.add(pList);
+		public void buttonToPrefList(int UID) {
+			service.getPrefList(UID);
+		}
+		
+		public void buttonToSearch() {
+			service.getSearchAssets();
 		}
 		
 //=============================================================================================================
@@ -75,15 +82,25 @@ public class GUIController extends Composite{
 			service.getUserLogIn(username, password, rememberMe);
 		}
 		
+		//DO NOT TOUCH: service callback
+		public void setFacList(List<String> list) {
+			this.facList = list;
+		}
+		
+		//DO NOT TOUCH: service callback
+		public void setHoodList(List<String> result) {
+			this.hoodList = result;
+			
+		}
+		
+		//DO NOT TOUCH: service callback for signIN
 		public void signIntoAcc(User user, boolean remembered) {
 			if (user == null) {
 				Window.alert("Username or password is wrong."); 
 			} else {
-				Window.alert("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
+				//Window.alert("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
 				System.out.println("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
-				horizontalPanel.clear();
-				Search search = new Search(this);
-				horizontalPanel.add(search);
+				goToSearch();
 			}
 		}
 		
@@ -99,6 +116,12 @@ public class GUIController extends Composite{
 		}
 
 
+		public void goToPrefList(List<PreferencePark> prefPark) {
+			horizontalPanel.clear();
+			PreferenceList pList = new PreferenceList(this, prefPark);
+			horizontalPanel.add(pList);
+		}
+		
 		public void doSearch(String park, String facility, String neighborhood) {
 		//	park = retString(park);
 		//	facility = retString(facility);
@@ -124,6 +147,19 @@ public class GUIController extends Composite{
 		public void warnPopup (String warning) {
 			Window.alert(warning);
 		}
+
+
+
+		public void goToSearch() {
+			horizontalPanel.clear();
+
+			Search search = new Search(this, this.facList, this.hoodList);
+			horizontalPanel.add(search);
+		}
+
+
+
+
 		
 		
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 
 public class ParkSorter {
 

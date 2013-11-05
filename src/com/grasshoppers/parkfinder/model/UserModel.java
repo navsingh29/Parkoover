@@ -99,7 +99,7 @@ public class UserModel extends DBManager {
 	 * Obtain the park ratings and comments for a particular user.
 	 * @param userId
 	 */
-	public static List<PreferencePark> getParkRatings(int userId) {
+	public List<PreferencePark> getParkRatings(int userId) {
 		Connection con = getConnection();
 		ResultSet rs;
 		List<PreferencePark> parks = new ArrayList<PreferencePark>();

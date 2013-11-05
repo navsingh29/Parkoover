@@ -28,10 +28,15 @@ public class Search extends Composite {
 	private ListBox lbNeighborhood;
 	private ListBox cbFacility;
 	private GUIController controller;
+	private List<String> facList;
+	private List<String> hoodList;
 	
+
 	
-	public Search(final GUIController controller) {
+	public Search(final GUIController controller, List<String> facList, List<String> hoodList) {
 		this.controller = controller;
+		this.facList = facList;
+		this.hoodList = hoodList;
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -66,7 +71,7 @@ public class Search extends Composite {
 		
 		MenuItem mntmPreferenceList = new MenuItem("preference list", false, new Command() {
 			public void execute() {
-				controller.goToPrefList();
+				controller.buttonToPrefList(1);
 			}
 		});
 		menuBar_1.addItem(mntmPreferenceList);
@@ -78,19 +83,20 @@ public class Search extends Composite {
 		tbParkSearch.setWidth("75%");
 		
 		cbFacility = new ListBox();
-		cbFacility.addItem("");
-		cbFacility.addItem("soccer field");
-		cbFacility.addItem("park");
-		cbFacility.addItem("dog park");
+		cbFacility.addItem("choose facility type");
+		for (String facType : this.facList) {
+			cbFacility.addItem(facType);
+		}
+		
 		cbFacility.setStyleName("gwt-Label-Login");
 		flexTable.setWidget(3, 0, cbFacility);
 		cbFacility.setWidth("75%");
 		
 		lbNeighborhood = new ListBox();
-		lbNeighborhood.addItem("");
-		lbNeighborhood.addItem("a");
-		lbNeighborhood.addItem("b");
-		lbNeighborhood.addItem("c");
+		lbNeighborhood.addItem("choose neighborhood");
+		for (String hoodName : this.hoodList) {
+			lbNeighborhood.addItem(hoodName);
+		}
 		lbNeighborhood.setStyleName("gwt-Label-Login");
 		flexTable.setWidget(4, 0, lbNeighborhood);
 		lbNeighborhood.setWidth("75%");
@@ -118,7 +124,12 @@ public class Search extends Composite {
 					String park = tbParkSearch.getText();
 					
 					String facility = cbFacility.getItemText(cbFacility.getSelectedIndex());
+					if (facility.contains("choose facility type"))
+						facility = "";
+					
 					String neighborhood = lbNeighborhood.getItemText(lbNeighborhood.getSelectedIndex());
+					if (neighborhood.contains("choose neighborhood"))
+						neighborhood = "";
 					
 					controller.doSearch(park,facility,neighborhood);
 					
