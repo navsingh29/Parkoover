@@ -21,19 +21,21 @@ import com.grasshoppers.parkfinder.client.GUI.Search;
 import com.grasshoppers.parkfinder.client.GUI.Signup;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+
+import com.grasshoppers.parkfinder.shared.StringMethods;
+
 import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class GUIController extends Composite{
 
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
-
-	
 	private ServiceController service;
+
 	private List<String> facList = null;
 
 
 	private List<String> hoodList = null;
-	
+
 	public GUIController(ServiceController service) {
 	initWidget(horizontalPanel);
 	this.service = service;
@@ -123,32 +125,25 @@ public class GUIController extends Composite{
 		}
 		
 		public void doSearch(String park, String facility, String neighborhood) {
-		//	park = retString(park);
-		//	facility = retString(facility);
-		//	neighborhood = retString(neighborhood);		
-			service.getParkList(park, neighborhood, facility);	
+			park = StringMethods.retString(park);
+			facility = StringMethods.retString(facility);
+			neighborhood = StringMethods.retString(neighborhood);
+			service.getParkList(park, neighborhood, facility);
+
 		}
 
 		public void displayParks(List<Park> parks) {
 			horizontalPanel.clear();
 			Results results = new Results(this, parks);
 			horizontalPanel.add(results);
-			
-		}
+		}		
+
 		
 		
-		public String retString (String string) {
-			string = string.trim();
-			if (string.equals(""))
-				return null;
-			else return string;
-		}
 		
 		public void warnPopup (String warning) {
 			Window.alert(warning);
 		}
-
-
 
 		public void goToSearch() {
 			horizontalPanel.clear();
@@ -157,10 +152,6 @@ public class GUIController extends Composite{
 			horizontalPanel.add(search);
 		}
 
-
-
-
-		
 		
 	}
 	
