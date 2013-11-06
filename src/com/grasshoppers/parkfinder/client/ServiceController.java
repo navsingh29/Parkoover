@@ -49,7 +49,7 @@ public class ServiceController {
 		});
 	}
 	
-	public void getParkList(String park, String facility, String neighborhood) {
+	public void getParkList(String park, String neighborhood, String facility) {
 		
 			service.findParkServer(park, neighborhood, facility, new AsyncCallback<List<Park>>(){
 

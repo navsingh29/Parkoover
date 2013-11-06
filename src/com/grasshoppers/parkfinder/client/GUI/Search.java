@@ -125,13 +125,13 @@ public class Search extends Composite {
 					
 					String facility = cbFacility.getItemText(cbFacility.getSelectedIndex());
 					if (facility.contains("choose facility type"))
-						facility = "";
+						facility = "";;
 					
 					String neighborhood = lbNeighborhood.getItemText(lbNeighborhood.getSelectedIndex());
 					if (neighborhood.contains("choose neighborhood"))
-						neighborhood = "";
+						neighborhood = "";;
 					
-					controller.doSearch(park,facility,neighborhood);
+					controller.doSearch(park,neighborhood,facility);
 					
 					
 				}

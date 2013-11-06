@@ -43,6 +43,8 @@ public class UserModel extends DBManager {
 		ps.setString(7, province);
 		ps.setString(8, country);
 		ps.executeUpdate();
+		
+		con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			isSuccess = false;
@@ -74,7 +76,7 @@ public class UserModel extends DBManager {
 		
 		user.addPreferences(getParkRatings(user.getId()));
 		
-		
+		con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -135,6 +137,7 @@ public class UserModel extends DBManager {
 				parkToAdd.addFacility(ModelFactory.makeFacility(rs));
 			}
 		}
+		con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

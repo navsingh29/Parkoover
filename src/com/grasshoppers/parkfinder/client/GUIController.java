@@ -1,19 +1,12 @@
 package com.grasshoppers.parkfinder.client;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.grasshoppers.parkfinder.client.GUI.Login;
 import com.grasshoppers.parkfinder.client.GUI.PreferenceList;
 import com.grasshoppers.parkfinder.client.GUI.Results;
@@ -32,8 +25,6 @@ public class GUIController extends Composite{
 	private ServiceController service;
 
 	private List<String> facList = null;
-
-
 	private List<String> hoodList = null;
 
 	public GUIController(ServiceController service) {
@@ -123,7 +114,7 @@ public class GUIController extends Composite{
 			horizontalPanel.add(pList);
 		}
 		
-		public void doSearch(String park, String facility, String neighborhood) {
+		public void doSearch(String park, String neighborhood,String facility) {
 			park = StringMethods.retString(park);
 			facility = StringMethods.retString(facility);
 			neighborhood = StringMethods.retString(neighborhood);

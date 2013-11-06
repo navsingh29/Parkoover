@@ -184,6 +184,7 @@ public class ParkModel extends DBManager {
 			rs.first();
 			int returnId = rs.getInt("id");
 			System.out.println("Hood ID is: " + returnId);
+			conn.close();
 			return returnId;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,6 +206,7 @@ public class ParkModel extends DBManager {
 				typeList.add(rs.getString("type"));
 				//System.out.println("Type added: " + rs.getString("type"));
 			}
+			conn.close();
 			return typeList;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -256,6 +258,7 @@ public class ParkModel extends DBManager {
 			rs.first();
 			int returnId = rs.getInt("id");
 			System.out.println("Facility ID is: " + returnId);
+			conn.close();
 			return returnId;
 		} catch (SQLException e) {
 			e.printStackTrace();
