@@ -14,6 +14,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.Window;
 import com.grasshoppers.parkfinder.client.GUIController;
+import com.google.gwt.user.client.ui.Image;
 
 public class Login extends Composite {
 	private TextBox textBoxUsername;
@@ -31,34 +32,35 @@ public class Login extends Composite {
 		
 		FlexTable flexTable = new FlexTable();
 		verticalPanel.add(flexTable);
+		verticalPanel.setCellHeight(flexTable, "100%");
+		verticalPanel.setCellWidth(flexTable, "100%");
 		verticalPanel.setCellHorizontalAlignment(flexTable, HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel.setCellVerticalAlignment(flexTable, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.setSize("100%", "100%");
 		
-		Label lblNewLabel = new Label("Parkoover");
-		flexTable.setWidget(0, 0, lblNewLabel);
-		flexTable.getCellFormatter().setStyleName(0, 0, "gwt-Label-Login");
+		Image image = new Image("images/Parkoover10.gif");
+		flexTable.setWidget(0, 0, image);
 		
 		textBoxUsername = new TextBox();
-		textBoxUsername.setStyleName("gwt-Label-Login");
+		textBoxUsername.setStyleName("gwt-Label-Fields");
 		textBoxUsername.setAlignment(TextAlignment.CENTER);
-		textBoxUsername.setText("username");
+		textBoxUsername.setText("Username");
 		flexTable.setWidget(1, 0, textBoxUsername);
 		flexTable.getCellFormatter().setStyleName(1, 0, "gwt-Label-Login");
 		textBoxUsername.setWidth("75%");
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
 		textBoxPassword = new TextBox();
-		textBoxPassword.setStyleName("gwt-Label-Login");
+		textBoxPassword.setStyleName("gwt-Label-Fields");
 		textBoxPassword.setAlignment(TextAlignment.CENTER);
-		textBoxPassword.setText("password");
+		textBoxPassword.setText("Password");
 		flexTable.setWidget(2, 0, textBoxPassword);
 		textBoxPassword.setWidth("75%");
 		flexTable.getCellFormatter().setWidth(2, 0, "");
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
-		chckbxRememberMe = new CheckBox("remember me");
-		chckbxRememberMe.setStyleName("gwt-Label-Login");
+		chckbxRememberMe = new CheckBox("Remember Me");
+		chckbxRememberMe.setStyleName("gwt-Label-Fields");
 		flexTable.setWidget(3, 0, chckbxRememberMe);
 		
 		Button btnNewButton = new Button("Sign In");
@@ -79,8 +81,6 @@ public class Login extends Composite {
 		flexTable.getCellFormatter().setVerticalAlignment(4, 0, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.getCellFormatter().setHorizontalAlignment(4, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		flexTable.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_MIDDLE);
 		
 		Button button = new Button("Sign Up");
 		button.addClickHandler(new ClickHandler() {
@@ -88,11 +88,12 @@ public class Login extends Composite {
 				controller.goToSignUp();
 			}
 		});
-		button.setText("don't have an account? sign up");
+		button.setText("register");
 		button.setStyleName("gwt-Label-Login");
 		flexTable.setWidget(5, 0, button);
 		button.setWidth("25%");
 		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);
+		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
 	
 	

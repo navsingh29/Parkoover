@@ -297,8 +297,24 @@ a:visited {
 .gwt-Label-Login {
 	color: black;
 	font-variant: small-caps;
-	font-size: 14px;
+	font-size: 15px;
 	font-style: normal;
 	font-family: Candara;
 	font-weight: normal;
+}
+.gwt-Label-Fields {
+	color: black;
+	font-variant: normal;
+	font-size: 12px;
+	font-style: normal;
+	font-family: Candara;
+	font-weight: normal;
+}
+.gwt-Label-Title {
+	color: black;
+	font-variant: small-caps;
+	font-size: 25px;
+	font-style: normal;
+	font-family: Candara;
+	font-weight: bold;
 }
