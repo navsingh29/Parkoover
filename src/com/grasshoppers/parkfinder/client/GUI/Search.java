@@ -71,7 +71,7 @@ public class Search extends Composite {
 		
 		MenuItem mntmPreferenceList = new MenuItem("preference list", false, new Command() {
 			public void execute() {
-				controller.buttonToPrefList(1);
+				controller.buttonToPrefList();
 			}
 		});
 		menuBar_1.addItem(mntmPreferenceList);

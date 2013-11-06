@@ -26,6 +26,7 @@ public class GUIController extends Composite{
 
 	private List<String> facList = null;
 	private List<String> hoodList = null;
+	private User user = null;
 
 	public GUIController(ServiceController service) {
 	initWidget(horizontalPanel);
@@ -55,12 +56,18 @@ public class GUIController extends Composite{
 		public void goToLogIn() {
 			horizontalPanel.clear();
 			Login login = new Login(this);
+			user = null;
 			horizontalPanel.add(login);
 		}
 		
 
-		public void buttonToPrefList(int UID) {
-			service.getPrefList(UID);
+		public void buttonToPrefList() {
+		//	service.getPrefList();
+			horizontalPanel.clear();
+			if (user!=null){
+			PreferenceList pList = new PreferenceList(this, user.getPreferenceList());
+			horizontalPanel.add(pList);
+			} else warnPopup("User not logged in.");
 		}
 		
 		public void buttonToSearch() {
@@ -93,6 +100,7 @@ public class GUIController extends Composite{
 			} else {
 				//Window.alert("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
 				System.out.println("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
+				this.user = user;
 				goToSearch();
 			}
 		}
@@ -110,8 +118,10 @@ public class GUIController extends Composite{
 
 		public void goToPrefList(List<PreferencePark> prefPark) {
 			horizontalPanel.clear();
+			
 			PreferenceList pList = new PreferenceList(this, prefPark);
 			horizontalPanel.add(pList);
+			
 		}
 		
 		public void doSearch(String park, String neighborhood,String facility) {
@@ -140,6 +150,10 @@ public class GUIController extends Composite{
 
 			Search search = new Search(this, this.facList, this.hoodList);
 			horizontalPanel.add(search);
+		}
+		
+		public User getUser() {
+			return user;
 		}
 
 		
