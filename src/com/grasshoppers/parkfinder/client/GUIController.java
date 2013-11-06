@@ -56,7 +56,7 @@ public class GUIController extends Composite{
 		
 		public void goToSignUp() {
 			horizontalPanel.clear();
-			Signup signup = new Signup();
+			Signup signup = new Signup(this);
 			horizontalPanel.add(signup);
 		}
 
@@ -106,13 +106,12 @@ public class GUIController extends Composite{
 			}
 		}
 		
-		public void buttonDoSignUp(String username, String password, String email, String addr, 
-				String country, String city, String postal) {
+		public void buttonDoSignUp(String username, String password, String firstName, String lastName, String address, 
+				String country, String city, String province) {
 			if (username.length() == 0 || password.length() == 0) {
 				Window.alert("Username or password must be filled."); 
 			} else {
-				Window.alert("Query check on: "+username+", "+password+", from: "+city+", "+country);
-				System.out.println("Query check on: "+username+", "+password+", from: "+city+", "+country);
+				service.createNewUser(username, password, firstName, lastName, address, city, province, country);
 				goToLogIn();
 			}
 		}

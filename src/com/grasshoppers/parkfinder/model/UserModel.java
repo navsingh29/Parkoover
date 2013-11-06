@@ -25,10 +25,11 @@ public class UserModel extends DBManager {
 	 * @param lastName
 	 * @param address
 	 * @param city
+	 * @return 
 	 */
-	public static void createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country) {
+	public boolean createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country) {
 		Connection con = getConnection();
-		
+		boolean isSuccess = true;
 		String query = "INSERT INTO "+USER_TABLE+"(user_name,password,fname,lname,address,city,province,country) "
 				+ "VALUES (?,?,?,?,?,?,?,?);";
 		try {
@@ -44,7 +45,9 @@ public class UserModel extends DBManager {
 		ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			isSuccess = false;
 		}
+		return isSuccess;
 	}
 	
 	/**

@@ -60,6 +60,18 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		else return string;
 	}
 
+	@Override
+	public Boolean createNewUser(String name, String password, String firstName,
+			String lastName, String address, String city, String province,
+			String country) {
+		
+		return new UserModel().createNewUser(
+				name, password, firstName, lastName, address, city, province, country
+				);
+		
+	}
+
+	
 	
 
 }

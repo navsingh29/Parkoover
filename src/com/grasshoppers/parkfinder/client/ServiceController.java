@@ -175,4 +175,28 @@ public class ServiceController {
 		});
 		
 	}
+	
+	public void createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country) {
+		
+		service.createNewUser(name, password, firstName, lastName, address, city, province, country, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				
+				if (result)
+				maingui.warnPopup("New User Account Created Successfully.");
+				else 
+				maingui.warnPopup("Could not create new user account. Try a different username.");
+			}
+			
+			
+		});
+	}
+	
 }

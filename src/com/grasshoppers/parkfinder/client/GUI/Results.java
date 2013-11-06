@@ -72,6 +72,19 @@ public class Results extends Composite {
 		});
 		menuBar_4.addItem(mntmSignOut);
 		
+		
+		
+		MenuItem menuItemSearch = new MenuItem("Search", false, new Command() {
+			public void execute() {
+				controller.buttonToSearch();
+			}
+		});
+//		mntmPreferenceList_1.setHTML("search");
+		menuBar_4.addItem(menuItemSearch);
+
+
+		
+		
 		MenuItem mntmPreferenceList_1 = new MenuItem("preference list", false, new Command() {
 			public void execute() {
 				controller.buttonToPrefList(1);
@@ -125,7 +138,7 @@ public class Results extends Composite {
 	//	for (int i = 0; i< parks.size(); i++ ) {
 		for (Park park: parks) {
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
-			decoratedStackPanel.add(verticalPanel_2, park.getParkId()+ ". "+ park.getName(), false);
+			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
 			
 			Label address = new Label("Address: "+park.getStreet_number()+" "+park.getStreet_name());

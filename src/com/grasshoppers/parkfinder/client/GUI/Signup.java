@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
 import com.google.gwt.user.client.ui.TextBoxBase;
+import com.grasshoppers.parkfinder.client.GUIController;
 
 public class Signup extends Composite {
 	private TextBox textBoxUsername;
@@ -23,9 +24,11 @@ public class Signup extends Composite {
 	private TextBox txtbxCountry;
 	private TextBox txtbxCity;
 	private TextBox txtbxPostalCode;
+	private TextBox textBoxFirstName;
+	private TextBox textBoxLastName;
 	
 
-	public Signup() {
+	public Signup(final GUIController controller) {
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -60,6 +63,22 @@ public class Signup extends Composite {
 		flexTable.getCellFormatter().setWidth(2, 0, "");
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
+		textBoxFirstName = new TextBox();
+		textBoxFirstName.setAlignment(TextAlignment.CENTER);
+		textBoxFirstName.setTextAlignment(TextBoxBase.ALIGN_CENTER);
+		textBoxFirstName.setStyleName("gwt-Label-Login");
+		textBoxFirstName.setText("first name");
+		flexTable.setWidget(3, 0, textBoxFirstName);
+		textBoxFirstName.setWidth("75%");
+		
+		textBoxLastName = new TextBox();
+		textBoxLastName.setAlignment(TextAlignment.CENTER);
+		textBoxLastName.setTextAlignment(TextBoxBase.ALIGN_CENTER);
+		textBoxLastName.setStyleName("gwt-Label-Login");
+		textBoxLastName.setText("last name");
+		flexTable.setWidget(3, 0, textBoxLastName);
+		textBoxLastName.setWidth("75%");
+		
 		textBoxEmail = new TextBox();
 		textBoxEmail.setAlignment(TextAlignment.CENTER);
 		textBoxEmail.setTextAlignment(TextBoxBase.ALIGN_CENTER);
@@ -79,8 +98,8 @@ public class Signup extends Composite {
 		Button btnNewButton = new Button("New button");
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				GUIHub.buttonDoSignUp(textBoxUsername.getText(), textBoxPassword.getText(), 
-						textBoxEmail.getText(), textBoxAddress.getText(), txtbxCountry.getText(), 
+				controller.buttonDoSignUp(textBoxUsername.getText(), textBoxPassword.getText(), 
+						textBoxFirstName.getText(), textBoxLastName.getText(), textBoxAddress.getText(), txtbxCountry.getText(), 
 						txtbxCity.getText(), txtbxPostalCode.getText());
 					}
 			});
@@ -103,7 +122,7 @@ public class Signup extends Composite {
 		
 		txtbxPostalCode = new TextBox();
 		txtbxPostalCode.setTextAlignment(TextBoxBase.ALIGN_CENTER);
-		txtbxPostalCode.setText("postal code");
+		txtbxPostalCode.setText("province");
 		txtbxPostalCode.setStyleName("gwt-Label-Login");
 		txtbxPostalCode.setAlignment(TextAlignment.CENTER);
 		flexTable.setWidget(7, 0, txtbxPostalCode);
@@ -122,7 +141,7 @@ public class Signup extends Composite {
 		Button button = new Button("New button");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				GUIHub.goToLogIn();
+				controller.goToLogIn();
 			}
 		});
 		button.setText("already have an account? login");

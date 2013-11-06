@@ -20,4 +20,5 @@ public interface ParkSearchService extends RemoteService {
 	List<String> getAllFacTypes();
 	List<String> getAllHoodNames();
 	List<PreferencePark> findPrefParks(int UID);
+	Boolean createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country);
 }
