@@ -18,4 +18,5 @@ public interface ParkSearchServiceAsync {
 	void getAllHoodNames(AsyncCallback<List<String>> callback);
 	void findPrefParks(int UID, AsyncCallback<List<PreferencePark>> callback);
 	void createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country, AsyncCallback<Boolean> callback);
+	void removeParkRating(int uid, int pid, AsyncCallback<String> callback);
 }

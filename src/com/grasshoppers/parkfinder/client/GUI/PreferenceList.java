@@ -25,6 +25,7 @@ import com.grasshoppers.parkfinder.client.GUIController;
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.google.gwt.user.client.ui.Image;
 
 public class PreferenceList extends Composite {
 
@@ -41,18 +42,17 @@ public class PreferenceList extends Composite {
 
 		FlexTable flexTable = new FlexTable();
 		verticalPanel.add(flexTable);
+		verticalPanel.setCellHeight(flexTable, "100%");
+		verticalPanel.setCellWidth(flexTable, "100%");
 		verticalPanel.setCellHorizontalAlignment(flexTable, HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel.setCellVerticalAlignment(flexTable, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.setSize("100%", "100%");
-
-		Label lblNewLabel = new Label("Parkoover");
-		flexTable.setWidget(0, 0, lblNewLabel);
-		flexTable.getCellFormatter().setStyleName(0, 0, "gwt-Label-Login");
-		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		flexTable.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_MIDDLE);
+		
+		Image image = new Image("images/Parkoover10.gif");
+		flexTable.setWidget(0, 0, image);
 
 		Label lblResults = new Label("preference list");
-		lblResults.setStyleName("gwt-Label-Login");
+		lblResults.setStyleName("gwt-Label-Title");
 		flexTable.setWidget(1, 0, lblResults);
 		
 		MenuBar menuBar_3 = new MenuBar(false);
@@ -60,7 +60,13 @@ public class PreferenceList extends Composite {
 		menuBar_3.setWidth("100px");
 		MenuBar menuBar_4 = new MenuBar(true);
 		
-		MenuItem mntmMenu_1 = new MenuItem("menu", false, menuBar_4);
+		String userMenuName = "Menu";
+		if (this.controller.getUser().getFname() != null)
+			userMenuName = this.controller.getUser().getFname()+"'s Menu";
+		else if (this.controller.getUser().getUser_name() != null)
+			userMenuName = this.controller.getUser().getUser_name()+"'s Menu";
+		
+		MenuItem mntmMenu_1 = new MenuItem(userMenuName, false, menuBar_4);
 		
 		MenuItem mntmSignOut = new MenuItem("sign out", false, new Command() {
 			public void execute() {
@@ -76,16 +82,14 @@ public class PreferenceList extends Composite {
 		});
 		mntmPreferenceList_1.setHTML("search");
 		menuBar_4.addItem(mntmPreferenceList_1);
-		MenuBar menuBar_5 = new MenuBar(true);
+
 		
-		MenuItem mntmSort_1 = new MenuItem("sort", false, menuBar_5);
-		
-		MenuItem mntmAlphabetical = new MenuItem("alphabetical", false, new Command() {
+		MenuItem mntmSort_1 = new MenuItem("last result", false, new Command() {
 			public void execute() {
+				controller.goToSavedResult();
 			}
 		});
-		mntmAlphabetical.setHTML("ABC");
-		menuBar_5.addItem(mntmAlphabetical);
+		
 		menuBar_4.addItem(mntmSort_1);
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
@@ -129,6 +133,7 @@ public class PreferenceList extends Composite {
 		flexTable.getFlexCellFormatter().setColSpan(3, 0, 1);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
 
 }

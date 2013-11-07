@@ -130,20 +130,27 @@ public class ParkModel extends DBManager {
 			rs = ps.executeQuery();
 			
 			List<Integer> ids = new ArrayList<Integer>();
-			Park parkToAdd = null;
+			Park parkToAdd = new Park();
 			while(rs.next()){
 				int id = rs.getInt("Park_Id");
-				if(!ids.contains(id)){
+				if (ids.isEmpty()) {
 					parkToAdd = ModelFactory.makePark(rs);
+					parkToAdd.addFacility(ModelFactory.makeFacility(rs));
+					
 					ids.add(id);
+				} else if (!ids.contains(id)){
 					parks.add(parkToAdd);
+					parkToAdd = ModelFactory.makePark(rs);
+					parkToAdd.addFacility(ModelFactory.makeFacility(rs));
 					
-					
-					
+					ids.add(id);
+
 				} else {
 					// TODO Check to see if parkToAdd is null or not
 					parkToAdd.addFacility(ModelFactory.makeFacility(rs));
+					//parkToAdd.addFacility(ModelFactory.makeFacility(rs));
 				}
+
 			}
 		} catch(SQLException e){
 			e.printStackTrace();
@@ -157,11 +164,11 @@ public class ParkModel extends DBManager {
 				}
 			}
 		}
-		
+
 		return parks;
 		
 	}
-	
+
 	/**
 	 * 
 	 * @param name

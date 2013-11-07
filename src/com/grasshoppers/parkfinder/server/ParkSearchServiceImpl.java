@@ -71,6 +71,14 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		
 	}
 
+	@Override
+	public String removeParkRating(int uid, int pid) {
+		new UserModel().removeParkRating(uid, pid);
+		return "";
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 
