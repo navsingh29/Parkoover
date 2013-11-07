@@ -17,6 +17,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		ParkSearchService {
 
+	UserModel userModel = new UserModel();
+	ParkModel parkModel = new ParkModel();
+	
 	@Override
 	public List<Park> findParkServer(String name, String neighbourhood,
 		String facility) throws IllegalArgumentException {
@@ -26,20 +29,13 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 	
 	public List<PreferencePark> findPrefParks(int UID) throws IllegalArgumentException {
 		
-		  List<PreferencePark> parks = new UserModel().getParkRatings(UID);
+		  List<PreferencePark> parks = userModel.getParkRatings(UID);
 		return parks;
 	}
 
-	
-	public String getPark() {
-	//	User user = UserModel.getUser("superman", "kryptonite");
-		List<Park> parks = new ParkModel().findParks(null, "ridge","ball");
-		
-		return parks.get(0).getName();
-	}
 
 	public User getUser(String username, String password) {
-		User user = new UserModel().getUser(username, password);
+		User user = userModel.getUser(username, password);
 		return user;
 	}
 	
@@ -53,22 +49,28 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		return hoodNames;
 	}
 	
-	public String retString (String string) {
-		string = string.trim();
-		if (string.equals(""))
-			return null;
-		else return string;
-	}
 
 	@Override
 	public Boolean createNewUser(String name, String password, String firstName,
 			String lastName, String address, String city, String province,
 			String country) {
 		
-		return new UserModel().createNewUser(
+		return userModel.createNewUser(
 				name, password, firstName, lastName, address, city, province, country
 				);
 		
+	}
+
+	@Override
+	public Boolean createNewParkRating(int userId, int parkId, int rating,
+			String comment) {
+		return userModel.createNewParkRating(userId, parkId, rating, comment);
+	}
+
+	@Override
+	public Boolean deleteParkRating(int userId, int parkId) {
+		// TODO Auto-generated method stub
+		return userModel.deleteParkRating(userId, parkId);
 	}
 
 	

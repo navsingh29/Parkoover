@@ -15,10 +15,11 @@ import com.grasshoppers.parkfinder.client.modeldata.User;
 @RemoteServiceRelativePath("parksearch")
 public interface ParkSearchService extends RemoteService {
 	List<Park> findParkServer(String name, String neighbourhood, String facility) throws IllegalArgumentException;
-	String getPark();
 	User getUser(String username, String password);
 	List<String> getAllFacTypes();
 	List<String> getAllHoodNames();
 	List<PreferencePark> findPrefParks(int UID);
 	Boolean createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country);
+	Boolean createNewParkRating(int userId, int parkId, int rating, String comment);
+	Boolean deleteParkRating(int userId, int parkId);
 }

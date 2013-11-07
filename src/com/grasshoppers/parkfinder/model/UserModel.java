@@ -83,9 +83,9 @@ public class UserModel extends DBManager {
 		return user;
 	}
 	
-	public static void createNewParkRating(int userId, int parkId, int rating, String comment) {
+	public Boolean createNewParkRating(int userId, int parkId, int rating, String comment) {
 		Connection con = getConnection();
-		
+		boolean isWorked=true;
 		String query = "INSERT INTO "+PREFS_TABLE+"(user_id,park_id,rating,comment) "
 				+ "VALUES (?,?,?,?);";
 		try {
@@ -95,9 +95,37 @@ public class UserModel extends DBManager {
 		ps.setInt(3,rating);
 		ps.setString(4, comment);
 		ps.executeUpdate();
+		con.close();
+		isWorked = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			isWorked = false;
 		}
+		return isWorked;
+	}
+	
+	public Boolean deleteParkRating(int userId, int parkId){
+		Connection con = getConnection();
+		boolean isWorked=true;
+		String query = "DELETE FROM "+PREFS_TABLE
+				+ " WHERE userID = ? AND parkId = ?";
+		try {
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setInt(1, userId);
+		ps.setInt(2, parkId);
+		ps.executeUpdate();
+		isWorked = true;
+		con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			isWorked = false;
+		}
+		return isWorked;
+		
+		
+		
+		
+		
 	}
 	
 	/**

@@ -14,9 +14,7 @@ import com.grasshoppers.parkfinder.client.GUI.Search;
 import com.grasshoppers.parkfinder.client.GUI.Signup;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
-
 import com.grasshoppers.parkfinder.shared.StringMethods;
-
 import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public class GUIController extends Composite{
@@ -152,10 +150,21 @@ public class GUIController extends Composite{
 			horizontalPanel.add(search);
 		}
 		
+		
 		public User getUser() {
 			return user;
 		}
 
+		
+		public void createNewParkRating(int userId, int parkId, int rating, String comment) {
+			
+			service.createNewParkRating(userId, parkId, rating, comment);
+		}
+		
+		public void deleteParkRating(int userId, int parkId) {
+			service.deleteParkRating(userId, parkId);
+			
+		}
 		
 	}
 	

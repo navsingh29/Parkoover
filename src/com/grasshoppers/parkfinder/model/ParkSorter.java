@@ -24,7 +24,6 @@ public class ParkSorter {
 				// TODO Auto-generated method stub
 				return park1.getName().compareToIgnoreCase(park2.getName());
 			}
-			
 		});
 		
 		

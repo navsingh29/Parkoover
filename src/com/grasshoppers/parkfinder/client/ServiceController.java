@@ -29,25 +29,6 @@ public class ServiceController {
 		return maingui;
 	}
 	
-
-	public void getParkName() {
-		// TODO Auto-generated method stub
-		service.getPark(new AsyncCallback<String>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				
-				
-			}
-
-			@Override
-			public void onSuccess(String result) {
-				
-				
-			}
-			
-		});
-	}
 	
 	public void getParkList(String park, String neighborhood, String facility) {
 		
@@ -197,6 +178,50 @@ public class ServiceController {
 			
 			
 		});
+	}
+	
+	public void createNewParkRating(int userId, int parkId, int rating, String comment) {
+		
+		service.createNewParkRating(userId, parkId, rating, comment, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+			
+			
+		});
+		
+	}
+	
+	public void deleteParkRating(int userId, int parkId) {
+		service.deleteParkRating(userId, parkId, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+			
+		});
+		
 	}
 	
 }
