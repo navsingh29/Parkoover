@@ -94,7 +94,7 @@ public class PreferenceList extends Composite {
 		flexTable.setWidget(3, 0, decoratedStackPanel);
 		decoratedStackPanel.setWidth("100%");
 
-		for (PreferencePark park: prefPark) {
+		for (final PreferencePark park: prefPark) {
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
 			decoratedStackPanel.add(verticalPanel_2, park.getParkId()+ ". "+ park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
@@ -116,10 +116,14 @@ public class PreferenceList extends Composite {
 			Comment.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(Comment);	
 			
-			CheckBox chckbxFavourite = new CheckBox("remove");
+			final CheckBox chckbxFavourite = new CheckBox("remove");
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
-					Window.alert("changed: ");
+					
+					controller.deleteParkRating(controller.getUser().getId(), park.getParkId(),park);
+					Window.alert("Park deleted from preference list");
+					controller.buttonToPrefList();
+				
 				}
 			});
 			

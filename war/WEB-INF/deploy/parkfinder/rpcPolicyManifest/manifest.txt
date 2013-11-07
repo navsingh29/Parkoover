@@ -1,3 +1,2 @@
 # Module parkfinder
 # RPC service class, partial path of RPC policy file
-com.grasshoppers.parkfinder.client.ParkSearchService, 9DDE1FFE066C4F0D109928030C9C51D7.gwt.rpc

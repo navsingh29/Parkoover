@@ -34,7 +34,47 @@ public class PreferencePark implements Serializable {
 	public PreferencePark() {
 	
 	}
-
+	
+	public PreferencePark(Park park, int rating, String comment) {
+		
+	// Park	
+		this.parkId = park.getParkId();
+		this.name = park.getName();
+		this.official = park.getOfficial();
+		this.street_number = park.getStreet_number();
+		this.street_name = park.getStreet_name();
+		this.ew_street = park.getEw_street();
+		this.ns_street = park.getNs_street();
+		this.map_x_loc = park.getMap_x_loc();
+		this.map_y_loc = park.getMap_y_loc();
+		this.hectares = park.getHectares();
+		
+	// Neighborhood
+		this.neighborhoodId = park.getNeighbourhoodId();
+		this.neighborhoodName = park.getName();
+		this.url = park.getUrl();
+		
+	// Facilities
+		this.facilityList = park.getFacilityList();
+		
+	// Preference Stuff
+		this.rating = rating;
+		this.comment = comment;
+		
+		
+	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj==null) return false;
+		else if (!(obj instanceof PreferencePark)) return false;
+		PreferencePark prefPark = (PreferencePark) obj;
+		if (this.parkId == prefPark.getParkId()) return true;
+		else return false;
+	}
+	
+	
 	public void addFacility(Facility facility) {
 		facilityList.add(facility);
 	}

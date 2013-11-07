@@ -70,5 +70,8 @@ public class Facility implements Serializable {
 	public void setWinter_hours(String winter_hours) {
 		this.winter_hours = winter_hours;
 	}
+
+
+	
 	
 }

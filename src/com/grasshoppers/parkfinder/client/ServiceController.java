@@ -51,6 +51,7 @@ public class ServiceController {
 		
 	}
 	
+	/*
 	public void getPrefList(int UID) {
 		
 		service.findPrefParks(UID, new AsyncCallback<List<PreferencePark>>(){
@@ -71,6 +72,7 @@ public class ServiceController {
 	});
 	
 }
+*/
 	public void getUserLogIn(String username, String password, boolean remember) {
 		
 		service.getAllHoodNames(new AsyncCallback<List<String>>() {

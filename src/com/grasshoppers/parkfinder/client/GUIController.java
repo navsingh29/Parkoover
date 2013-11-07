@@ -113,14 +113,14 @@ public class GUIController extends Composite{
 			}
 		}
 
-
+/*
 		public void goToPrefList(List<PreferencePark> prefPark) {
 			horizontalPanel.clear();
-			
 			PreferenceList pList = new PreferenceList(this, prefPark);
 			horizontalPanel.add(pList);
 			
 		}
+		*/
 		
 		public void doSearch(String park, String neighborhood,String facility) {
 			park = StringMethods.retString(park);
@@ -156,13 +156,17 @@ public class GUIController extends Composite{
 		}
 
 		
-		public void createNewParkRating(int userId, int parkId, int rating, String comment) {
+		public void createNewParkRating(int userId, int parkId, int rating, String comment, Park park) {
 			
 			service.createNewParkRating(userId, parkId, rating, comment);
+			user.addPreferences(new PreferencePark(park, rating, comment));
 		}
 		
-		public void deleteParkRating(int userId, int parkId) {
+		public void deleteParkRating(int userId, int parkId, PreferencePark park) {
+			horizontalPanel.clear();
 			service.deleteParkRating(userId, parkId);
+			user.getPreferenceList().remove(park);
+			
 			
 		}
 		

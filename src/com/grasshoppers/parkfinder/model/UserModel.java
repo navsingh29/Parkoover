@@ -108,7 +108,7 @@ public class UserModel extends DBManager {
 		Connection con = getConnection();
 		boolean isWorked=true;
 		String query = "DELETE FROM "+PREFS_TABLE
-				+ " WHERE userID = ? AND parkId = ?";
+				+ " WHERE user_ID = ? AND park_Id = ?";
 		try {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, userId);

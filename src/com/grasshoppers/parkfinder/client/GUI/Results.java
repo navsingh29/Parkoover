@@ -27,6 +27,7 @@ import com.google.gwt.user.client.Command;
 import com.grasshoppers.parkfinder.client.GUIController;
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
+import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 
 public class Results extends Composite {
 
@@ -136,7 +137,7 @@ public class Results extends Composite {
 		*/
 		
 	//	for (int i = 0; i< parks.size(); i++ ) {
-		for (Park park: parks) {
+		for (final Park park: parks) {
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
 			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
@@ -162,10 +163,21 @@ public class Results extends Composite {
 			label_FacilityNames.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(label_FacilityNames);
 			
-			CheckBox chckbxFavourite = new CheckBox("favourite");
+			final CheckBox chckbxFavourite = new CheckBox("favourite");
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
-					Window.alert("changed: ");
+					//TODO: make a popup appear when checked that allows user to specify
+					// rating and comment, for now they are null
+					if (chckbxFavourite.getValue()) {
+						controller.createNewParkRating(controller.getUser().getId(), park.getParkId(), 0, "",park);
+						Window.alert("Park added to preference list.");
+					} else {
+						PreferencePark dummyPark = new PreferencePark();
+						dummyPark.setParkId(park.getParkId());
+						controller.deleteParkRating(controller.getUser().getId(), park.getParkId(), dummyPark);
+						Window.alert("Park deleted from preference list.");
+					}
+					
 				}
 			});
 			
