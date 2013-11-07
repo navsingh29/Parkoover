@@ -31,6 +31,7 @@ public class Search extends Composite {
 	private GUIController controller;
 	private List<String> facList;
 	private List<String> hoodList;
+	private String blankSearchText;
 	
 
 	
@@ -87,7 +88,8 @@ public class Search extends Composite {
 		
 		tbParkSearch = new TextBox();
 		tbParkSearch.setStyleName("gwt-Label-Fields");
-		tbParkSearch.setText("Search Me!");
+		blankSearchText = "Search Me!";
+		tbParkSearch.setText(blankSearchText);
 		flexTable.setWidget(2, 0, tbParkSearch);
 		tbParkSearch.setWidth("75%");
 		
@@ -130,14 +132,16 @@ public class Search extends Composite {
 		 
 				public void onClick(ClickEvent event) {
 					String park = tbParkSearch.getText();
+					if (park.equalsIgnoreCase(blankSearchText))
+						park = "";
 					
 					String facility = cbFacility.getItemText(cbFacility.getSelectedIndex());
 					if (facility.contains("choose facility type"))
-						facility = "";;
+						facility = "";
 					
 					String neighborhood = lbNeighborhood.getItemText(lbNeighborhood.getSelectedIndex());
 					if (neighborhood.contains("choose neighborhood"))
-						neighborhood = "";;
+						neighborhood = "";
 					
 					controller.doSearch(park,neighborhood,facility);
 					

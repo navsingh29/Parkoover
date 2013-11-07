@@ -147,46 +147,56 @@ public class Results extends Composite {
 	//	for (int i = 0; i< parks.size(); i++ ) {
 		
 		for (final Park park: parks) {
+			//Park Tab panel
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
+			//Park Name
 			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
+
 			
+			//Address 
 			Label address = new Label("Address: "+park.getStreet_number()+" "+park.getStreet_name());
 			address.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(address);
 			
+			//Bound Streets
+			Label nearBy = new Label("EW Bound: "+park.getEw_street()+", NS Bound "+park.getNs_street());
+			nearBy.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(nearBy);
 			
-			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
-			neighbourhood.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(neighbourhood);
-			
+			//Size
 			Label hectares = new Label("Size: "+park.getHectares()+" Hectares");
 			hectares.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(hectares);			
 			
+			//Hood 
+			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
+			neighbourhood.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(neighbourhood);
+			
+			//Facs
 			List<String> listFac = new ArrayList<String>();
 			String listFacName = "Available Facilities: ";
 			
 			for (Facility fac : park.getFacilityList()) {
 				//System.out.println(fac.getType().toString() + "yooooo");
 				if (!listFac.contains(fac.getType())) {
-					listFacName = listFacName + fac.getType().toString() + ", ";
+					listFacName = listFacName + fac.getType().toString() + " (x"+ fac.getCount()+ "), ";
 					listFac.add(fac.getType());
 				}
 			}
-			
 			Label label_FacilityNames = new Label(listFacName);
 			label_FacilityNames.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(label_FacilityNames);
 			
-			
-			Label blank = new Label("===========================");
+			//Break line
+			Label blank = new Label("===========================================");
 			blank.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(blank);
 			
 
 
-			
+			//Fav/Remove 
 			boolean isPref = false;
 			for (PreferencePark pp : this.controller.getUser().getPreferenceList()) {
 				if (pp.getParkId() == park.getParkId()) {
@@ -221,7 +231,7 @@ public class Results extends Composite {
 				}
 				starBox.setStyleName("gwt-Label-Login");
 				//flexTable.setWidget(4, 0, starBox);
-				starBox.setWidth("75%");
+				starBox.setWidth("15%");
 				verticalPanel_2.add(starBox);
 				chkBox = "favourite this park";
 			}

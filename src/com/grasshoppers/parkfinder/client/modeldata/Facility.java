@@ -11,6 +11,7 @@ public class Facility implements Serializable {
 	private String note;
 	private String summer_hours;
 	private String winter_hours;
+	private int count;
 	
 	public Facility() {
 	}
@@ -69,6 +70,14 @@ public class Facility implements Serializable {
 
 	public void setWinter_hours(String winter_hours) {
 		this.winter_hours = winter_hours;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 

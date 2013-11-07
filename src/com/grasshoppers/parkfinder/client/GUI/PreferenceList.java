@@ -100,27 +100,80 @@ public class PreferenceList extends Composite {
 
 		for (final PreferencePark park: prefPark) {
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
-			decoratedStackPanel.add(verticalPanel_2, park.getParkId()+ ". "+ park.getName(), false);
+			decoratedStackPanel.add(verticalPanel_2,park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
 			
+			//Status
+			String offStatus = "Official";
+			if (park.getOfficial() == 0)
+				offStatus = "Unofficial";
+			Label status = new Label("Status: "+offStatus);
+			status.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(status);
+			
+			//Address 
 			Label address = new Label("Address: "+park.getStreet_number()+" "+park.getStreet_name());
 			address.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(address);
 			
+			//Bound Streets
+			Label nearBy = new Label("EW Bound: "+park.getEw_street()+", NS Bound: "+park.getNs_street());
+			nearBy.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(nearBy);
 			
-			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
-			neighbourhood.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(neighbourhood);
+			//Coord 
+			Label coords = new Label("Coordinates: "+park.getMap_x_loc()+", "+park.getMap_y_loc());
+			coords.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(coords);
 			
+			//Size
 			Label hectares = new Label("Size: "+park.getHectares()+" Hectares");
 			hectares.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(hectares);			
+			verticalPanel_2.add(hectares);	
 			
-			Label Comment = new Label("Comment: "+park.getComment());
-			Comment.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(Comment);	
+			//Hood
+			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
+			neighbourhood.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(neighbourhood);	
 			
-			final CheckBox chckbxFavourite = new CheckBox("remove");
+			//Hood URL
+			Label hoodURL = new Label("URL: "+park.getUrl());
+			hoodURL.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(hoodURL);
+			
+			//Facs
+			List<String> listFac = new ArrayList<String>();
+			String listFacName = "Available Facilities: ";
+			
+			for (Facility fac : park.getFacilityList()) {
+				//System.out.println(fac.getType().toString() + "yooooo");
+				if (!listFac.contains(fac.getType())) {
+					listFacName = listFacName + fac.getType().toString() + " (x"+ fac.getCount()+ "), ";
+					listFac.add(fac.getType());
+				}
+			}
+			Label label_FacilityNames = new Label(listFacName);
+			label_FacilityNames.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(label_FacilityNames);
+			
+			
+			//Break line
+			Label blank = new Label("===========================================");
+			blank.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(blank);
+			
+			//Comments
+			Label comment = new Label("My comment: "+park.getComment());
+			comment.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(comment);
+			
+			//Ratings
+			Label rating = new Label("I rated this park: "+park.getRating()+" stars.");
+			rating.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(rating);
+			
+			//remove
+			final CheckBox chckbxFavourite = new CheckBox("remove this park");
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					
