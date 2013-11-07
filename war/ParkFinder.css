@@ -6,6 +6,13 @@ body {
 	background-color: white;
 }
 
+ div#container
+{
+ margin-left: auto;
+ margin-right: auto;
+ width:480px;
+}
+
 a {	
 	color: darkblue;
 }
@@ -161,6 +168,12 @@ a:visited {
   border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205) rgb(232, 241, 255);
   cursor: pointer;
   cursor: hand;
+  	color: black;
+	font-variant: small-caps;
+	font-size: 15px;
+	font-style: normal;
+	font-family: Candara;
+	font-weight: normal;
 }
 
 .gwt-ToggleButton-up-hovering {
@@ -200,6 +213,12 @@ a:visited {
 .gwt-RichTextToolbar {
   background-color: #C3D9FF;
   padding: 2px;
+  	color: black;
+	font-variant: small-caps;
+	font-size: 12px;
+	font-style: normal;
+	font-family: Arial;
+	font-weight: normal;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up {
@@ -252,6 +271,11 @@ a:visited {
 
 .gwt-HorizontalSplitPanel {
 	border: 8px solid #C3D9FF;
+	font-variant: small-caps;
+	color: black;
+	font-size: 12px;
+	font-family: Candara;
+	font-weight: normal;
 }
 
 .gwt-HorizontalSplitPanel .splitter {
@@ -265,6 +289,12 @@ a:visited {
 
 .gwt-VerticalSplitPanel {
 	border: 8px solid #C3D9FF;
+	color: black;
+	font-variant: small-caps;
+	font-size: 12px;
+	font-style: normal;
+	font-family: Candara;
+	font-weight: normal;
 }
 
 .gwt-VerticalSplitPanel .splitter {
@@ -297,8 +327,24 @@ a:visited {
 .gwt-Label-Login {
 	color: black;
 	font-variant: small-caps;
-	font-size: 14px;
+	font-size: 15px;
 	font-style: normal;
 	font-family: Candara;
 	font-weight: normal;
+}
+.gwt-Label-Fields {
+	color: black;
+	font-variant: normal;
+	font-size: 12px;
+	font-style: normal;
+	font-family: Candara;
+	font-weight: normal;
+}
+.gwt-Label-Title {
+	color: black;
+	font-variant: small-caps;
+	font-size: 25px;
+	font-style: normal;
+	font-family: Candara;
+	font-weight: bold;
 }

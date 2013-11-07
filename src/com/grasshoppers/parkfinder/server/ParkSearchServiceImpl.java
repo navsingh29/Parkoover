@@ -71,6 +71,7 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 	public Boolean deleteParkRating(int userId, int parkId) {
 		// TODO Auto-generated method stub
 		return userModel.deleteParkRating(userId, parkId);
+
 	}
 
 	

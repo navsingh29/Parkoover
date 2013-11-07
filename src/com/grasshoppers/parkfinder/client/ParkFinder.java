@@ -20,7 +20,7 @@ public class ParkFinder implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		ServiceController clientImpl = new ServiceController();
-		RootPanel.get().add(clientImpl.getGUIController());
+		RootPanel.get("container").add(clientImpl.getGUIController());
 		
 	}
 }

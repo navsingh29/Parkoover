@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.Command;
 import com.grasshoppers.parkfinder.client.GUIController;
+import com.google.gwt.user.client.ui.Image;
 
 public class Search extends Composite {
 
@@ -30,6 +31,7 @@ public class Search extends Composite {
 	private GUIController controller;
 	private List<String> facList;
 	private List<String> hoodList;
+	private String blankSearchText;
 	
 
 	
@@ -46,21 +48,27 @@ public class Search extends Composite {
 		
 		FlexTable flexTable = new FlexTable();
 		verticalPanel.add(flexTable);
-		verticalPanel.setCellWidth(flexTable, "200px");
+		verticalPanel.setCellHeight(flexTable, "100%");
+		verticalPanel.setCellWidth(flexTable, "100%");
 		verticalPanel.setCellHorizontalAlignment(flexTable, HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel.setCellVerticalAlignment(flexTable, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.setSize("100%", "100%");
 		
-		Label lblNewLabel = new Label("Parkoover");
-		flexTable.setWidget(0, 0, lblNewLabel);
-		flexTable.getCellFormatter().setStyleName(0, 0, "gwt-Label-Login");
+		Image image = new Image("images/Parkoover10.gif");
+		flexTable.setWidget(0, 0, image);
 		
 		MenuBar menuBar = new MenuBar(false);
 		flexTable.setWidget(1, 0, menuBar);
 		menuBar.setWidth("100px");
 		MenuBar menuBar_1 = new MenuBar(true);
 		
-		MenuItem mntmMenu = new MenuItem("menu", false, menuBar_1);
+		String userMenuName = "Menu";
+		if (this.controller.getUser().getFname() != null)
+			userMenuName = this.controller.getUser().getFname()+"'s Menu";
+		else if (this.controller.getUser().getUser_name() != null)
+			userMenuName = this.controller.getUser().getUser_name()+"'s Menu";
+		
+		MenuItem mntmMenu = new MenuItem(userMenuName, false, menuBar_1);
 		
 		MenuItem mntmSignOut = new MenuItem("sign out", false, new Command() {
 			public void execute() {
@@ -79,6 +87,10 @@ public class Search extends Composite {
 		mntmMenu.setWidth("100px");
 		
 		tbParkSearch = new TextBox();
+		tbParkSearch.setStyleName("gwt-Label-Fields");
+		blankSearchText = "Search Me!";
+		tbParkSearch.setText(blankSearchText);
+		tbParkSearch.setStyleName("gwt-HorizontalSplitPanel");
 		flexTable.setWidget(2, 0, tbParkSearch);
 		tbParkSearch.setWidth("75%");
 		
@@ -88,7 +100,7 @@ public class Search extends Composite {
 			cbFacility.addItem(facType);
 		}
 		
-		cbFacility.setStyleName("gwt-Label-Login");
+		cbFacility.setStyleName("gwt-HorizontalSplitPanel");
 		flexTable.setWidget(3, 0, cbFacility);
 		cbFacility.setWidth("75%");
 		
@@ -97,7 +109,7 @@ public class Search extends Composite {
 		for (String hoodName : this.hoodList) {
 			lbNeighborhood.addItem(hoodName);
 		}
-		lbNeighborhood.setStyleName("gwt-Label-Login");
+		lbNeighborhood.setStyleName("gwt-HorizontalSplitPanel");
 		flexTable.setWidget(4, 0, lbNeighborhood);
 		lbNeighborhood.setWidth("75%");
 		
@@ -109,12 +121,11 @@ public class Search extends Composite {
 		btnNewButton.setWidth("25%");
 		flexTable.getCellFormatter().setVerticalAlignment(5, 0, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		flexTable.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(4, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_CENTER);
+		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
 	
 	
@@ -122,14 +133,16 @@ public class Search extends Composite {
 		 
 				public void onClick(ClickEvent event) {
 					String park = tbParkSearch.getText();
+					if (park.equalsIgnoreCase(blankSearchText))
+						park = "";
 					
 					String facility = cbFacility.getItemText(cbFacility.getSelectedIndex());
 					if (facility.contains("choose facility type"))
-						facility = "";;
+						facility = "";
 					
 					String neighborhood = lbNeighborhood.getItemText(lbNeighborhood.getSelectedIndex());
 					if (neighborhood.contains("choose neighborhood"))
-						neighborhood = "";;
+						neighborhood = "";
 					
 					controller.doSearch(park,neighborhood,facility);
 					

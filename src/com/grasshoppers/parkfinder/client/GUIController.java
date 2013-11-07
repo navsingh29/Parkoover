@@ -62,14 +62,22 @@ public class GUIController extends Composite{
 		public void buttonToPrefList() {
 		//	service.getPrefList();
 			horizontalPanel.clear();
-			if (user!=null){
-			PreferenceList pList = new PreferenceList(this, user.getPreferenceList());
-			horizontalPanel.add(pList);
-			} else warnPopup("User not logged in.");
+			if (user!=null) {
+				PreferenceList pList = new PreferenceList(this, user.getPreferenceList());
+				horizontalPanel.add(pList);
+			} else 
+				warnPopup("User not logged in.");
 		}
 		
 		public void buttonToSearch() {
 			service.getSearchAssets();
+		}
+		
+		public void goToSavedResult() {
+			if (user.getLastSearch().isEmpty())
+				warnPopup("Last search result is empty!");
+			else
+				displayParks(this.user.getLastSearch());
 		}
 		
 //=============================================================================================================
@@ -99,6 +107,7 @@ public class GUIController extends Composite{
 				//Window.alert("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
 				System.out.println("Logged on: "+user.getId()+", "+user.getUser_name()+", with Remember Me: "+remembered);
 				this.user = user;
+				warnPopup("Welcome "+user.getUser_name()+"!");
 				goToSearch();
 			}
 		}
@@ -134,6 +143,7 @@ public class GUIController extends Composite{
 			horizontalPanel.clear();
 			Results results = new Results(this, parks);
 			horizontalPanel.add(results);
+			user.setLastSearch(parks);
 		}		
 
 		
@@ -149,11 +159,16 @@ public class GUIController extends Composite{
 			Search search = new Search(this, this.facList, this.hoodList);
 			horizontalPanel.add(search);
 		}
+
+//=============================================================================================================
+//		Info Retrieval
+//=============================================================================================================
 		
 		
 		public User getUser() {
 			return user;
 		}
+
 
 		
 		public void createNewParkRating(int userId, int parkId, int rating, String comment, Park park) {
@@ -170,6 +185,7 @@ public class GUIController extends Composite{
 			
 		}
 		
+
 	}
 	
 	

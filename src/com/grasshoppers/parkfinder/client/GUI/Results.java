@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
@@ -28,6 +29,7 @@ import com.grasshoppers.parkfinder.client.GUIController;
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.google.gwt.user.client.ui.Image;
 
 public class Results extends Composite {
 
@@ -45,18 +47,17 @@ public class Results extends Composite {
 		
 		FlexTable flexTable = new FlexTable();
 		verticalPanel.add(flexTable);
+		verticalPanel.setCellHeight(flexTable, "100%");
+		verticalPanel.setCellWidth(flexTable, "100%");
 		verticalPanel.setCellHorizontalAlignment(flexTable, HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel.setCellVerticalAlignment(flexTable, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.setSize("100%", "100%");
 		
-		Label lblNewLabel = new Label("Parkoover");
-		flexTable.setWidget(0, 0, lblNewLabel);
-		flexTable.getCellFormatter().setStyleName(0, 0, "gwt-Label-Login");
-		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		flexTable.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_MIDDLE);
+		Image image = new Image("images/Parkoover10.gif");
+		flexTable.setWidget(0, 0, image);
 		
 		Label label_2 = new Label("results");
-		label_2.setStyleName("gwt-Label-Login");
+		label_2.setStyleName("gwt-Label-Title");
 		flexTable.setWidget(1, 0, label_2);
 		
 		MenuBar menuBar_3 = new MenuBar(false);
@@ -64,7 +65,13 @@ public class Results extends Composite {
 		menuBar_3.setWidth("100px");
 		MenuBar menuBar_4 = new MenuBar(true);
 		
-		MenuItem mntmMenu_1 = new MenuItem("menu", false, menuBar_4);
+		String userMenuName = "Menu";
+		if (this.controller.getUser().getFname() != null)
+			userMenuName = this.controller.getUser().getFname()+"'s Menu";
+		else if (this.controller.getUser().getUser_name() != null)
+			userMenuName = this.controller.getUser().getUser_name()+"'s Menu";
+		
+		MenuItem mntmMenu_1 = new MenuItem(userMenuName, false, menuBar_4);
 		
 		MenuItem mntmSignOut = new MenuItem("sign out", false, new Command() {
 			public void execute() {
@@ -80,6 +87,7 @@ public class Results extends Composite {
 				controller.buttonToSearch();
 			}
 		});
+		menuItemSearch.setHTML("search");
 //		mntmPreferenceList_1.setHTML("search");
 		menuBar_4.addItem(menuItemSearch);
 
@@ -92,9 +100,9 @@ public class Results extends Composite {
 			}
 		});
 		menuBar_4.addItem(mntmPreferenceList_1);
-		MenuBar menuBar_5 = new MenuBar(true);
+		//MenuBar menuBar_5 = new MenuBar(true);
 		
-		MenuItem mntmSort_1 = new MenuItem("sort", false, menuBar_5);
+/*		MenuItem mntmSort_1 = new MenuItem("sort", false, menuBar_5);
 		
 		
 		
@@ -106,7 +114,7 @@ public class Results extends Composite {
 		
 		mntmAlphabetical.setHTML("ABC");
 		menuBar_5.addItem(mntmAlphabetical);
-		menuBar_4.addItem(mntmSort_1);
+		menuBar_4.addItem(mntmSort_1);*/
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 		
@@ -137,57 +145,131 @@ public class Results extends Composite {
 		*/
 		
 	//	for (int i = 0; i< parks.size(); i++ ) {
+		
 		for (final Park park: parks) {
+			//Park Tab panel
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
+			//Park Name
 			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
 			verticalPanel_2.setSize("100%", "100%");
+
 			
+			//Address 
 			Label address = new Label("Address: "+park.getStreet_number()+" "+park.getStreet_name());
 			address.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(address);
 			
+			//Bound Streets
+			Label nearBy = new Label("EW Bound: "+park.getEw_street()+", NS Bound "+park.getNs_street());
+			nearBy.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(nearBy);
 			
-			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
-			neighbourhood.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(neighbourhood);
-			
+			//Size
 			Label hectares = new Label("Size: "+park.getHectares()+" Hectares");
 			hectares.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(hectares);			
 			
-			String listFacName = "";
+			//Hood 
+			Label neighbourhood = new Label("Neighbourhood: "+park.getNeighbourhoodName());
+			neighbourhood.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(neighbourhood);
+			
+			//Facs
+			List<String> listFac = new ArrayList<String>();
+			String listFacName = "Available Facilities: ";
+			
 			for (Facility fac : park.getFacilityList()) {
-				listFacName.concat(fac.getType());
+				//System.out.println(fac.getType().toString() + "yooooo");
+				if (!listFac.contains(fac.getType())) {
+					listFacName = listFacName + fac.getType().toString() + " (x"+ fac.getCount()+ "), ";
+					listFac.add(fac.getType());
+				}
 			}
-			Label label_FacilityNames = new Label("Available Facilities: "+listFacName);
+			Label label_FacilityNames = new Label(listFacName);
 			label_FacilityNames.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(label_FacilityNames);
 			
-			final CheckBox chckbxFavourite = new CheckBox("favourite");
+			//Break line
+			Label blank = new Label("===========================================");
+			blank.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(blank);
+			
+
+
+			//Fav/Remove 
+			boolean isPref = false;
+			for (PreferencePark pp : this.controller.getUser().getPreferenceList()) {
+				if (pp.getParkId() == park.getParkId()) {
+					isPref = true;
+					break;
+				}
+			}
+			
+			TextBox commBox = null;
+			ListBox starBox = null;
+			
+			String chkBox = "remove this park";
+			if (!isPref) {
+				Label commentB = new Label("Put your comments here: ");
+				commentB.setStyleName("gwt-Label-Login");
+				verticalPanel_2.add(commentB);
+				
+				commBox = new TextBox();
+				commBox.setStyleName("gwt-Label-Fields");
+				commBox.setText("");
+				//flexTable.setWidget(2, 0, commBox);
+				verticalPanel_2.add(commBox);
+				commBox.setWidth("85%");
+				
+				Label ratingB = new Label("Rate this Park: ");
+				ratingB.setStyleName("gwt-Label-Login");
+				verticalPanel_2.add(ratingB);
+				
+				starBox = new ListBox();
+				for (int i=1; i<= 5; i++) {
+					starBox.addItem(Integer.toString(i));
+				}
+				starBox.setStyleName("gwt-Label-Login");
+				//flexTable.setWidget(4, 0, starBox);
+				starBox.setWidth("15%");
+				verticalPanel_2.add(starBox);
+				chkBox = "favourite this park";
+			}
+			
+			final TextBox comm = commBox;
+			final ListBox lisb = starBox;
+			final boolean notInPref = !isPref;
+			final Button chckbxFavourite = new Button(chkBox);
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					//TODO: make a popup appear when checked that allows user to specify
 					// rating and comment, for now they are null
-					if (chckbxFavourite.getValue()) {
-						controller.createNewParkRating(controller.getUser().getId(), park.getParkId(), 0, "",park);
+					if (notInPref) {
+						
+						controller.createNewParkRating(controller.getUser().getId(), park.getParkId(),
+								Integer.parseInt(lisb.getValue(lisb.getSelectedIndex())), comm.getValue(),park);
 						Window.alert("Park added to preference list.");
+						controller.goToSavedResult();
 					} else {
 						PreferencePark dummyPark = new PreferencePark();
 						dummyPark.setParkId(park.getParkId());
 						controller.deleteParkRating(controller.getUser().getId(), park.getParkId(), dummyPark);
 						Window.alert("Park deleted from preference list.");
+						controller.goToSavedResult();
 					}
 					
 				}
 			});
 			
-			chckbxFavourite.setStyleName("gwt-Label-Login");
+			chckbxFavourite.setStyleName("gwt-RichTextToolbar");
 			verticalPanel_2.add(chckbxFavourite);
 		}
+		
 		
 		flexTable.getFlexCellFormatter().setColSpan(3, 0, 1);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
 
 }

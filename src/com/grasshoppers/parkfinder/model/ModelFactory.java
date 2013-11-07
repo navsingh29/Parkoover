@@ -23,11 +23,11 @@ public class ModelFactory {
 		park.setEw_street(rs.getString("ew_street"));
 		park.setNs_street(rs.getString("ns_street"));
 		park.setMap_x_loc(rs.getDouble("map_x_loc"));
+		park.setMap_y_loc(rs.getDouble("map_y_loc"));
 		park.setHectares(rs.getDouble("hectares"));
-		
 		park.setNeighbourhoodId(rs.getInt("Neighborhood_Id"));
 		park.setNeighbourhoodName(rs.getString("Neighborhood_Name"));
-		park.setUrl(rs.getString("Neighborhood_Name"));
+		park.setUrl(rs.getString("url"));
 		
 		park.addFacility(ModelFactory.makeFacility(rs));
 		
@@ -48,6 +48,7 @@ public class ModelFactory {
 		facility.setNote(rs.getString("note"));
 		facility.setSummer_hours(rs.getString("summer_hours"));
 		facility.setWinter_hours(rs.getString("winter_hours"));
+		facility.setCount(rs.getInt("count"));
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -67,11 +68,12 @@ public class ModelFactory {
 		park.setEw_street(rs.getString("ew_street"));
 		park.setNs_street(rs.getString("ns_street"));
 		park.setMap_x_loc(rs.getDouble("map_x_loc"));
+		park.setMap_y_loc(rs.getDouble("map_y_loc"));
 		park.setHectares(rs.getDouble("hectares"));
 		
 		park.setNeighbourhoodId(rs.getInt("Neighborhood_Id"));
 		park.setNeighbourhoodName(rs.getString("Neighborhood_Name"));
-		park.setUrl(rs.getString("Neighborhood_Name"));
+		park.setUrl(rs.getString("url"));
 		
 		park.setRating(rs.getInt("rating"));
 		park.setComment(rs.getString("comment"));

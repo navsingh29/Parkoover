@@ -25,9 +25,10 @@ public class Park implements Serializable {
 	private String url;
 	
 // Facilities
-	private List<Facility> facilityList = new ArrayList<Facility>();
+	private List<Facility> facilityList;
 	
 	public Park() {
+		facilityList = new ArrayList<Facility>();
 	}
 
 	public void addFacility(Facility facility) {
