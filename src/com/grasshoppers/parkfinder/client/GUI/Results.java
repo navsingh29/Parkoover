@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
@@ -177,19 +178,73 @@ public class Results extends Composite {
 			label_FacilityNames.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(label_FacilityNames);
 			
-			final CheckBox chckbxFavourite = new CheckBox("favourite");
+			
+			Label blank = new Label("===========================");
+			blank.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(blank);
+			
+
+
+			
+			boolean isPref = false;
+			for (PreferencePark pp : this.controller.getUser().getPreferenceList()) {
+				if (pp.getParkId() == park.getParkId()) {
+					isPref = true;
+					break;
+				}
+			}
+			
+			TextBox commBox = null;
+			ListBox starBox = null;
+			
+			String chkBox = "remove this park";
+			if (!isPref) {
+				Label commentB = new Label("Put your comments here: ");
+				commentB.setStyleName("gwt-Label-Login");
+				verticalPanel_2.add(commentB);
+				
+				commBox = new TextBox();
+				commBox.setStyleName("gwt-Label-Fields");
+				commBox.setText("");
+				flexTable.setWidget(2, 0, commBox);
+				verticalPanel_2.add(commBox);
+				commBox.setWidth("55%");
+				
+				Label ratingB = new Label("Rate this Park: ");
+				ratingB.setStyleName("gwt-Label-Login");
+				verticalPanel_2.add(ratingB);
+				
+				starBox = new ListBox();
+				for (int i=1; i<= 5; i++) {
+					starBox.addItem(Integer.toString(i));
+				}
+				starBox.setStyleName("gwt-Label-Login");
+				flexTable.setWidget(4, 0, starBox);
+				starBox.setWidth("75%");
+				verticalPanel_2.add(starBox);
+				chkBox = "favourite this park";
+			}
+			
+			final TextBox comm = commBox;
+			final ListBox lisb = starBox;
+			final boolean notInPref = !isPref;
+			final CheckBox chckbxFavourite = new CheckBox(chkBox);
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					//TODO: make a popup appear when checked that allows user to specify
 					// rating and comment, for now they are null
-					if (chckbxFavourite.getValue()) {
-						controller.createNewParkRating(controller.getUser().getId(), park.getParkId(), 0, "",park);
+					if (notInPref) {
+						
+						controller.createNewParkRating(controller.getUser().getId(), park.getParkId(),
+								Integer.parseInt(lisb.getValue(lisb.getSelectedIndex())), comm.getValue(),park);
 						Window.alert("Park added to preference list.");
+						controller.goToSavedResult();
 					} else {
 						PreferencePark dummyPark = new PreferencePark();
 						dummyPark.setParkId(park.getParkId());
 						controller.deleteParkRating(controller.getUser().getId(), park.getParkId(), dummyPark);
 						Window.alert("Park deleted from preference list.");
+						controller.goToSavedResult();
 					}
 					
 				}

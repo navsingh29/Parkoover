@@ -87,6 +87,7 @@ public class Search extends Composite {
 		
 		tbParkSearch = new TextBox();
 		tbParkSearch.setStyleName("gwt-Label-Fields");
+		tbParkSearch.setText("Search Me!");
 		flexTable.setWidget(2, 0, tbParkSearch);
 		tbParkSearch.setWidth("75%");
 		
