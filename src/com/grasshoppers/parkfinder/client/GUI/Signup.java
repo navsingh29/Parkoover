@@ -47,7 +47,7 @@ public class Signup extends Composite {
 		flexTable.setWidget(0, 0, image);
 		
 		textBoxUsername = new TextBox();
-		textBoxUsername.setStyleName("gwt-Label-Fields");
+		textBoxUsername.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxUsername.setAlignment(TextAlignment.CENTER);
 		textBoxUsername.setText("Username");
 		flexTable.setWidget(1, 0, textBoxUsername);
@@ -56,7 +56,7 @@ public class Signup extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
 		textBoxPassword = new TextBox();
-		textBoxPassword.setStyleName("gwt-Label-Fields");
+		textBoxPassword.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxPassword.setAlignment(TextAlignment.CENTER);
 		textBoxPassword.setText("Password");
 		flexTable.setWidget(2, 0, textBoxPassword);
@@ -128,7 +128,7 @@ public class Signup extends Composite {
 		txtbxPostalCode.setAlignment(TextAlignment.CENTER);
 		flexTable.setWidget(7, 0, txtbxPostalCode);
 		txtbxPostalCode.setWidth("75%");
-		btnNewButton.setStyleName("gwt-Label-Login");
+		btnNewButton.setStyleName("gwt-RichTextToolbar");
 		btnNewButton.setText("sign up");
 		flexTable.setWidget(8, 0, btnNewButton);
 		btnNewButton.setWidth("25%");
@@ -144,7 +144,7 @@ public class Signup extends Composite {
 			}
 		});
 		button.setText("have an account?");
-		button.setStyleName("gwt-Label-Login");
+		button.setStyleName("gwt-RichTextToolbar");
 		flexTable.setWidget(9, 0, button);
 		button.setWidth("25%");
 		flexTable.getCellFormatter().setHorizontalAlignment(9, 0, HasHorizontalAlignment.ALIGN_CENTER);

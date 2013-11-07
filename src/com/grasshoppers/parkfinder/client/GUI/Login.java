@@ -42,7 +42,7 @@ public class Login extends Composite {
 		flexTable.setWidget(0, 0, image);
 		
 		textBoxUsername = new TextBox();
-		textBoxUsername.setStyleName("gwt-Label-Fields");
+		textBoxUsername.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxUsername.setAlignment(TextAlignment.CENTER);
 		textBoxUsername.setText("Username");
 		flexTable.setWidget(1, 0, textBoxUsername);
@@ -51,7 +51,7 @@ public class Login extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
 		textBoxPassword = new TextBox();
-		textBoxPassword.setStyleName("gwt-Label-Fields");
+		textBoxPassword.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxPassword.setAlignment(TextAlignment.CENTER);
 		textBoxPassword.setText("Password");
 		flexTable.setWidget(2, 0, textBoxPassword);
@@ -61,7 +61,7 @@ public class Login extends Composite {
 		
 		chckbxRememberMe = new CheckBox("Remember Me");
 		chckbxRememberMe.setChecked(false);
-		chckbxRememberMe.setStyleName("gwt-Label-Fields");
+		chckbxRememberMe.setStyleName("gwt-Label-Login");
 		flexTable.setWidget(3, 0, chckbxRememberMe);
 		
 		Button btnNewButton = new Button("Sign In");
@@ -75,8 +75,8 @@ public class Login extends Composite {
 				}
 			}
 		});
-		btnNewButton.setStyleName("gwt-Label-Login");
-		btnNewButton.setText("sign in");
+		btnNewButton.setStyleName("gwt-RichTextToolbar");
+		btnNewButton.setText("SIGN IN");
 		flexTable.setWidget(4, 0, btnNewButton);
 		btnNewButton.setWidth("25%");
 		flexTable.getCellFormatter().setVerticalAlignment(4, 0, HasVerticalAlignment.ALIGN_MIDDLE);
@@ -89,8 +89,8 @@ public class Login extends Composite {
 				controller.goToSignUp();
 			}
 		});
-		button.setText("register");
-		button.setStyleName("gwt-Label-Login");
+		button.setText("REGISTER");
+		button.setStyleName("gwt-RichTextToolbar");
 		flexTable.setWidget(5, 0, button);
 		button.setWidth("25%");
 		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);

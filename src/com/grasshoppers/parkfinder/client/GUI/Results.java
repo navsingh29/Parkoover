@@ -239,7 +239,7 @@ public class Results extends Composite {
 			final TextBox comm = commBox;
 			final ListBox lisb = starBox;
 			final boolean notInPref = !isPref;
-			final CheckBox chckbxFavourite = new CheckBox(chkBox);
+			final Button chckbxFavourite = new Button(chkBox);
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					//TODO: make a popup appear when checked that allows user to specify
@@ -261,7 +261,7 @@ public class Results extends Composite {
 				}
 			});
 			
-			chckbxFavourite.setStyleName("gwt-Label-Login");
+			chckbxFavourite.setStyleName("gwt-RichTextToolbar");
 			verticalPanel_2.add(chckbxFavourite);
 		}
 		

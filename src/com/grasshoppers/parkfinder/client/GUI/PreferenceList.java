@@ -173,7 +173,7 @@ public class PreferenceList extends Composite {
 			verticalPanel_2.add(rating);
 			
 			//remove
-			final CheckBox chckbxFavourite = new CheckBox("remove this park");
+			final Button chckbxFavourite = new Button("remove this park");
 			chckbxFavourite.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					
@@ -184,7 +184,7 @@ public class PreferenceList extends Composite {
 				}
 			});
 			
-			chckbxFavourite.setStyleName("gwt-Label-Login");
+			chckbxFavourite.setStyleName("gwt-RichTextToolbar");
 			verticalPanel_2.add(chckbxFavourite);
 		}
 		flexTable.getFlexCellFormatter().setColSpan(3, 0, 1);

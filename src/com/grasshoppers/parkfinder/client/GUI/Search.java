@@ -90,6 +90,7 @@ public class Search extends Composite {
 		tbParkSearch.setStyleName("gwt-Label-Fields");
 		blankSearchText = "Search Me!";
 		tbParkSearch.setText(blankSearchText);
+		tbParkSearch.setStyleName("gwt-HorizontalSplitPanel");
 		flexTable.setWidget(2, 0, tbParkSearch);
 		tbParkSearch.setWidth("75%");
 		
@@ -99,7 +100,7 @@ public class Search extends Composite {
 			cbFacility.addItem(facType);
 		}
 		
-		cbFacility.setStyleName("gwt-Label-Login");
+		cbFacility.setStyleName("gwt-HorizontalSplitPanel");
 		flexTable.setWidget(3, 0, cbFacility);
 		cbFacility.setWidth("75%");
 		
@@ -108,7 +109,7 @@ public class Search extends Composite {
 		for (String hoodName : this.hoodList) {
 			lbNeighborhood.addItem(hoodName);
 		}
-		lbNeighborhood.setStyleName("gwt-Label-Login");
+		lbNeighborhood.setStyleName("gwt-HorizontalSplitPanel");
 		flexTable.setWidget(4, 0, lbNeighborhood);
 		lbNeighborhood.setWidth("75%");
 		
