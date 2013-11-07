@@ -145,6 +145,7 @@ public class Results extends Composite {
 		*/
 		
 	//	for (int i = 0; i< parks.size(); i++ ) {
+		
 		for (final Park park: parks) {
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
 			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
@@ -206,9 +207,9 @@ public class Results extends Composite {
 				commBox = new TextBox();
 				commBox.setStyleName("gwt-Label-Fields");
 				commBox.setText("");
-				flexTable.setWidget(2, 0, commBox);
+				//flexTable.setWidget(2, 0, commBox);
 				verticalPanel_2.add(commBox);
-				commBox.setWidth("55%");
+				commBox.setWidth("85%");
 				
 				Label ratingB = new Label("Rate this Park: ");
 				ratingB.setStyleName("gwt-Label-Login");
@@ -219,7 +220,7 @@ public class Results extends Composite {
 					starBox.addItem(Integer.toString(i));
 				}
 				starBox.setStyleName("gwt-Label-Login");
-				flexTable.setWidget(4, 0, starBox);
+				//flexTable.setWidget(4, 0, starBox);
 				starBox.setWidth("75%");
 				verticalPanel_2.add(starBox);
 				chkBox = "favourite this park";
@@ -253,6 +254,7 @@ public class Results extends Composite {
 			chckbxFavourite.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(chckbxFavourite);
 		}
+		
 		
 		flexTable.getFlexCellFormatter().setColSpan(3, 0, 1);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
