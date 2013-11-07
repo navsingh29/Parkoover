@@ -16,6 +16,7 @@ public class User implements Serializable {
 	private String country;
 	
 	List<PreferencePark> preferenceList = new ArrayList<PreferencePark>();
+	List<Park> lastSearch = new ArrayList<Park>();
 	
 	public User() {		
 	}
@@ -64,6 +65,10 @@ public class User implements Serializable {
 		return preferenceList;
 	}
 
+	public List<Park> getLastSearch() {
+		return lastSearch;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -86,6 +91,10 @@ public class User implements Serializable {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public void setLastSearch(List<Park> lastSearch) {
+		this.lastSearch = lastSearch;
 	}
 
 	public void setProvince(String province) {

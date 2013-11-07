@@ -28,6 +28,7 @@ public class ModelFactory {
 		park.setNeighbourhoodId(rs.getInt("Neighborhood_Id"));
 		park.setNeighbourhoodName(rs.getString("Neighborhood_Name"));
 		park.setUrl(rs.getString("Neighborhood_Name"));
+		System.out.println("hood name: "+ rs.getString("Neighborhood_Name"));
 		
 		park.addFacility(ModelFactory.makeFacility(rs));
 		
@@ -43,6 +44,7 @@ public class ModelFactory {
 		try {
 		facility.setFacilityId(rs.getInt("Facility_Id"));
 		facility.setType(rs.getString("type"));
+		System.out.println("type: "+ rs.getString("type"));
 		facility.setFeature(rs.getString("feature"));
 		facility.setLocation(rs.getString("location"));
 		facility.setNote(rs.getString("note"));

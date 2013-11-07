@@ -128,6 +128,20 @@ public class UserModel extends DBManager {
 		
 	}
 	
+	public void removeParkRating(int userId, int parkId) {
+		Connection con = getConnection();
+		
+		String query = "DELETE FROM "+PREFS_TABLE+" WHERE user_id = ? AND park_id = ?;";
+		try {
+		PreparedStatement ps = con.prepareStatement(query);
+		ps.setInt(1, userId);
+		ps.setInt(2, parkId);
+		ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Obtain the park ratings and comments for a particular user.
 	 * @param userId
