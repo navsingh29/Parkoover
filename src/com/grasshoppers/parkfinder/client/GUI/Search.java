@@ -134,19 +134,18 @@ public class Search extends Composite {
 				public void onClick(ClickEvent event) {
 					String park = tbParkSearch.getText();
 					if (park.equalsIgnoreCase(blankSearchText))
-						park = "";
+						park = "";;
 					
 					String facility = cbFacility.getItemText(cbFacility.getSelectedIndex());
 					if (facility.contains("choose facility type"))
-						facility = "";
+						facility = "";;
 					
 					String neighborhood = lbNeighborhood.getItemText(lbNeighborhood.getSelectedIndex());
 					if (neighborhood.contains("choose neighborhood"))
-						neighborhood = "";
+						neighborhood = "";;
 					
 					controller.doSearch(park,neighborhood,facility);
-					
-					
+
 				}
 		
 		

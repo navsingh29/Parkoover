@@ -133,16 +133,15 @@ public class ParkModel extends DBManager {
 			Park parkToAdd = new Park();
 			while(rs.next()){
 				int id = rs.getInt("Park_Id");
-				if (ids.isEmpty()) {
+			/*	if (ids.isEmpty()) {
 					parkToAdd = ModelFactory.makePark(rs);
 					parkToAdd.addFacility(ModelFactory.makeFacility(rs));
-					
-					ids.add(id);
-				} else if (!ids.contains(id)){
 					parks.add(parkToAdd);
+					ids.add(id);
+				} else*/ if (!ids.contains(id)){
 					parkToAdd = ModelFactory.makePark(rs);
 					parkToAdd.addFacility(ModelFactory.makeFacility(rs));
-					
+					parks.add(parkToAdd);
 					ids.add(id);
 
 				} else {
@@ -234,6 +233,7 @@ public class ParkModel extends DBManager {
 			while(rs.next()) {
 				nameList.add(rs.getString("name"));
 			}
+			conn.close();
 			return nameList;
 		} catch (SQLException e) {
 			e.printStackTrace();

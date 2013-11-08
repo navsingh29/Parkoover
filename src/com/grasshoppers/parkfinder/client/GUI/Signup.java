@@ -77,7 +77,7 @@ public class Signup extends Composite {
 		textBoxLastName.setTextAlignment(TextBoxBase.ALIGN_CENTER);
 		textBoxLastName.setStyleName("gwt-Label-Login");
 		textBoxLastName.setText("last name");
-		flexTable.setWidget(3, 0, textBoxLastName);
+		flexTable.setWidget(4, 0, textBoxLastName);
 		textBoxLastName.setWidth("75%");
 		
 		textBoxEmail = new TextBox();
@@ -85,7 +85,7 @@ public class Signup extends Composite {
 		textBoxEmail.setTextAlignment(TextBoxBase.ALIGN_CENTER);
 		textBoxEmail.setStyleName("gwt-Label-Fields");
 		textBoxEmail.setText("Email");
-		flexTable.setWidget(3, 0, textBoxEmail);
+	//	flexTable.setWidget(3, 0, textBoxEmail);
 		textBoxEmail.setWidth("75%");
 		
 		textBoxAddress = new TextBox();
@@ -93,12 +93,13 @@ public class Signup extends Composite {
 		textBoxAddress.setText("Address");
 		textBoxAddress.setStyleName("gwt-Label-Fields");
 		textBoxAddress.setAlignment(TextAlignment.CENTER);
-		flexTable.setWidget(4, 0, textBoxAddress);
+		flexTable.setWidget(5, 0, textBoxAddress);
 		textBoxAddress.setWidth("75%");
 		
 		Button btnNewButton = new Button("New button");
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				
 				controller.buttonDoSignUp(textBoxUsername.getText(), textBoxPassword.getText(), 
 						textBoxFirstName.getText(), textBoxLastName.getText(), textBoxAddress.getText(), txtbxCountry.getText(), 
 						txtbxCity.getText(), txtbxPostalCode.getText());
@@ -110,7 +111,7 @@ public class Signup extends Composite {
 		txtbxCountry.setText("Country");
 		txtbxCountry.setStyleName("gwt-Label-Fields");
 		txtbxCountry.setAlignment(TextAlignment.CENTER);
-		flexTable.setWidget(5, 0, txtbxCountry);
+		flexTable.setWidget(6, 0, txtbxCountry);
 		txtbxCountry.setWidth("75%");
 		
 		txtbxCity = new TextBox();
@@ -118,7 +119,7 @@ public class Signup extends Composite {
 		txtbxCity.setText("City");
 		txtbxCity.setStyleName("gwt-Label-Fields");
 		txtbxCity.setAlignment(TextAlignment.CENTER);
-		flexTable.setWidget(6, 0, txtbxCity);
+		flexTable.setWidget(7, 0, txtbxCity);
 		txtbxCity.setWidth("75%");
 		
 		txtbxPostalCode = new TextBox();
@@ -126,11 +127,11 @@ public class Signup extends Composite {
 		txtbxPostalCode.setText("Province");
 		txtbxPostalCode.setStyleName("gwt-Label-Fields");
 		txtbxPostalCode.setAlignment(TextAlignment.CENTER);
-		flexTable.setWidget(7, 0, txtbxPostalCode);
+		flexTable.setWidget(8, 0, txtbxPostalCode);
 		txtbxPostalCode.setWidth("75%");
 		btnNewButton.setStyleName("gwt-RichTextToolbar");
 		btnNewButton.setText("sign up");
-		flexTable.setWidget(8, 0, btnNewButton);
+		flexTable.setWidget(9, 0, btnNewButton);
 		btnNewButton.setWidth("25%");
 		flexTable.getCellFormatter().setVerticalAlignment(8, 0, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.getCellFormatter().setHorizontalAlignment(8, 0, HasHorizontalAlignment.ALIGN_CENTER);
@@ -145,7 +146,7 @@ public class Signup extends Composite {
 		});
 		button.setText("have an account?");
 		button.setStyleName("gwt-RichTextToolbar");
-		flexTable.setWidget(9, 0, button);
+		flexTable.setWidget(10, 0, button);
 		button.setWidth("25%");
 		flexTable.getCellFormatter().setHorizontalAlignment(9, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);

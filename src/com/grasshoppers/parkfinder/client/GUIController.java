@@ -96,7 +96,6 @@ public class GUIController extends Composite{
 		//DO NOT TOUCH: service callback
 		public void setHoodList(List<String> result) {
 			this.hoodList = result;
-			
 		}
 		
 		//DO NOT TOUCH: service callback for signIN

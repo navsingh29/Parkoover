@@ -1,2 +1,0 @@
-serviceClass: com.grasshoppers.parkfinder.client.ParkSearchService
-path: 9DDE1FFE066C4F0D109928030C9C51D7.gwt.rpc

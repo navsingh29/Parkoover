@@ -62,7 +62,7 @@ public class Login extends Composite {
 		chckbxRememberMe = new CheckBox("Remember Me");
 		chckbxRememberMe.setChecked(false);
 		chckbxRememberMe.setStyleName("gwt-Label-Login");
-		flexTable.setWidget(3, 0, chckbxRememberMe);
+	//	flexTable.setWidget(3, 0, chckbxRememberMe);
 		
 		Button btnNewButton = new Button("Sign In");
 		btnNewButton.addClickHandler(new ClickHandler() {

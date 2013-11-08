@@ -72,7 +72,10 @@ public class UserModel extends DBManager {
 		
 		if(rs.next()){
 			user = ModelFactory.makeUser(rs);
-		} else return null;
+		} else {
+			con.close();
+			return null;
+		}
 		
 		user.addPreferences(getParkRatings(user.getId()));
 		
@@ -137,6 +140,7 @@ public class UserModel extends DBManager {
 		ps.setInt(1, userId);
 		ps.setInt(2, parkId);
 		ps.executeUpdate();
+		con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
