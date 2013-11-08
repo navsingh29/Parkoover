@@ -47,13 +47,21 @@ public class PreferenceList extends Composite {
 		verticalPanel.setCellHorizontalAlignment(flexTable, HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel.setCellVerticalAlignment(flexTable, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.setSize("100%", "100%");
-		
-		Image image = new Image("images/Parkoover10.gif");
-		flexTable.setWidget(0, 0, image);
+		if (!prefPark.isEmpty()) {
+			Image image = new Image("images/Parkoover10.gif");
+			flexTable.setWidget(0, 0, image);
+	
+			Label lblResults = new Label("preference list");
+			lblResults.setStyleName("gwt-Label-Title");
+			flexTable.setWidget(1, 0, lblResults);
+		} else {
+			Image image = new Image("images/sadpanda.png");
+			flexTable.setWidget(0, 0, image);
 
-		Label lblResults = new Label("preference list");
-		lblResults.setStyleName("gwt-Label-Title");
-		flexTable.setWidget(1, 0, lblResults);
+			Label lblResults = new Label("SHOW SOME LOVIN' AND FILL ME!");
+			lblResults.setStyleName("gwt-Label-Title");
+			flexTable.setWidget(1, 0, lblResults);
+		}
 		
 		MenuBar menuBar_3 = new MenuBar(false);
 		flexTable.setWidget(2, 0, menuBar_3);

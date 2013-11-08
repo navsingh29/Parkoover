@@ -53,13 +53,21 @@ public class Results extends Composite {
 		verticalPanel.setCellVerticalAlignment(flexTable, HasVerticalAlignment.ALIGN_MIDDLE);
 		flexTable.setSize("100%", "100%");
 		
-		Image image = new Image("images/Parkoover10.gif");
-		flexTable.setWidget(0, 0, image);
+		if (!parks.isEmpty()) {
+			Image image = new Image("images/Parkoover10.gif");
+			flexTable.setWidget(0, 0, image);
 		
-		Label label_2 = new Label("results");
-		label_2.setStyleName("gwt-Label-Title");
-		flexTable.setWidget(1, 0, label_2);
+			Label label_2 = new Label("results");
+			label_2.setStyleName("gwt-Label-Title");
+			flexTable.setWidget(1, 0, label_2);
+		} else {
+			Image image = new Image("images/index.png");
+			flexTable.setWidget(0, 0, image);
 		
+			Label label_2 = new Label("NO MATCH FOUND: UMAD?");
+			label_2.setStyleName("gwt-Label-Title");
+			flexTable.setWidget(1, 0, label_2);
+		}
 		MenuBar menuBar_3 = new MenuBar(false);
 		flexTable.setWidget(2, 0, menuBar_3);
 		menuBar_3.setWidth("100px");
@@ -147,6 +155,8 @@ public class Results extends Composite {
 	//	for (int i = 0; i< parks.size(); i++ ) {
 		
 		for (final Park park: parks) {
+			
+
 			//Park Tab panel
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
 			//Park Name
@@ -190,7 +200,7 @@ public class Results extends Composite {
 			verticalPanel_2.add(label_FacilityNames);
 			
 			//Break line
-			Label blank = new Label("===========================================");
+			Label blank = new Label("=============================================");
 			blank.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(blank);
 			
@@ -270,7 +280,6 @@ public class Results extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-	}
-
+		}
 }
 
