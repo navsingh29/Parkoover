@@ -27,6 +27,9 @@ public class Park implements Serializable {
 // Facilities
 	private List<Facility> facilityList;
 	
+	// Average Rating
+	private int rating;
+	
 	public Park() {
 		facilityList = new ArrayList<Facility>();
 	}
@@ -141,6 +144,14 @@ public class Park implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	@Override

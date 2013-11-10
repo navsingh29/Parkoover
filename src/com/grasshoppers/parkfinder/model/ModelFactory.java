@@ -28,6 +28,7 @@ public class ModelFactory {
 		park.setNeighbourhoodId(rs.getInt("Neighborhood_Id"));
 		park.setNeighbourhoodName(rs.getString("Neighborhood_Name"));
 		park.setUrl(rs.getString("url"));
+		park.setRating(rs.getInt("rating"));
 		
 		park.addFacility(ModelFactory.makeFacility(rs));
 		
