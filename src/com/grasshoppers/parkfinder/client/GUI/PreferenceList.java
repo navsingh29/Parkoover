@@ -12,7 +12,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
@@ -171,14 +173,65 @@ public class PreferenceList extends Composite {
 			verticalPanel_2.add(blank);
 			
 			//Comments
-			Label comment = new Label("My comment: "+park.getComment());
-			comment.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(comment);
+			//Label comment = new Label("My comment: "+park.getComment());
+			//comment.setStyleName("gwt-Label-Login");
+			//verticalPanel_2.add(comment);
+			
+			Label commentB = new Label("My comment:");
+			commentB.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(commentB);
+			
+			TextBox commBox = new TextBox();
+			commBox.setStyleName("gwt-Label-Fields");
+			commBox.setText(park.getComment());
+			//flexTable.setWidget(2, 0, commBox);
+			verticalPanel_2.add(commBox);
+			commBox.setWidth("85%");
 			
 			//Ratings
-			Label rating = new Label("I rated this park: "+park.getRating()+" stars.");
+			final HorizontalPanel ratingPanel = new HorizontalPanel();
+			Label rating = new Label("I rated this park: ");
 			rating.setStyleName("gwt-Label-Login");
-			verticalPanel_2.add(rating);
+			ratingPanel.add(rating);
+			
+			ListBox starBox = new ListBox();
+			for (int i=1; i<= 5; i++) {
+				starBox.addItem(Integer.toString(i));
+			}
+			starBox.setSelectedIndex(park.getRating() - 1);
+			starBox.setStyleName("gwt-Label-Login");
+			//flexTable.setWidget(4, 0, starBox);
+			starBox.setWidth("100%");
+			ratingPanel.add(starBox);
+			
+			Label ending = new Label("  stars.");
+			ending.setStyleName("gwt-Label-Login");
+			ratingPanel.add(ending);
+			verticalPanel_2.add(ratingPanel);
+			
+			final TextBox comm = commBox;
+			final ListBox lisb = starBox;
+			
+			final HorizontalPanel buttonPanel = new HorizontalPanel();
+			
+			//modify
+			final Button buttonModify = new Button("save changes");
+			buttonModify.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					Park dummyPark = new Park();
+					dummyPark.setParkId(park.getParkId());
+					
+					controller.modifyParkRating(controller.getUser().getId(), park.getParkId(),
+							Integer.parseInt(lisb.getValue(lisb.getSelectedIndex())), comm.getValue(), park);
+					
+					Window.alert("Changes saved.");
+					controller.buttonToPrefList();
+				
+				}
+			});
+			
+			buttonModify.setStyleName("gwt-RichTextToolbar");
+			buttonPanel.add(buttonModify);
 			
 			//remove
 			final Button chckbxFavourite = new Button("remove this park");
@@ -186,14 +239,16 @@ public class PreferenceList extends Composite {
 				public void onClick(ClickEvent event) {
 					
 					controller.deleteParkRating(controller.getUser().getId(), park.getParkId(),park);
-					Window.alert("Park deleted from preference list");
+					Window.alert("Park deleted from preference list.");
 					controller.buttonToPrefList();
 				
 				}
 			});
 			
 			chckbxFavourite.setStyleName("gwt-RichTextToolbar");
-			verticalPanel_2.add(chckbxFavourite);
+			buttonPanel.add(chckbxFavourite);
+			
+			verticalPanel_2.add(buttonPanel);
 		}
 		flexTable.getFlexCellFormatter().setColSpan(3, 0, 1);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);

@@ -146,6 +146,29 @@ public class UserModel extends DBManager {
 		}
 	}
 	
+	public Boolean modifyParkRating(int userId, int parkId, int rating, String comment) {
+		Connection con = getConnection();
+		boolean isWorked=true;
+		
+		String query = "UPDATE "+PREFS_TABLE+" SET rating = ? , comment = ?"+
+		" WHERE user_id = ? AND park_id = ?;";
+		try {
+		PreparedStatement ps = con.prepareStatement(query);
+
+		ps.setInt(1, rating);
+		ps.setString(2, comment);
+		ps.setInt(3, userId);
+		ps.setInt(4, parkId);
+		isWorked = true;
+		ps.executeUpdate();
+		con.close();
+		} catch (SQLException e) {
+			isWorked = false;
+			e.printStackTrace();
+		}
+		return isWorked;
+	}
+	
 	/**
 	 * Obtain the park ratings and comments for a particular user.
 	 * @param userId

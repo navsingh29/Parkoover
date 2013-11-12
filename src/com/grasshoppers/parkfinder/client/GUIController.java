@@ -184,6 +184,15 @@ public class GUIController extends Composite{
 			
 		}
 		
+		public void modifyParkRating(int userId, int parkId, int rating, String comment, PreferencePark park) {
+			service.modifyRating(userId, parkId, rating, comment, park);
+
+			PreferencePark temp = park;
+			user.getPreferenceList().remove(temp);
+			temp.setComment(comment);
+			temp.setRating(rating);
+			user.addPreferences(temp);
+		}
 
 	}
 	

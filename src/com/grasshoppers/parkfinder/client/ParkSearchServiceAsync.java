@@ -19,4 +19,5 @@ public interface ParkSearchServiceAsync {
 	void createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country, AsyncCallback<Boolean> callback);
 	void createNewParkRating(int userId, int parkId, int rating, String comment, AsyncCallback<Boolean> callback);
 	void deleteParkRating(int userId, int parkId, AsyncCallback<Boolean> callback);
+	void modifyParkRating(int userId, int parkId, int rating, String comment, AsyncCallback<Boolean> callback);
 }

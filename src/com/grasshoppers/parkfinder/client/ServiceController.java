@@ -204,6 +204,7 @@ public class ServiceController {
 		});
 		
 	}
+
 	
 	public void deleteParkRating(int userId, int parkId) {
 		service.deleteParkRating(userId, parkId, new AsyncCallback<Boolean>() {
@@ -219,6 +220,30 @@ public class ServiceController {
 				// TODO Auto-generated method stub
 				
 			}
+			
+			
+			
+		});
+		
+	}
+
+	public void modifyRating(int userId, int parkId, int rating,
+			String comment, PreferencePark park) {
+		
+		service.modifyParkRating(userId, parkId, rating, comment, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
 			
 			
 			

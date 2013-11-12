@@ -22,4 +22,5 @@ public interface ParkSearchService extends RemoteService {
 	Boolean createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country);
 	Boolean createNewParkRating(int userId, int parkId, int rating, String comment);
 	Boolean deleteParkRating(int userId, int parkId);
+	Boolean modifyParkRating(int userId, int parkId, int rating, String comment);
 }

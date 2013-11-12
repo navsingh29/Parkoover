@@ -74,7 +74,10 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 
 	}
 
-	
+	public Boolean modifyParkRating(int userId, int parkId, int rating,
+			String comment) {
+		return userModel.modifyParkRating(userId, parkId, rating, comment);
+	}
 	
 
 }
