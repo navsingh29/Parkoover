@@ -78,7 +78,7 @@ public class ModelFactory {
 		
 		park.setRating(rs.getInt("rating"));
 		park.setComment(rs.getString("comment"));
-		
+		park.setTime(rs.getString("upd_time"));
 		park.addFacility(ModelFactory.makeFacility(rs));
 		
 		} catch (SQLException e){

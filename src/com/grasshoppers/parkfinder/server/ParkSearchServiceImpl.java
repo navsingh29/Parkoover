@@ -63,8 +63,8 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public Boolean createNewParkRating(int userId, int parkId, int rating,
-			String comment) {
-		return userModel.createNewParkRating(userId, parkId, rating, comment);
+			String comment, String time) {
+		return userModel.createNewParkRating(userId, parkId, rating, comment, time);
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 	}
 
 	public Boolean modifyParkRating(int userId, int parkId, int rating,
-			String comment) {
-		return userModel.modifyParkRating(userId, parkId, rating, comment);
+			String comment, String time) {
+		return userModel.modifyParkRating(userId, parkId, rating, comment, time);
 	}
 	
 

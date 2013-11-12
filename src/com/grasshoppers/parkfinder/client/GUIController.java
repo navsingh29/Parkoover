@@ -1,5 +1,8 @@
 package com.grasshoppers.parkfinder.client;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.user.client.Window;
@@ -171,9 +174,10 @@ public class GUIController extends Composite{
 
 		
 		public void createNewParkRating(int userId, int parkId, int rating, String comment, Park park) {
+			String time = getCurrentTime();
 			
-			service.createNewParkRating(userId, parkId, rating, comment);
-			user.addPreferences(new PreferencePark(park, rating, comment));
+			service.createNewParkRating(userId, parkId, rating, comment, time);
+			user.addPreferences(new PreferencePark(park, rating, comment, time));
 		}
 		
 		public void deleteParkRating(int userId, int parkId, PreferencePark park) {
@@ -185,13 +189,24 @@ public class GUIController extends Composite{
 		}
 		
 		public void modifyParkRating(int userId, int parkId, int rating, String comment, PreferencePark park) {
-			service.modifyRating(userId, parkId, rating, comment, park);
+			
+			String time = getCurrentTime();
+			service.modifyRating(userId, parkId, rating, comment, time, park);
 
 			PreferencePark temp = park;
 			user.getPreferenceList().remove(temp);
 			temp.setComment(comment);
 			temp.setRating(rating);
+			temp.setTime(time);
+			
 			user.addPreferences(temp);
+		}
+		
+		public String getCurrentTime() {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date date = new Date();
+			
+			return dateFormat.format(date);
 		}
 
 	}

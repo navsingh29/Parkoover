@@ -20,7 +20,7 @@ public interface ParkSearchService extends RemoteService {
 	List<String> getAllHoodNames();
 	List<PreferencePark> findPrefParks(int UID);
 	Boolean createNewUser(String name, String password, String firstName, String lastName, String address, String city, String province, String country);
-	Boolean createNewParkRating(int userId, int parkId, int rating, String comment);
+	Boolean createNewParkRating(int userId, int parkId, int rating, String comment, String time);
 	Boolean deleteParkRating(int userId, int parkId);
-	Boolean modifyParkRating(int userId, int parkId, int rating, String comment);
+	Boolean modifyParkRating(int userId, int parkId, int rating, String comment, String time);
 }

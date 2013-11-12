@@ -86,17 +86,18 @@ public class UserModel extends DBManager {
 		return user;
 	}
 	
-	public Boolean createNewParkRating(int userId, int parkId, int rating, String comment) {
+	public Boolean createNewParkRating(int userId, int parkId, int rating, String comment, String time) {
 		Connection con = getConnection();
 		boolean isWorked=true;
-		String query = "INSERT INTO "+PREFS_TABLE+"(user_id,park_id,rating,comment) "
-				+ "VALUES (?,?,?,?);";
+		String query = "INSERT INTO "+PREFS_TABLE+"(user_id,park_id,rating,comment, upd_time) "
+				+ "VALUES (?,?,?,?,?);";
 		try {
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, userId);
 		ps.setInt(2, parkId);
 		ps.setInt(3,rating);
 		ps.setString(4, comment);
+		ps.setString(5, time);
 		ps.executeUpdate();
 		con.close();
 		isWorked = true;
@@ -146,19 +147,20 @@ public class UserModel extends DBManager {
 		}
 	}
 	
-	public Boolean modifyParkRating(int userId, int parkId, int rating, String comment) {
+	public Boolean modifyParkRating(int userId, int parkId, int rating, String comment, String time) {
 		Connection con = getConnection();
 		boolean isWorked=true;
 		
-		String query = "UPDATE "+PREFS_TABLE+" SET rating = ? , comment = ?"+
+		String query = "UPDATE "+PREFS_TABLE+" SET rating = ? , comment = ?, upd_time = ?"+
 		" WHERE user_id = ? AND park_id = ?;";
 		try {
 		PreparedStatement ps = con.prepareStatement(query);
 
 		ps.setInt(1, rating);
 		ps.setString(2, comment);
-		ps.setInt(3, userId);
-		ps.setInt(4, parkId);
+		ps.setString(3, time);
+		ps.setInt(4, userId);
+		ps.setInt(5, parkId);
 		isWorked = true;
 		ps.executeUpdate();
 		con.close();
@@ -181,7 +183,7 @@ public class UserModel extends DBManager {
 		query = "SELECT p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 				+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 				+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url,"
-				+ " pr.rating,pr.comment"
+				+ " pr.rating,pr.comment,pr.upd_time"
 				+ " FROM "+PREFS_TABLE+" pr,"+ParkModel.DBNAME+" p,"+ParkModel.TABLE_FACILITY+" f,"+ParkModel.TABLE_HAS_FACILITY+" h,"
 				+ParkModel.TABLE_NEIGHBORHOOD+" n, "+ParkModel.TABLE_IN_NEIGHBORHOOD+" i"
 				+ " WHERE p.id=i.park_id AND n.id=i.neighbourhood_id AND f.id=h.facility_id AND p.id=h.park_id"

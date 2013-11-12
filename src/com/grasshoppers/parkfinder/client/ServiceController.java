@@ -182,9 +182,9 @@ public class ServiceController {
 		});
 	}
 	
-	public void createNewParkRating(int userId, int parkId, int rating, String comment) {
+	public void createNewParkRating(int userId, int parkId, int rating, String comment, String time) {
 		
-		service.createNewParkRating(userId, parkId, rating, comment, new AsyncCallback<Boolean>() {
+		service.createNewParkRating(userId, parkId, rating, comment, time, new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -228,9 +228,9 @@ public class ServiceController {
 	}
 
 	public void modifyRating(int userId, int parkId, int rating,
-			String comment, PreferencePark park) {
+			String comment, String time, PreferencePark park) {
 		
-		service.modifyParkRating(userId, parkId, rating, comment, new AsyncCallback<Boolean>() {
+		service.modifyParkRating(userId, parkId, rating, comment, time, new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onFailure(Throwable caught) {

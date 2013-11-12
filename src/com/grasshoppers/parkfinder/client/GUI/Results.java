@@ -160,7 +160,7 @@ public class Results extends Composite {
 			//Park Tab panel
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
 			//Park Name
-			decoratedStackPanel.add(verticalPanel_2, park.getName(), false);
+			decoratedStackPanel.add(verticalPanel_2, park.getName()+" :: Average Rating: "+park.getRating(), false);
 			verticalPanel_2.setSize("100%", "100%");
 
 			

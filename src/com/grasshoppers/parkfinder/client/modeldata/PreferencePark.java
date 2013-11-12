@@ -30,12 +30,13 @@ public class PreferencePark implements Serializable {
 // Preference Stuff
 	private int rating;
 	private String comment;
+	private String time;
 	
 	public PreferencePark() {
 	
 	}
 	
-	public PreferencePark(Park park, int rating, String comment) {
+	public PreferencePark(Park park, int rating, String comment, String time) {
 		
 	// Park	
 		this.parkId = park.getParkId();
@@ -60,7 +61,7 @@ public class PreferencePark implements Serializable {
 	// Preference Stuff
 		this.rating = rating;
 		this.comment = comment;
-		
+		this.time = time;
 		
 	}
 	
@@ -209,5 +210,15 @@ public class PreferencePark implements Serializable {
 		// TODO Auto-generated method stub
 		return name+":"+parkId;
 	}
+
+	public void setTime(String string) {
+		// TODO Auto-generated method stub
+		this.time = string;
+	}
 	
+
+	public String getTime() {
+		// TODO Auto-generated method stub
+		return time;
+	}
 }

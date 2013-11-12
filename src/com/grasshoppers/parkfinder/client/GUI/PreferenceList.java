@@ -177,7 +177,7 @@ public class PreferenceList extends Composite {
 			//comment.setStyleName("gwt-Label-Login");
 			//verticalPanel_2.add(comment);
 			
-			Label commentB = new Label("My comment:");
+			Label commentB = new Label("My comment: (Last Updated: "+park.getTime()+")");
 			commentB.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(commentB);
 			
