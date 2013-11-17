@@ -95,7 +95,7 @@ public class GoogleMapsWidget extends Composite{
         marker.setMap(theMap);
 		
 	}
-	
+	 
 	public void plotRoute(Double x1, Double y1, Double x2, Double y2, String travelMethodWorBorD){
 		DirectionsService dService = DirectionsService.create();
 		DirectionsRequest dRequest = DirectionsRequest.create();
