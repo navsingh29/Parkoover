@@ -39,13 +39,12 @@ public class Search extends Composite {
 		this.controller = controller;
 		this.facList = facList;
 		this.hoodList = hoodList;
-		
+	
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		initWidget(verticalPanel);
 		verticalPanel.setSize("100%", "100%");
-		
 		FlexTable flexTable = new FlexTable();
 		verticalPanel.add(flexTable);
 		verticalPanel.setCellHeight(flexTable, "100%");

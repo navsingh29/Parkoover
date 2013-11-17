@@ -8,6 +8,11 @@
 <module rename-to='parkfinder'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
+  
+  
+  
+  
+    
 
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
@@ -22,9 +27,13 @@
   <!-- Specify the app entry point class.                         -->
  <entry-point class='com.grasshoppers.parkfinder.client.ParkFinder'/>
  <!--   <entry-point class='com.grasshoppers.parkfinder.client.GUI.GUIHub'/>-->
-
+ 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>
+  
+  <!-- google maps inherit -->
+  <inherits name="com.google.maps.gwt.GoogleMaps" />
+  <script src="http://maps.google.com/maps/api/js?sensor=false" />
 
 </module>
