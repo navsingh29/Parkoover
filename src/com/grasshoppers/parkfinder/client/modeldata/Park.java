@@ -28,7 +28,8 @@ public class Park implements Serializable {
 	private List<Facility> facilityList;
 	
 	// Average Rating
-	private int rating;
+	private double rating;
+	private int count;
 	
 	public Park() {
 		facilityList = new ArrayList<Facility>();
@@ -146,11 +147,11 @@ public class Park implements Serializable {
 		this.url = url;
 	}
 
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 
@@ -158,6 +159,14 @@ public class Park implements Serializable {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return name+":"+parkId;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	

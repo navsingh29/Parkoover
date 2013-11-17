@@ -28,7 +28,8 @@ public class ModelFactory {
 		park.setNeighbourhoodId(rs.getInt("Neighborhood_Id"));
 		park.setNeighbourhoodName(rs.getString("Neighborhood_Name"));
 		park.setUrl(rs.getString("url"));
-		park.setRating(rs.getInt("rating"));
+		park.setRating(rs.getDouble("rating"));
+		park.setCount(rs.getInt("count"));
 		
 		park.addFacility(ModelFactory.makeFacility(rs));
 		
@@ -77,6 +78,7 @@ public class ModelFactory {
 		park.setUrl(rs.getString("url"));
 		
 		park.setRating(rs.getInt("rating"));
+		park.setCount(rs.getInt("count"));
 		park.setComment(rs.getString("comment"));
 		park.setTime(rs.getString("upd_time"));
 		park.addFacility(ModelFactory.makeFacility(rs));

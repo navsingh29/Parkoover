@@ -31,14 +31,14 @@ public class ParkModel extends DBManager {
 		List<Park> parks = new ArrayList<Park>();
 		try {
 			if (park!=null&&neighbourhood==null&&facility==null) {
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
@@ -48,14 +48,14 @@ public class ParkModel extends DBManager {
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+park+"%");
 			} else if (park==null&&neighbourhood!=null&&facility==null) {
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
@@ -65,14 +65,14 @@ public class ParkModel extends DBManager {
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+neighbourhood+"%");
 			} else if (park==null&&neighbourhood==null&&facility!=null){
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
@@ -82,14 +82,14 @@ public class ParkModel extends DBManager {
 				ps = con.prepareStatement(query);
 				ps.setString(1, "%"+facility+"%");
 			} else if (park!=null&&neighbourhood!=null&&facility==null){
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
@@ -100,14 +100,14 @@ public class ParkModel extends DBManager {
 				ps.setString(1, "%"+park+"%");
 				ps.setString(2, "%"+neighbourhood+"%");
 			} else if (park!=null&&neighbourhood==null&&facility!=null){
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
@@ -119,14 +119,14 @@ public class ParkModel extends DBManager {
 				ps.setString(1, "%"+park+"%");
 				ps.setString(2, "%"+facility+"%");
 			} else if (park==null&&neighbourhood!=null&&facility!=null){
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
@@ -138,14 +138,14 @@ public class ParkModel extends DBManager {
 				ps.setString(1, "%"+neighbourhood+"%");
 				ps.setString(2, "%"+facility+"%");
 			} else if (park!=null&&neighbourhood!=null&&facility!=null){
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"
@@ -159,14 +159,14 @@ public class ParkModel extends DBManager {
 				ps.setString(2, "%"+facility+"%");
 				ps.setString(3, "%"+park+"%");
 			} else if (park==null&&neighbourhood==null&&facility==null){
-				query = "SELECT R.rating, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
+				query = "SELECT R.rating, R.count, p.id AS Park_Id, p.name, p.official, p.street_number,p.street_name,p.ew_street,p.ns_street,"
 						+ "p.map_x_loc,p.map_y_loc,p.hectares,f.id AS Facility_Id, f.type,f.feature,f.location,f.note,f.summer_hours,"
 						+ "f.winter_hours,h.count,n.id AS Neighborhood_Id, n.name AS Neighborhood_Name, n.url"
 						+ " FROM"
-						+ " (SELECT park_id, MAX(rating_table.rating) AS rating FROM"
-						+" ((SELECT park_id, AVG(rating) AS rating FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
+						+ " (SELECT park_id, MAX(rating_table.rating) AS rating, MAX(rating_table.count) AS count FROM"
+						+" ((SELECT park_id, AVG(rating) AS rating, Count(rating) AS count FROM "+UserModel.PREFS_TABLE+" GROUP BY park_id)"
 						+" UNION"
-						+" (SELECT id, 0 AS rating FROM "+DBNAME+" GROUP BY id)) AS rating_table"
+						+" (SELECT id, 0 AS rating, 0 AS count FROM "+DBNAME+" GROUP BY id)) AS rating_table"
 						+" GROUP BY park_id) AS R,"
 						+ " "+DBNAME+" p,"+TABLE_FACILITY+" f,"+TABLE_HAS_FACILITY+" h,"
 						+TABLE_NEIGHBORHOOD+" n, "+TABLE_IN_NEIGHBORHOOD+" i"

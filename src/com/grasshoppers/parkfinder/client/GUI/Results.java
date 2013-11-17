@@ -156,13 +156,36 @@ public class Results extends Composite {
 		
 		for (final Park park: parks) {
 			
-
+			int avgRating = (int) park.getRating();
+			StringBuffer rating = new StringBuffer();
+			for(int i=0;i<5;i++){
+				if (avgRating-->0)
+					rating.append("&#9733");
+				else rating.append("&#9734");
+				
+			}
+			
 			//Park Tab panel
 			VerticalPanel verticalPanel_2 = new VerticalPanel();
 			//Park Name
-			decoratedStackPanel.add(verticalPanel_2, park.getName()+" :: Average Rating: "+park.getRating(), false);
+			decoratedStackPanel.add(verticalPanel_2, new String(rating) +"  "+ park.getName(), true);
+			
 			verticalPanel_2.setSize("100%", "100%");
 
+			//Rating
+			Label ratingLabel = new Label("Average Rating: "+park.getRating());
+			ratingLabel.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(ratingLabel);
+			
+			//Number of Ratings
+			Label ratingsLabel = new Label("Number of Ratings: "+park.getCount());
+			ratingsLabel.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(ratingsLabel);
+			
+			//New Line
+			Label emptyLabel = new Label("");
+			emptyLabel .setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(emptyLabel);
 			
 			//Address 
 			Label address = new Label("Address: "+park.getStreet_number()+" "+park.getStreet_name());

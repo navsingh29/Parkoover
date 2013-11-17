@@ -29,6 +29,7 @@ public class PreferencePark implements Serializable {
 	
 // Preference Stuff
 	private int rating;
+	private int count;
 	private String comment;
 	private String time;
 	
@@ -220,5 +221,13 @@ public class PreferencePark implements Serializable {
 	public String getTime() {
 		// TODO Auto-generated method stub
 		return time;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 }
