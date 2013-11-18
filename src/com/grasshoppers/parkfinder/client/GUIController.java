@@ -2,6 +2,7 @@ package com.grasshoppers.parkfinder.client;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -150,8 +151,32 @@ public class GUIController extends Composite{
 			user.setLastSearch(parks);
 		}		
 
+		public void sortDisplayParks(List<Park> parks, int sortType) {
+			horizontalPanel.clear();
+			if (sortType == 0) {
+				Collections.sort(parks, Park.ParkNameComparator);
+			} else if (sortType == 1) {
+				Collections.sort(parks, Park.ParkRatingComparator);
+			} else if (sortType == 2) {
+				Collections.sort(parks, Park.ParkSizeComparator);
+			}
+			Results results = new Results(this, parks);
+			horizontalPanel.add(results);
+			user.setLastSearch(parks);
+		}
 		
-		
+		public void sortPrefParks(List<PreferencePark> parks, int sortType) {
+			horizontalPanel.clear();
+			if (sortType == 0) {
+				Collections.sort(parks, PreferencePark.PrefParkNameComparator);
+			} else if (sortType == 1) {
+				Collections.sort(parks, PreferencePark.PrefParkRatingComparator);
+			} else if (sortType == 2) {
+				Collections.sort(parks, PreferencePark.PrefParkSizeComparator);
+			}
+			PreferenceList results = new PreferenceList(this, parks);
+			horizontalPanel.add(results);
+		}
 		
 		public void warnPopup (String warning) {
 			Window.alert(warning);

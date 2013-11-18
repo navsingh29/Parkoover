@@ -36,7 +36,7 @@ public class Results extends Composite {
 
 	private GUIController controller;
 	
-	public Results(final GUIController controller, List<Park> parks) {
+	public Results(final GUIController controller, final List<Park> parks) {
 		this.controller = controller;
 		
 		
@@ -109,6 +109,31 @@ public class Results extends Composite {
 			}
 		});
 		menuBar_4.addItem(mntmPreferenceList_1);
+		MenuBar menuBar = new MenuBar(true);
+		
+		MenuItem menuItem = new MenuItem("sort", false, menuBar);
+		
+		MenuItem menuItem_1 = new MenuItem("by alphabet", false, new Command() {
+			public void execute() {
+				controller.sortDisplayParks(parks, 0);
+			}
+		});
+		menuBar.addItem(menuItem_1);
+		
+		MenuItem menuItem_2 = new MenuItem("by rating", false, new Command() {
+			public void execute() {
+				controller.sortDisplayParks(parks, 1);
+			}
+		});
+		menuBar.addItem(menuItem_2);
+		
+		MenuItem menuItem_3 = new MenuItem("by size", false, new Command() {
+			public void execute() {
+				controller.sortDisplayParks(parks, 2);
+			}
+		});
+		menuBar.addItem(menuItem_3);
+		menuBar_4.addItem(menuItem);
 		//MenuBar menuBar_5 = new MenuBar(true);
 		
 /*		MenuItem mntmSort_1 = new MenuItem("sort", false, menuBar_5);

@@ -38,7 +38,7 @@ public class WeatherViewer extends Composite {
 	}
 
 	private void constructViewer() {
-		verticalPanel.setWidth("400px");
+		verticalPanel.setWidth("410px");
 		
 		Label lblNewLabel = new Label("Weekly Vancouver Weather");
 		lblNewLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);

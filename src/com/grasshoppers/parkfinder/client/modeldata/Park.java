@@ -2,9 +2,10 @@ package com.grasshoppers.parkfinder.client.modeldata;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class Park implements Serializable {
+public class Park implements Serializable{
 
 	
 // Park	
@@ -169,7 +170,40 @@ public class Park implements Serializable {
 		this.count = count;
 	}
 	
+	public static Comparator<Park> ParkNameComparator 
+	    = new Comparator<Park>() {
 	
+		public int compare(Park p1, Park p2) {
 	
+			String parkName1 = p1.getName().toUpperCase();
+			String parkName2 = p2.getName().toUpperCase();
 	
+			return parkName1.compareTo(parkName2);
+		}	
+	};	
+	
+	public static Comparator<Park> ParkRatingComparator 
+    	= new Comparator<Park>() {
+
+		public int compare(Park p1, Park p2) {
+
+			double parkRating1 = p1.getRating();
+			double parkRating2 = p2.getRating();
+
+			return Double.compare(parkRating1, parkRating2);
+		}	
+	};	
+	
+	public static Comparator<Park> ParkSizeComparator 
+    	= new Comparator<Park>() {
+
+		public int compare(Park p1, Park p2) {
+
+			double parkSize1 = p1.getHectares();
+			double parkSize2 = p2.getHectares();
+			
+			return Double.compare(parkSize1, parkSize2);
+		}	
+	};	
+
 }

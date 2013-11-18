@@ -72,7 +72,7 @@ public class Weather {
 		if (this.precVal != -1) {
 			return Double.toString(this.precVal) +"mm "+ this.precType;
 		} else {
-			return "None - Clear Sky";
+			return "None";
 		}
 	}
 	

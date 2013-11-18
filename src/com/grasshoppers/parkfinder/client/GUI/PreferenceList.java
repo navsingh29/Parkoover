@@ -34,7 +34,7 @@ public class PreferenceList extends Composite {
 
 	private GUIController controller;
 	
-	public PreferenceList(final GUIController controller, List<PreferencePark> prefPark) {
+	public PreferenceList(final GUIController controller, final List<PreferencePark> prefPark) {
 		this.controller = controller;
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -102,6 +102,31 @@ public class PreferenceList extends Composite {
 		});
 		
 		menuBar_4.addItem(mntmSort_1);
+		MenuBar menuBar = new MenuBar(true);
+		
+		MenuItem mntmNewMenu = new MenuItem("sort", false, menuBar);
+		
+		MenuItem menuItem = new MenuItem("by alphabet", false, new Command() {
+			public void execute() {
+				controller.sortPrefParks(prefPark, 0);
+			}
+		});
+		menuBar.addItem(menuItem);
+		
+		MenuItem menuItem_1 = new MenuItem("by personal ratings", false, new Command() {
+			public void execute() {
+				controller.sortPrefParks(prefPark, 1);
+			}
+		});
+		menuBar.addItem(menuItem_1);
+		
+		MenuItem menuItem_2 = new MenuItem("by size", false, new Command() {
+			public void execute() {
+				controller.sortPrefParks(prefPark, 2);
+			}
+		});
+		menuBar.addItem(menuItem_2);
+		menuBar_4.addItem(mntmNewMenu);
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 

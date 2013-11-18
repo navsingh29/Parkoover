@@ -2,6 +2,7 @@ package com.grasshoppers.parkfinder.client.modeldata;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PreferencePark implements Serializable {
@@ -230,4 +231,41 @@ public class PreferencePark implements Serializable {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
+	public static Comparator<PreferencePark> PrefParkNameComparator 
+		= new Comparator<PreferencePark>() {
+
+		public int compare(PreferencePark p1, PreferencePark p2) {
+
+			String parkName1 = p1.getName().toUpperCase();
+			String parkName2 = p2.getName().toUpperCase();
+
+			return parkName1.compareTo(parkName2);
+		}	
+	};	
+
+	public static Comparator<PreferencePark> PrefParkRatingComparator 
+		= new Comparator<PreferencePark>() {
+
+		public int compare(PreferencePark p1, PreferencePark p2) {
+
+			double parkRating1 = p1.getRating();
+			double parkRating2 = p2.getRating();
+
+			return Double.compare(parkRating1, parkRating2);
+		}	
+	};	
+
+	public static Comparator<PreferencePark> PrefParkSizeComparator 
+		= new Comparator<PreferencePark>() {
+
+		public int compare(PreferencePark p1, PreferencePark p2) {
+
+			double parkSize1 = p1.getHectares();
+			double parkSize2 = p2.getHectares();
+
+			return Double.compare(parkSize1, parkSize2);
+		}	
+	};	
+
 }
