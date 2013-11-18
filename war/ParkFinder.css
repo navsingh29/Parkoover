@@ -318,6 +318,12 @@ a:visited {
 
 .gwt-DisclosurePanel {
 	border: 2px solid #C3D9FF;
+	color: black;
+	font-variant: small-caps;
+	font-size: 25px;
+	font-style: normal;
+	font-family: Candara;
+	font-weight: bold;
 }
 
 .gwt-DisclosurePanel .header {

@@ -15,6 +15,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.Window;
 import com.grasshoppers.parkfinder.client.GUIController;
 import com.google.gwt.user.client.ui.Image;
+import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;
 
 public class Login extends Composite {
 	private TextBox textBoxUsername;

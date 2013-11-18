@@ -2,6 +2,7 @@ package com.grasshoppers.parkfinder.client;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.shared.StringMethods;
 import com.grasshoppers.parkfinder.client.modeldata.User;
-
+import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;;
 public class GUIController extends Composite{
 
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
@@ -29,6 +30,8 @@ public class GUIController extends Composite{
 	private List<String> hoodList = null;
 	private User user = null;
 
+	private int currWeat = 3;
+	
 	public GUIController(ServiceController service) {
 	initWidget(horizontalPanel);
 	this.service = service;
@@ -37,8 +40,8 @@ public class GUIController extends Composite{
 	horizontalPanel.setSize("450px", "300px");
 	
 	Login log = new Login(this);
-	horizontalPanel.add(log);
 	
+	horizontalPanel.add(log);
 	}
 	
 
@@ -148,8 +151,32 @@ public class GUIController extends Composite{
 			user.setLastSearch(parks);
 		}		
 
+		public void sortDisplayParks(List<Park> parks, int sortType) {
+			horizontalPanel.clear();
+			if (sortType == 0) {
+				Collections.sort(parks, Park.ParkNameComparator);
+			} else if (sortType == 1) {
+				Collections.sort(parks, Park.ParkRatingComparator);
+			} else if (sortType == 2) {
+				Collections.sort(parks, Park.ParkSizeComparator);
+			}
+			Results results = new Results(this, parks);
+			horizontalPanel.add(results);
+			user.setLastSearch(parks);
+		}
 		
-		
+		public void sortPrefParks(List<PreferencePark> parks, int sortType) {
+			horizontalPanel.clear();
+			if (sortType == 0) {
+				Collections.sort(parks, PreferencePark.PrefParkNameComparator);
+			} else if (sortType == 1) {
+				Collections.sort(parks, PreferencePark.PrefParkRatingComparator);
+			} else if (sortType == 2) {
+				Collections.sort(parks, PreferencePark.PrefParkSizeComparator);
+			}
+			PreferenceList results = new PreferenceList(this, parks);
+			horizontalPanel.add(results);
+		}
 		
 		public void warnPopup (String warning) {
 			Window.alert(warning);
@@ -171,8 +198,6 @@ public class GUIController extends Composite{
 			return user;
 		}
 
-
-		
 		public void createNewParkRating(int userId, int parkId, int rating, String comment, Park park) {
 			String time = getCurrentTime();
 			
