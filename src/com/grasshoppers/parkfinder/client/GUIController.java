@@ -19,7 +19,7 @@ import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.shared.StringMethods;
 import com.grasshoppers.parkfinder.client.modeldata.User;
-
+import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;;
 public class GUIController extends Composite{
 
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
@@ -29,6 +29,8 @@ public class GUIController extends Composite{
 	private List<String> hoodList = null;
 	private User user = null;
 
+	private int currWeat = 3;
+	
 	public GUIController(ServiceController service) {
 	initWidget(horizontalPanel);
 	this.service = service;
@@ -37,8 +39,8 @@ public class GUIController extends Composite{
 	horizontalPanel.setSize("450px", "300px");
 	
 	Login log = new Login(this);
-	horizontalPanel.add(log);
 	
+	horizontalPanel.add(log);
 	}
 	
 
@@ -171,8 +173,6 @@ public class GUIController extends Composite{
 			return user;
 		}
 
-
-		
 		public void createNewParkRating(int userId, int parkId, int rating, String comment, Park park) {
 			String time = getCurrentTime();
 			

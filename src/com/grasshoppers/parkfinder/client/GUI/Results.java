@@ -29,6 +29,7 @@ import com.grasshoppers.parkfinder.client.GUIController;
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;
 import com.google.gwt.user.client.ui.Image;
 
 public class Results extends Composite {
@@ -126,8 +127,12 @@ public class Results extends Composite {
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 		
+		WeatherViewer wv = new WeatherViewer();
+		flexTable.setWidget(3, 0, wv);
+		//wv.setWidth("100%");
+		
 		DecoratedStackPanel decoratedStackPanel = new DecoratedStackPanel();
-		flexTable.setWidget(3, 0, decoratedStackPanel);
+		flexTable.setWidget(4, 0, decoratedStackPanel);
 		decoratedStackPanel.setWidth("100%");
 		
 		/*
@@ -299,7 +304,7 @@ public class Results extends Composite {
 		}
 		
 		
-		flexTable.getFlexCellFormatter().setColSpan(3, 0, 1);
+		flexTable.getFlexCellFormatter().setColSpan(4, 0, 1);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
