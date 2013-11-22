@@ -39,13 +39,12 @@ public class Search extends Composite {
 		this.controller = controller;
 		this.facList = facList;
 		this.hoodList = hoodList;
-		
+	
 		VerticalPanel verticalPanel = new VerticalPanel();
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		initWidget(verticalPanel);
 		verticalPanel.setSize("100%", "100%");
-		
 		FlexTable flexTable = new FlexTable();
 		verticalPanel.add(flexTable);
 		verticalPanel.setCellHeight(flexTable, "100%");
@@ -67,8 +66,6 @@ public class Search extends Composite {
 			userMenuName = this.controller.getUser().getFname()+"'s Menu";
 		else if (this.controller.getUser().getUser_name() != null)
 			userMenuName = this.controller.getUser().getUser_name()+"'s Menu";
-		
-		
 		
 		MenuItem mntmMenu = new MenuItem(userMenuName, false, menuBar_1);
 		
@@ -152,6 +149,5 @@ public class Search extends Composite {
 		
 		
 	}
-
 }
 
