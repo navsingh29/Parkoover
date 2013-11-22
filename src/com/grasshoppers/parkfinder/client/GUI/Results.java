@@ -30,6 +30,7 @@ import com.grasshoppers.parkfinder.client.GUIController;
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.grasshoppers.parkfinder.client.widget.map.GoogleMapsWidget;
 import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;
 import com.google.gwt.user.client.ui.Image;
 
@@ -157,8 +158,11 @@ public class Results extends Composite {
 		flexTable.setWidget(3, 0, wv);
 		//wv.setWidth("100%");
 		
+		GoogleMapsWidget map = new GoogleMapsWidget();
+		flexTable.setWidget(4, 0, map);
+		
 		DecoratedStackPanel decoratedStackPanel = new DecoratedStackPanel();
-		flexTable.setWidget(4, 0, decoratedStackPanel);
+		flexTable.setWidget(5, 0, decoratedStackPanel);
 		decoratedStackPanel.setWidth("100%");
 		
 		/*
@@ -366,7 +370,9 @@ public class Results extends Composite {
 		}
 		
 		
-		flexTable.getFlexCellFormatter().setColSpan(4, 0, 1);
+		flexTable.getFlexCellFormatter().setColSpan(5, 0, 1);
+		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);
+		flexTable.getCellFormatter().setHorizontalAlignment(4, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
