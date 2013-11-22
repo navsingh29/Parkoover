@@ -16,6 +16,18 @@
     <url-pattern>/parkfinder/parksearch</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>facebookServlet</servlet-name>
+    <servlet-class>com.grasshoppers.parkfinder.server.FacebookEventServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>facebookServlet</servlet-name>
+    <url-pattern>/parkfinder/facebookevent</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>ParkFinder.html</welcome-file>

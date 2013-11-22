@@ -1,6 +1,7 @@
 package com.grasshoppers.parkfinder.client;
 
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -14,6 +15,7 @@ import com.grasshoppers.parkfinder.client.modeldata.User;
 public class ServiceController {
 
 	private ParkSearchServiceAsync service;
+	private FacebookEventServiceAsync facebookEventservice;
 	private GUIController maingui;
 
 	public ServiceController() {
@@ -22,6 +24,11 @@ public class ServiceController {
 		ServiceDefTarget endpoint = (ServiceDefTarget) this.service;
 		endpoint.setServiceEntryPoint(url);
 		this.maingui = new GUIController(this);
+		
+		this.facebookEventservice = GWT.create(FacebookEventService.class);
+		String url2 = GWT.getModuleBaseURL() + "facebookevent";
+		ServiceDefTarget endpoint2 = (ServiceDefTarget) this.facebookEventservice;
+		endpoint2.setServiceEntryPoint(url2);
 		
 	}
 
@@ -245,6 +252,26 @@ public class ServiceController {
 			}
 			
 			
+			
+			
+		});
+		
+	}
+
+	public void makeFacebookEvent(String event, String location,String description, Date starTime, Date endTime) {
+		facebookEventservice.makeEvent(event, location, description, starTime, endTime, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				// TODO Auto-generated method stub
+				
+			}
 			
 			
 		});

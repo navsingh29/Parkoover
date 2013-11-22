@@ -7,10 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.grasshoppers.parkfinder.client.GUI.Login;
 import com.grasshoppers.parkfinder.client.GUI.PreferenceList;
 import com.grasshoppers.parkfinder.client.GUI.Results;
@@ -20,10 +23,13 @@ import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.shared.StringMethods;
 import com.grasshoppers.parkfinder.client.modeldata.User;
-import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;;
 public class GUIController extends Composite{
 
+	private VerticalPanel verticalPanel = new VerticalPanel();
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
+	private HorizontalPanel statusPanel = new HorizontalPanel();
+	private Label facebookLogin = new Label("Not Logged Into Facebook");
+	
 	private ServiceController service;
 
 	private List<String> facList = null;
@@ -33,15 +39,42 @@ public class GUIController extends Composite{
 	private int currWeat = 3;
 	
 	public GUIController(ServiceController service) {
-	initWidget(horizontalPanel);
+//	initWidget(horizontalPanel);
+//	initWidget(statusPanel);
+	initWidget(verticalPanel);
 	this.service = service;
 	horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	horizontalPanel.setSize("450px", "300px");
 	
+	statusPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+	statusPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+	statusPanel.setSize("450px", "30px");
+	statusPanel.add(facebookLogin);
+//	LoginButton loginButton = new LoginButton();
+//	Button loginButton = new Button("Facebook Login");
+	
+	
+	/*
+	Facebook.addLoginHandler(new FacebookLoginHandler() {
+		public void loginStatusChanged(FacebookLoginEvent event) {
+		if (event.isLoggedIn()){
+			facebookLogin.setText("Logged in to Facebook.");
+		} else {
+			facebookLogin.setText("No user logged in to Facebook.");
+		}
+		}
+		});
+	
+	*/
+	//statusPanel.add(loginButton);
+	
 	Login log = new Login(this);
 	
 	horizontalPanel.add(log);
+	verticalPanel.add(statusPanel);
+	verticalPanel.add(horizontalPanel);
+	
 	}
 	
 
@@ -89,6 +122,10 @@ public class GUIController extends Composite{
 //=============================================================================================================
 //		Triggers
 //=============================================================================================================
+		public void makeFacebookEvent(String event, String location,String description, Date starTime, Date endTime) {
+			service.makeFacebookEvent(event, location, description, starTime, endTime);
+		}
+		
 		
 		public void buttonDoSignIn(String username, String password, Boolean rememberMe ) {
 			service.getUserLogIn(username, password, rememberMe);

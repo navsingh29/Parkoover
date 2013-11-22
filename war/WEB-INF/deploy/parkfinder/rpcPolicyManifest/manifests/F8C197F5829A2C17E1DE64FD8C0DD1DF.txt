@@ -1,0 +1,2 @@
+serviceClass: com.grasshoppers.parkfinder.client.FacebookEventService
+path: A8F888B85E6B2D8D94F5C4F18681CC82.gwt.rpc

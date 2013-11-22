@@ -2,6 +2,7 @@ package com.grasshoppers.parkfinder.client.GUI;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -213,7 +214,7 @@ public class Results extends Composite {
 			verticalPanel_2.add(ratingsLabel);
 			
 			//New Line
-			Label emptyLabel = new Label("");
+			Label emptyLabel = new Label(" ");
 			emptyLabel .setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(emptyLabel);
 			
@@ -326,6 +327,42 @@ public class Results extends Composite {
 			
 			chckbxFavourite.setStyleName("gwt-RichTextToolbar");
 			verticalPanel_2.add(chckbxFavourite);
+			
+			//final TextBox eventType = new TextBox();
+			//eventType.setText("Sport to Play");
+			
+			final ListBox eventType = new ListBox();
+			eventType.addItem("Select an Activity");
+			for(int i=0;i<park.getFacilityList().size();i++){
+			eventType.addItem(park.getFacilityList().get(i).getFeature());
+			}
+			eventType.addItem("Picnic");
+			eventType.addItem("Sight Seeing");
+			eventType.addItem("Other");
+			
+			
+			final TextBox eventDescription  = new TextBox();
+			eventDescription.setText("Event Description.");
+			
+			final Date now = new Date();
+			final Date tom = new Date(now.getTime()+1000*60*60*24);
+			
+			
+			
+			final Button makeEvent = new Button("Create Facebook Event");
+			makeEvent.addClickHandler(new ClickHandler() {
+
+				@Override
+				public void onClick(ClickEvent event) {
+					controller.makeFacebookEvent(eventType.getItemText(eventType.getSelectedIndex()), park.getName(), eventDescription.getText(), now, tom);
+				}
+				
+				
+			});
+			verticalPanel_2.add(eventType);
+			verticalPanel_2.add(eventDescription);
+			verticalPanel_2.add(makeEvent);
+			
 		}
 		
 		

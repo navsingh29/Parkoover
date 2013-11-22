@@ -68,6 +68,8 @@ public class Search extends Composite {
 		else if (this.controller.getUser().getUser_name() != null)
 			userMenuName = this.controller.getUser().getUser_name()+"'s Menu";
 		
+		
+		
 		MenuItem mntmMenu = new MenuItem(userMenuName, false, menuBar_1);
 		
 		MenuItem mntmSignOut = new MenuItem("sign out", false, new Command() {

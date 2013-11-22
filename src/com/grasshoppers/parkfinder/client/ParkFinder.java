@@ -19,8 +19,12 @@ public class ParkFinder implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+	//	Facebook.init("354332208044523");
+		
 		ServiceController clientImpl = new ServiceController();
 		RootPanel.get("container").add(clientImpl.getGUIController());
+		
+		
 		
 	}
 }
