@@ -1,4 +1,4 @@
-package com.grasshoppers.parkfinder.client.GUI.widgets;
+package com.grasshoppers.parkfinder.client.widget.map;
 
 import java.util.HashSet;
 import java.util.List;
