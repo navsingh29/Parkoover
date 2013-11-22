@@ -1,0 +1,2 @@
+serviceClass: com.grasshoppers.parkfinder.client.LoginService
+path: 26B70D45C9E3DB206AFB6917EE5A9F07.gwt.rpc
