@@ -18,6 +18,10 @@ public class User implements Serializable {
 	List<PreferencePark> preferenceList = new ArrayList<PreferencePark>();
 	List<Park> lastSearch = new ArrayList<Park>();
 	
+	private boolean facebookLogin = false;
+	private String accessToken = null;
+	
+	
 	public User() {		
 	}
 	
@@ -113,6 +117,22 @@ public class User implements Serializable {
 	public String toString() {
 		
 		return user_name+":"+id;
+	}
+
+	public boolean isFacebookLogin() {
+		return facebookLogin;
+	}
+
+	public void setFacebookLogin(boolean facebookLogin) {
+		this.facebookLogin = facebookLogin;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 	
 	

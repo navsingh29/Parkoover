@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Widget;
@@ -125,7 +127,10 @@ public class ServiceController {
 			@Override
 			public void onSuccess(User result) {
 				maingui.signIntoAcc(result, false);
-				
+				String sessionID = result.getUser_name();
+                final long DURATION = 1000 * 60 * 60 * 24 * 1;
+                Date expires = new Date(System.currentTimeMillis() + DURATION);
+                Cookies.setCookie("sid", sessionID, expires, null, "/", false);
 			}
 		});
 	}
@@ -136,7 +141,7 @@ public class ServiceController {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				
+				Window.alert("Error getting neighborhood names.");
 				
 			}
 
@@ -153,7 +158,7 @@ public class ServiceController {
 			@Override
 			public void onFailure(Throwable caught) {
 				
-				
+				Window.alert("Error getting facility names.");
 			}
 
 			@Override
@@ -270,6 +275,26 @@ public class ServiceController {
 			@Override
 			public void onSuccess(Boolean result) {
 				// TODO Auto-generated method stub
+				
+			}
+			
+			
+		});
+		
+	}
+
+	public void logout() {
+		LoginService.Util.getInstance().logout(new AsyncCallback<Boolean>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				Window.alert("Logout Successful");
 				
 			}
 			

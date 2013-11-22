@@ -9,6 +9,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface FacebookEventService extends RemoteService {
 
 	boolean makeEvent(String event, String location,String description, Date starTime, Date endTime);
+
+	boolean makeEvent(String token, String event, String location,String description, Date startTime, Date endTime);
 	
 	
 }

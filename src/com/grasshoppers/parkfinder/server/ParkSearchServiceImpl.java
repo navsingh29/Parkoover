@@ -2,6 +2,9 @@ package com.grasshoppers.parkfinder.server;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.grasshoppers.parkfinder.client.ParkSearchService;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
@@ -36,6 +39,11 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 
 	public User getUser(String username, String password) {
 		User user = userModel.getUser(username, password);
+		
+		HttpServletRequest httpServletRequest = this.getThreadLocalRequest();
+        HttpSession session = httpServletRequest.getSession(true);
+        session.setAttribute("user", user);
+		
 		return user;
 	}
 	

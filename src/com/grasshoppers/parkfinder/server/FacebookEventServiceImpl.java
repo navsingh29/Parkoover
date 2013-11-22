@@ -20,17 +20,34 @@ public class FacebookEventServiceImpl extends RemoteServiceServlet implements Fa
 		long endLong =  now.getTime()+1000*60*60*24*2;
 		Date twoDaysFromNow = new Date(endLong);
 		
-		
+		FacebookType publishEventResponse = fbClient.publish("me/events", FacebookType.class,
+				  Parameter.with("name", event), Parameter.with("start_time", startTime),
+				    Parameter.with("end_time", endTime), Parameter.with("description", description),
+				    Parameter.with("location", location));
+				System.out.println("Published event ID: " + publishEventResponse.getId());
+		return false;
+	}
+	
+	@Override
+	public boolean makeEvent(String token, String event, String location,String description, Date startTime, Date endTime) {
+		try{
+		FacebookClient fbClient = new DefaultFacebookClient(token);
 		FacebookType publishEventResponse = fbClient.publish("me/events", FacebookType.class,
 				  Parameter.with("name", event), Parameter.with("start_time", startTime),
 				    Parameter.with("end_time", endTime), Parameter.with("description", description),
 				    Parameter.with("location", location));
 
 				System.out.println("Published event ID: " + publishEventResponse.getId());
+				return true;
+		} catch(Exception e){
+			return false;
+		}
+
 		
-	
 		
-		return false;
+		
 	}
+	
+	
 
 }

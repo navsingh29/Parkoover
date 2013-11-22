@@ -6,7 +6,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -36,11 +41,9 @@ public class GUIController extends Composite{
 	private List<String> hoodList = null;
 	private User user = null;
 
-	private int currWeat = 3;
 	
 	public GUIController(ServiceController service) {
-//	initWidget(horizontalPanel);
-//	initWidget(statusPanel);
+
 	initWidget(verticalPanel);
 	this.service = service;
 	horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -51,27 +54,49 @@ public class GUIController extends Composite{
 	statusPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	statusPanel.setSize("450px", "30px");
 	statusPanel.add(facebookLogin);
-//	LoginButton loginButton = new LoginButton();
-//	Button loginButton = new Button("Facebook Login");
 	
 	
-	/*
-	Facebook.addLoginHandler(new FacebookLoginHandler() {
-		public void loginStatusChanged(FacebookLoginEvent event) {
-		if (event.isLoggedIn()){
-			facebookLogin.setText("Logged in to Facebook.");
-		} else {
-			facebookLogin.setText("No user logged in to Facebook.");
-		}
-		}
+	
+	String sessionID = Cookies.getCookie("sid");
+	if(sessionID==null) {
+		goToLogIn();
+	} else {
+		LoginService.Util.getInstance().getUserFromSession(new AsyncCallback<User>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				goToLogIn();
+			}
+
+			@Override
+			public void onSuccess(User result) {
+				if (result==null){
+					goToLogIn();
+				} else {
+					setUser(result);
+					if(result.isFacebookLogin()) facebookLogin.setText("Logged Into Facebook.");;
+					buttonToSearch();
+				}
+				
+			}
+			
+			
+			
 		});
-	
-	*/
-	//statusPanel.add(loginButton);
-	
-	Login log = new Login(this);
-	
-	horizontalPanel.add(log);
+	}
+	//if(user!=null&&!user.isFacebookLogin()){
+	Button facebookLoginButton = new Button("Facebook Login");
+	facebookLoginButton.addClickHandler(new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+			goFacebookSignIn();
+		}
+		
+		
+	});
+	statusPanel.add(facebookLoginButton);
+//	}
 	verticalPanel.add(statusPanel);
 	verticalPanel.add(horizontalPanel);
 	
@@ -82,7 +107,11 @@ public class GUIController extends Composite{
 //=============================================================================================================
 //		GOTOs
 //=============================================================================================================
-		
+	public void goFacebookSignIn() {
+		Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+	}
+	
+	
 		public void goToSignUp() {
 			horizontalPanel.clear();
 			Signup signup = new Signup(this);
@@ -90,7 +119,13 @@ public class GUIController extends Composite{
 		}
 
 
+		public void logout() {
+			service.logout();
+			goToLogIn();
+		}
+		
 		public void goToLogIn() {
+		//	service.logout();
 			horizontalPanel.clear();
 			Login login = new Login(this);
 			user = null;
@@ -230,6 +265,9 @@ public class GUIController extends Composite{
 //		Info Retrieval
 //=============================================================================================================
 		
+		public void setUser(User user){
+			this.user = user;
+		}
 		
 		public User getUser() {
 			return user;
