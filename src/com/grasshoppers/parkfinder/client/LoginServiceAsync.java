@@ -5,7 +5,7 @@ import com.grasshoppers.parkfinder.client.modeldata.User;
 
 public interface LoginServiceAsync  {
 
-	void getUserFromSession(AsyncCallback<User> callback);
+	void getUserFromSession(String token, AsyncCallback<User> callback);
 	void logout(AsyncCallback<Boolean> callback);
 	
 }

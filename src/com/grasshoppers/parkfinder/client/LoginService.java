@@ -25,7 +25,7 @@ public interface LoginService extends RemoteService {
         }
     }
     
-    public User getUserFromSession();
+    public User getUserFromSession(String token);
     public Boolean logout();
 	
 }

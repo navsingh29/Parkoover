@@ -13,12 +13,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
+import com.grasshoppers.parkfinder.client.widget.weather.Weather;
 
 public class ServiceController {
 
 	private ParkSearchServiceAsync service;
 	private FacebookEventServiceAsync facebookEventservice;
 	private GUIController maingui;
+	private List<Weather> weathers = null;
 
 	public ServiceController() {
 		String url = GWT.getModuleBaseURL() + "parksearch";
@@ -263,18 +265,22 @@ public class ServiceController {
 		
 	}
 
-	public void makeFacebookEvent(String event, String location,String description, Date starTime, Date endTime) {
-		facebookEventservice.makeEvent(event, location, description, starTime, endTime, new AsyncCallback<Boolean>() {
+	public void makeFacebookEvent(String token, String event, String location,String description, Date starTime, Date endTime) {
+		facebookEventservice.makeEvent(token, event, location, description, starTime, endTime, new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				Window.alert("An error occured. Your Facebook Login may have expired. Please re-login and try again.");
 				
 			}
 
 			@Override
 			public void onSuccess(Boolean result) {
-				// TODO Auto-generated method stub
+				if (result)
+					Window.alert("Event successfully created");
+				else 
+					Window.alert("An error occured. Your Facebook Login may have expired. Please re-login and try again.");
+				
 				
 			}
 			
@@ -301,6 +307,34 @@ public class ServiceController {
 			
 		});
 		
+	}
+
+	public List<Weather> getWeathers() {
+		
+		service.getWeathers(new AsyncCallback<List<Weather>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				
+			}
+
+			@Override
+			public void onSuccess(List<Weather> result) {
+				changeWeathers(result);
+				
+			}
+			
+			
+		});;
+		
+		
+		if (weathers==null) Window.alert("Error. Could not get weather.");
+		return weathers;
+	}
+	
+	public void changeWeathers(List<Weather> weathers) {
+		this.weathers = weathers;
 	}
 	
 }

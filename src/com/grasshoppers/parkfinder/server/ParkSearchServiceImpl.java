@@ -9,6 +9,7 @@ import com.grasshoppers.parkfinder.client.ParkSearchService;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
+import com.grasshoppers.parkfinder.client.widget.weather.Weather;
 import com.grasshoppers.parkfinder.model.ParkModel;
 import com.grasshoppers.parkfinder.model.UserModel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -87,5 +88,11 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		return userModel.modifyParkRating(userId, parkId, rating, comment, time);
 	}
 	
-
+	@Override
+	public List<Weather> getWeathers() {
+		WeatherParser tempWP = new WeatherParser();
+		return tempWP.get();
+		
+	}
+	
 }

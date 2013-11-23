@@ -40,6 +40,7 @@ public class FacebookEventServiceImpl extends RemoteServiceServlet implements Fa
 				System.out.println("Published event ID: " + publishEventResponse.getId());
 				return true;
 		} catch(Exception e){
+			e.printStackTrace();
 			return false;
 		}
 

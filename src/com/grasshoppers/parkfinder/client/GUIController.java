@@ -1,10 +1,11 @@
 package com.grasshoppers.parkfinder.client;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -28,6 +29,7 @@ import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.shared.StringMethods;
 import com.grasshoppers.parkfinder.client.modeldata.User;
+import com.grasshoppers.parkfinder.client.widget.weather.Weather;
 public class GUIController extends Composite{
 
 	private VerticalPanel verticalPanel = new VerticalPanel();
@@ -44,7 +46,22 @@ public class GUIController extends Composite{
 	
 	public GUIController(ServiceController service) {
 
+		
+	
 	initWidget(verticalPanel);
+	
+	
+	
+	
+	String hash = Window.Location.getHash();
+	String token = null;
+	if(hash!=null&&hash.length()>10){
+	System.out.println(hash);
+	int end = hash.lastIndexOf("&");
+	token = hash.substring(14, end);
+	System.out.println(token);
+	}
+	
 	this.service = service;
 	horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -57,11 +74,12 @@ public class GUIController extends Composite{
 	
 	
 	
+	
 	String sessionID = Cookies.getCookie("sid");
 	if(sessionID==null) {
 		goToLogIn();
 	} else {
-		LoginService.Util.getInstance().getUserFromSession(new AsyncCallback<User>() {
+		LoginService.Util.getInstance().getUserFromSession(token, new AsyncCallback<User>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -74,14 +92,10 @@ public class GUIController extends Composite{
 					goToLogIn();
 				} else {
 					setUser(result);
-					if(result.isFacebookLogin()) facebookLogin.setText("Logged Into Facebook.");;
 					buttonToSearch();
-				}
-				
+					if(result.isFacebookLogin()) facebookLogin.setText("Logged Into Facebook.");;
+				}	
 			}
-			
-			
-			
 		});
 	}
 	//if(user!=null&&!user.isFacebookLogin()){
@@ -102,13 +116,13 @@ public class GUIController extends Composite{
 	
 	}
 	
-
-
 //=============================================================================================================
 //		GOTOs
 //=============================================================================================================
 	public void goFacebookSignIn() {
-		Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&redirect_uri="+GWT.getModuleBaseURL() + "parseloginservice?");
+	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&redirect_uri="+GWT.getModuleBaseURL() + "parseloginservice?");
+		Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&scope=create_event&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
 	}
 	
 	
@@ -158,7 +172,12 @@ public class GUIController extends Composite{
 //		Triggers
 //=============================================================================================================
 		public void makeFacebookEvent(String event, String location,String description, Date starTime, Date endTime) {
-			service.makeFacebookEvent(event, location, description, starTime, endTime);
+			if(user.getAccessToken()!=null)
+			service.makeFacebookEvent(user.getAccessToken(), event, location, description, starTime, endTime);
+			else { 
+				Window.alert("Please Login To Facebook");
+				facebookLogin.setText("Not Logged into Facebook");
+			}
 		}
 		
 		
@@ -303,10 +322,17 @@ public class GUIController extends Composite{
 		}
 		
 		public String getCurrentTime() {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		//	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
 			
-			return dateFormat.format(date);
+		//	return dateFormat.format(date);
+			return date.toString();
+		}
+
+
+
+		public List<Weather> getWeathers() {
+			return service.getWeathers();
 		}
 
 	}

@@ -11,25 +11,20 @@ import com.grasshoppers.parkfinder.client.modeldata.User;
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
 
 	@Override
-	public User getUserFromSession() {
+	public User getUserFromSession(String accessToken) {
 			
 		 	User user = null;
 	        HttpServletRequest httpServletRequest = this.getThreadLocalRequest();
 	        HttpSession session = httpServletRequest.getSession();
 	       
-	        String accessToken = httpServletRequest.getParameter("access_token");
-	        String expirationDate = httpServletRequest.getParameter("expires_in");
-	        System.out.println(accessToken + " ==Expires:== " + expirationDate);
-	        
 	        Object userObj = session.getAttribute("user");
 	        if (userObj != null && userObj instanceof User) {
 	            user = (User) userObj;
 	            if(accessToken!=null){
 	            	user.setFacebookLogin(true);
 	            	user.setAccessToken(accessToken);
-	            	session.setAttribute("user", user);
+	            	httpServletRequest.getSession().setAttribute("user", user);
 	            }
-	            
 	        }
 	        return user;
 	}

@@ -36,6 +36,16 @@
     <url-pattern>/parkfinder/loginservice</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>parseloginServlet</servlet-name>
+    <servlet-class>com.grasshoppers.parkfinder.server.ParseFacebookLogin</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>parseloginServlet</servlet-name>
+    <url-pattern>/parkfinder/parseloginservice</url-pattern>
+  </servlet-mapping>
+  
   
   <!-- Default page to serve -->
   <welcome-file-list>

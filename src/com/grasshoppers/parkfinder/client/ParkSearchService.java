@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
+import com.grasshoppers.parkfinder.client.widget.weather.Weather;
 
 /**
  * The client side stub for the RPC service.
@@ -23,4 +24,5 @@ public interface ParkSearchService extends RemoteService {
 	Boolean createNewParkRating(int userId, int parkId, int rating, String comment, String time);
 	Boolean deleteParkRating(int userId, int parkId);
 	Boolean modifyParkRating(int userId, int parkId, int rating, String comment, String time);
+	List<Weather> getWeathers();
 }

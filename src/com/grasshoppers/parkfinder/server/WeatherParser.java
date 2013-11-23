@@ -1,4 +1,4 @@
-package com.grasshoppers.parkfinder.client.widget.weather;
+package com.grasshoppers.parkfinder.server;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -14,6 +14,8 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.grasshoppers.parkfinder.client.widget.weather.Weather;
 
 
 public class WeatherParser extends DefaultHandler {

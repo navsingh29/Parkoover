@@ -154,8 +154,8 @@ public class Results extends Composite {
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 		
-		WeatherViewer wv = new WeatherViewer();
-		flexTable.setWidget(3, 0, wv);
+	//	WeatherViewer wv = new WeatherViewer(controller);
+	//	flexTable.setWidget(3, 0, wv);
 		//wv.setWidth("100%");
 		
 		GoogleMapsWidget map = new GoogleMapsWidget();
@@ -338,7 +338,10 @@ public class Results extends Composite {
 			final ListBox eventType = new ListBox();
 			eventType.addItem("Select an Activity");
 			for(int i=0;i<park.getFacilityList().size();i++){
-			eventType.addItem(park.getFacilityList().get(i).getFeature());
+				String feature = park.getFacilityList().get(i).getFeature();
+				if (feature!=null)
+				eventType.addItem(feature);
+			
 			}
 			eventType.addItem("Picnic");
 			eventType.addItem("Sight Seeing");

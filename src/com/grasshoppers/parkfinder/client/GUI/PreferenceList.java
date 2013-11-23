@@ -130,7 +130,7 @@ public class PreferenceList extends Composite {
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 
-		WeatherViewer wv = new WeatherViewer();
+		WeatherViewer wv = new WeatherViewer(controller);
 		flexTable.setWidget(3, 0, wv);
 		
 		DecoratedStackPanel decoratedStackPanel = new DecoratedStackPanel();

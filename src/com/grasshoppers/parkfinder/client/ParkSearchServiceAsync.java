@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
+import com.grasshoppers.parkfinder.client.widget.weather.Weather;
 
 /**
  * The async counterpart of <code>GreetingService</code>.
@@ -20,4 +21,5 @@ public interface ParkSearchServiceAsync {
 	void createNewParkRating(int userId, int parkId, int rating, String comment, String time, AsyncCallback<Boolean> callback);
 	void deleteParkRating(int userId, int parkId, AsyncCallback<Boolean> callback);
 	void modifyParkRating(int userId, int parkId, int rating, String comment, String time, AsyncCallback<Boolean> callback);
+	void getWeathers(AsyncCallback<List<Weather>> callback);
 }

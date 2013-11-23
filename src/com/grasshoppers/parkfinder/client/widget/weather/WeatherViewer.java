@@ -5,33 +5,27 @@ import java.util.List;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.i18n.client.HasDirection.Direction;
-import com.google.gwt.user.client.ui.TextBoxBase;
-import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.grasshoppers.parkfinder.client.GUIController;
+import com.grasshoppers.parkfinder.server.WeatherParser;
 
 public class WeatherViewer extends Composite {
 
 	private int curr;
 	private VerticalPanel verticalPanel;
 	private List<Weather> weathers;
+	private GUIController controller;
 	
-	public WeatherViewer() {
+	public WeatherViewer(GUIController controller) {
+		this.controller = controller;
 		curr = 0;
-		weathers = new WeatherParser().get();
+		weathers = controller.getWeathers();
 		verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
 		constructViewer();
@@ -176,11 +170,13 @@ public class WeatherViewer extends Composite {
 
 		@Override
 		public void onClick(ClickEvent event) {
-			WeatherParser tempWP = new WeatherParser();
-			weathers = tempWP.get();
-			curr = 0;
-			verticalPanel.clear();
-			constructViewer();
+			
+				weathers = controller.getWeathers();
+				if(weathers!=null) {
+				curr = 0;
+				verticalPanel.clear();
+				constructViewer();
+			}
 		}
 	}
 }

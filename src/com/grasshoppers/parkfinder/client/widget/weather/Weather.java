@@ -1,9 +1,5 @@
 package com.grasshoppers.parkfinder.client.widget.weather;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Weather {
 
 	private String 	day;
