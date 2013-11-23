@@ -5,27 +5,35 @@ import java.util.List;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.i18n.client.HasDirection.Direction;
+import com.google.gwt.user.client.ui.TextBoxBase;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.grasshoppers.parkfinder.client.GUIController;
-import com.grasshoppers.parkfinder.server.WeatherParser;
 
 public class WeatherViewer extends Composite {
 
 	private int curr;
 	private VerticalPanel verticalPanel;
 	private List<Weather> weathers;
-	private GUIController controller;
+	private GUIController gui;
 	
-	public WeatherViewer(GUIController controller) {
-		this.controller = controller;
+	public WeatherViewer(GUIController gui) {
 		curr = 0;
-		weathers = controller.getWeathers();
+		this.gui = gui;
+		weathers = new WeatherParser(gui).get();
 		verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
 		constructViewer();
@@ -120,15 +128,6 @@ public class WeatherViewer extends Composite {
 		horizontalPanel.add(prevDayButton);
 		prevDayButton.setWidth("100px");
 		
-
-		
-		Button btnReferesh = new Button("refresh");
-		btnReferesh.addClickHandler(new refreshClickHandler());
-		
-		btnReferesh.setStyleName("gwt-ToggleButton-up");
-		horizontalPanel.add(btnReferesh);
-		btnReferesh.setWidth("100px");
-		
 		Button nextDayButton = new Button("next day");
 		nextDayButton.setStyleName("gwt-ToggleButton-up");
 		if (curr < weathers.size() - 1)
@@ -160,20 +159,6 @@ public class WeatherViewer extends Composite {
 			if (curr < weathers.size() - 1) {
 				curr++;
 				System.out.println(curr);
-				verticalPanel.clear();
-				constructViewer();
-			}
-		}
-	}
-	
-	private class refreshClickHandler implements ClickHandler {
-
-		@Override
-		public void onClick(ClickEvent event) {
-			
-				weathers = controller.getWeathers();
-				if(weathers!=null) {
-				curr = 0;
 				verticalPanel.clear();
 				constructViewer();
 			}

@@ -28,7 +28,10 @@
   <source path='client'/>
   <source path='shared'/>
 
-  
+  <!-- parser inherit -->
+  <inherits name="com.google.gwt.http.HTTP"/>
+  <inherits name="com.google.gwt.xml.XML" />
+    
   <!-- google maps inherit -->
   <inherits name="com.google.maps.gwt.GoogleMaps" />
   <script src="http://maps.google.com/maps/api/js?sensor=false" />

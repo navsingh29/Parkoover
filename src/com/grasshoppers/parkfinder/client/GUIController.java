@@ -42,7 +42,7 @@ public class GUIController extends Composite{
 	private List<String> facList = null;
 	private List<String> hoodList = null;
 	private User user = null;
-
+	private String weathers;
 	
 	public GUIController(ServiceController service) {
 
@@ -329,10 +329,13 @@ public class GUIController extends Composite{
 			return date.toString();
 		}
 
-
-
-		public List<Weather> getWeathers() {
-			return service.getWeathers();
+		public String getWeather() {
+			return weathers;
+		}
+		
+		public void setWeathers(String result) {
+			this.weathers = result;
+			
 		}
 
 	}

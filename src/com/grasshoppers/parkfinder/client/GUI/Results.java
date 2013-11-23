@@ -154,8 +154,8 @@ public class Results extends Composite {
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 		
-	//	WeatherViewer wv = new WeatherViewer(controller);
-	//	flexTable.setWidget(3, 0, wv);
+		WeatherViewer wv = new WeatherViewer(controller);
+		flexTable.setWidget(3, 0, wv);
 		//wv.setWidth("100%");
 		
 		GoogleMapsWidget map = new GoogleMapsWidget();

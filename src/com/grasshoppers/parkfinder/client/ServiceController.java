@@ -135,6 +135,8 @@ public class ServiceController {
                 Cookies.setCookie("sid", sessionID, expires, null, "/", false);
 			}
 		});
+		
+		getWeatherData();
 	}
 	
 	public void getSearchAssets() {
@@ -309,32 +311,24 @@ public class ServiceController {
 		
 	}
 
-	public List<Weather> getWeathers() {
-		
-		service.getWeathers(new AsyncCallback<List<Weather>>(){
+	public void getWeatherData() {
+		service.getWeatherData(new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				
+				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
-			public void onSuccess(List<Weather> result) {
-				changeWeathers(result);
-				
+			public void onSuccess(String result) {
+				maingui.setWeathers(result);
 			}
 			
 			
-		});;
+			
+		});
 		
-		
-		if (weathers==null) Window.alert("Error. Could not get weather.");
-		return weathers;
-	}
-	
-	public void changeWeathers(List<Weather> weathers) {
-		this.weathers = weathers;
 	}
 	
 }

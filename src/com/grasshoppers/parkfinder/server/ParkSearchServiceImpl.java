@@ -1,5 +1,11 @@
 package com.grasshoppers.parkfinder.server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +16,7 @@ import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
 import com.grasshoppers.parkfinder.client.widget.weather.Weather;
+import com.grasshoppers.parkfinder.client.widget.weather.WeatherParser;
 import com.grasshoppers.parkfinder.model.ParkModel;
 import com.grasshoppers.parkfinder.model.UserModel;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -88,11 +95,32 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		return userModel.modifyParkRating(userId, parkId, rating, comment, time);
 	}
 	
-	@Override
-	public List<Weather> getWeathers() {
-		WeatherParser tempWP = new WeatherParser();
-		return tempWP.get();
-		
+	public String getWeatherData() {
+		String message = "";
+
+		try {
+			String srcLink = "http://api.openweathermap.org/data/2.5/"
+					+"forecast/daily?q=Vancouver&mode=xml&units=metric&cnt=7";
+
+			URL url = new URL(srcLink);
+			URLConnection urlConn = url.openConnection();
+			urlConn.setReadTimeout(100000);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				message = message.concat(line);
+				System.out.println(line);
+			}
+			reader.close();
+
+
+		} catch (MalformedURLException e) {
+			message = e.getMessage();
+		} catch (IOException e) {
+			message = e.getMessage();
+		}
+		return message;
 	}
 	
 }
