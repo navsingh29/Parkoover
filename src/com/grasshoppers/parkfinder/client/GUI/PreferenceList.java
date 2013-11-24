@@ -282,6 +282,12 @@ public class PreferenceList extends Composite {
 			buttonPanel.add(chckbxFavourite);
 			
 			verticalPanel_2.add(buttonPanel);
+			
+			Label blank2 = new Label("===========================================");
+			blank.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(blank2);
+			
+			verticalPanel_2.add(new FacebookEventWidget(controller, park));
 		}
 		flexTable.getFlexCellFormatter().setColSpan(5, 0, 1);
 		flexTable.getCellFormatter().setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_CENTER);

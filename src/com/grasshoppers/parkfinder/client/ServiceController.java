@@ -272,7 +272,7 @@ public class ServiceController {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("An error occured. Your Facebook Login may have expired. Please re-login and try again.");
+				Window.alert("An error occured. Your Facebook Login may have expired or your event time may be invalid.");
 				
 			}
 

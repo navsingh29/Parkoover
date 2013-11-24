@@ -154,8 +154,8 @@ public class Results extends Composite {
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 		
-		WeatherViewer wv = new WeatherViewer(controller);
-		flexTable.setWidget(3, 0, wv);
+//		WeatherViewer wv = new WeatherViewer(controller);
+//		flexTable.setWidget(3, 0, wv);
 		//wv.setWidth("100%");
 		
 		GoogleMapsWidget map = new GoogleMapsWidget();
@@ -332,45 +332,11 @@ public class Results extends Composite {
 			chckbxFavourite.setStyleName("gwt-RichTextToolbar");
 			verticalPanel_2.add(chckbxFavourite);
 			
-			//final TextBox eventType = new TextBox();
-			//eventType.setText("Sport to Play");
+			Label blank2 = new Label("===========================================");
+			blank.setStyleName("gwt-Label-Login");
+			verticalPanel_2.add(blank2);
 			
-			final ListBox eventType = new ListBox();
-			eventType.addItem("Select an Activity");
-			for(int i=0;i<park.getFacilityList().size();i++){
-				String feature = park.getFacilityList().get(i).getFeature();
-				if (feature!=null)
-				eventType.addItem(feature);
-			
-			}
-			eventType.addItem("Picnic");
-			eventType.addItem("Sight Seeing");
-			eventType.addItem("Other");
-			
-			
-			final TextBox eventDescription  = new TextBox();
-			eventDescription.setText("Event Description.");
-			
-			final Date now = new Date();
-			final Date tom = new Date(now.getTime()+1000*60*60*24);
-			
-			
-			
-			final Button makeEvent = new Button("Create Facebook Event");
-			makeEvent.addClickHandler(new ClickHandler() {
-
-				@Override
-				public void onClick(ClickEvent event) {
-					controller.makeFacebookEvent(eventType.getItemText(eventType.getSelectedIndex()), park.getName(), eventDescription.getText(), now, tom);
-				}
-				
-				
-			});
-			verticalPanel_2.add(eventType);
-			verticalPanel_2.add(eventDescription);
-			verticalPanel_2.add(makeEvent);
-			
-		}
+			verticalPanel_2.add(new FacebookEventWidget(controller, park));
 		
 		
 		flexTable.getFlexCellFormatter().setColSpan(5, 0, 1);
@@ -380,5 +346,7 @@ public class Results extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		}
+}
+	
 }
 
