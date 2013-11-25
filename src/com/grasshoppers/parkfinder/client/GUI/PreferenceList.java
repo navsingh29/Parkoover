@@ -1,14 +1,25 @@
 package com.grasshoppers.parkfinder.client.GUI;
 
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -27,13 +38,16 @@ import com.grasshoppers.parkfinder.client.GUIController;
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.grasshoppers.parkfinder.client.modeldata.User;
 import com.grasshoppers.parkfinder.client.widget.map.GoogleMapsWidget;
 import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;
 import com.google.gwt.user.client.ui.Image;
+import com.google.maps.gwt.client.LatLng;
 
 public class PreferenceList extends Composite {
 
 	private GUIController controller;
+	private GoogleMapsWidget map;
 	
 	public PreferenceList(final GUIController controller, final List<PreferencePark> prefPark) {
 		this.controller = controller;
@@ -134,7 +148,8 @@ public class PreferenceList extends Composite {
 		WeatherViewer wv = new WeatherViewer(controller);
 		flexTable.setWidget(3, 0, wv);
 		
-		GoogleMapsWidget map = new GoogleMapsWidget();
+		map = new GoogleMapsWidget(45.2500, -123.1000, "V6T 1Z4", "vancouver");
+		map.clearEverything();
 		flexTable.setWidget(4, 0, map);
 		
 		DecoratedStackPanel decoratedStackPanel = new DecoratedStackPanel();
@@ -283,6 +298,32 @@ public class PreferenceList extends Composite {
 			
 			verticalPanel_2.add(buttonPanel);
 			
+			final HorizontalPanel mapButtonPanel = new HorizontalPanel();
+			
+			//plotPark
+			final Button mapPark = new Button("Plot Park");
+			mapPark.addClickHandler(new PlotParkClickHandler(park));
+			
+			mapPark.setStyleName("gwt-RichTextToolbar");
+			mapButtonPanel.add(mapPark);
+			
+			//plotRoute
+			final Button plotRoute = new Button("Plot Route");
+			plotRoute.addClickHandler(new PlotRouteClickHandler(park,this.controller));
+			
+			plotRoute.setStyleName("gwt-RichTextToolbar");
+			mapButtonPanel.add(plotRoute);
+			
+			//GointoStreetview
+			
+			final Button goInToSV = new Button("Street View");
+			goInToSV.addClickHandler(new StreetViewClickHandler(park));
+			goInToSV.setStyleName("gwt-RichTextToolbar");
+			mapButtonPanel.add(goInToSV);
+			
+			verticalPanel_2.add(mapButtonPanel);
+						
+			
 			Label blank2 = new Label("===========================================");
 			blank.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(blank2);
@@ -296,6 +337,62 @@ public class PreferenceList extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
+
+	private class PlotParkClickHandler implements ClickHandler {
+
+		PreferencePark pp = null;
+		public PlotParkClickHandler(PreferencePark pp) {
+			// TODO Auto-generated constructor stub
+			super();
+			this.pp = pp;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			map.plotPark(pp.getMap_x_loc(), pp.getMap_y_loc());
+		}
+		
+	}
+	
+
+	private class PlotRouteClickHandler implements ClickHandler {
+		String method = "D";
+		final PreferencePark ppp;
+		User user;
+		public PlotRouteClickHandler(PreferencePark pp,GUIController gc) {
+			super();
+			this.ppp = pp;
+			this.user =gc.getUser();
+		}  
+		   
+
+		@Override
+		public void onClick(ClickEvent event) {
+	    map.plotRouteFromHomeToPark(user.getAddress(),user.getCity(),ppp.getMap_x_loc(), ppp.getMap_y_loc(), "D");
+			
+			
+		}
+		
+	}
+	
+private class StreetViewClickHandler implements ClickHandler {
+		
+		PreferencePark pp = null;
+				public StreetViewClickHandler(PreferencePark pp) {
+		
+			super();    
+			this.pp = pp;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			map.goToNearestStreetView(pp.getMap_x_loc(), pp.getMap_y_loc());
+			
+		}
+		
+	}
+
 
 }
 
