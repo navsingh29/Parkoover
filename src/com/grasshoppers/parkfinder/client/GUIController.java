@@ -2,6 +2,7 @@ package com.grasshoppers.parkfinder.client;
 
 //import java.text.DateFormat;
 //import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -39,8 +40,64 @@ public class GUIController extends Composite{
 	
 	private ServiceController service;
 
-	private List<String> facList = null;
-	private List<String> hoodList = null;
+	private List<String> facList = Arrays.asList("Ball Hockey","Baseball Diamonds"
+			,"BasketballCourts"
+			,"Beaches"
+			,"BowlingGreens"
+			,"CommunityCentres"
+			,"CommunityHalls"
+			,"CricketPitches"
+			,"DiscGolfCourses"
+			,"DogsOff-LeashAreas"
+			,"FieldHockey"
+			,"FieldHouses"
+			,"FoodConcessions"
+			,"FootballFields"
+			,"GolfCourses"
+			,"JoggingTrails"
+			,"LacrosseBoxes"
+			,"LightedFields"
+			,"OutdoorRollerHockeyRinks"
+			,"PicnicSites"
+			,"Playgrounds"
+			,"Restaurants"
+			,"Rinks"
+			,"RugbyFields"
+			,"RunningTracks"
+			,"SkateboardParks"
+			,"SoccerFields"
+			,"Softball"
+			,"SpecialFeature"
+			,"SwimmingPools"
+			,"TennisCourts"
+			,"UltimateFields"
+			,"WadingPool"
+			,"Washroom"
+			,"Water/SprayParks"
+);
+	
+	private List<String> hoodList = Arrays.asList("Arbutus Ridge"
+			,"Downtown"
+			,"Dunbar-Southlands"
+			,"Fairview"
+			,"Grandview-Woodland"
+			,"Hastings-Sunrise"
+			,"Kensington-Cedar Cottage"
+			,"Kerrisdale"
+			,"Killarney"
+			,"Kitsilano"
+			,"Marpole"
+			,"Mount Pleasant"
+			,"Oakridge"
+			,"Renfrew-Collingwood"
+			,"Riley-Little Mountain"
+			,"Shaughnessy"
+			,"South Cambie"
+			,"Strathcona"
+			,"Sunset"
+			,"Victoria-Fraserview"
+			,"West End"
+			,"West Point Grey");
 	private User user = null;
 	private String weathers;
 	
@@ -135,6 +192,8 @@ public class GUIController extends Composite{
 
 		public void logout() {
 			service.logout();
+			facebookLogin.setText("Not Logged Into Facebook.");
+			
 			goToLogIn();
 		}
 		
@@ -158,7 +217,8 @@ public class GUIController extends Composite{
 		}
 		
 		public void buttonToSearch() {
-			service.getSearchAssets();
+		//	service.getSearchAssets();
+			goToSearch();
 		}
 		
 		public void goToSavedResult() {
@@ -185,7 +245,7 @@ public class GUIController extends Composite{
 			service.getUserLogIn(username, password, rememberMe);
 		}
 		
-		//DO NOT TOUCH: service callback
+	/*	//DO NOT TOUCH: service callback
 		public void setFacList(List<String> list) {
 			this.facList = list;
 		}
@@ -194,7 +254,7 @@ public class GUIController extends Composite{
 		public void setHoodList(List<String> result) {
 			this.hoodList = result;
 		}
-		
+	*/	
 		//DO NOT TOUCH: service callback for signIN
 		public void signIntoAcc(User user, boolean remembered) {
 			if (user == null) {

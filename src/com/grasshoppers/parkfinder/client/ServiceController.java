@@ -86,37 +86,6 @@ public class ServiceController {
 */
 	public void getUserLogIn(String username, String password, boolean remember) {
 		
-		service.getAllHoodNames(new AsyncCallback<List<String>>() {
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				
-				
-			}
-
-			@Override
-			public void onSuccess(List<String> result) {
-				maingui.setHoodList(result);
-				
-			}
-
-		});
-		
-		service.getAllFacTypes(new AsyncCallback<List<String>>() {
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				
-				
-			}
-
-			@Override
-			public void onSuccess(List<String> result) {
-				maingui.setFacList(result);
-				
-			}
-
-		});
 		
 		service.getUser(username, password, new AsyncCallback<User>() {
 			
@@ -151,7 +120,7 @@ public class ServiceController {
 
 			@Override
 			public void onSuccess(List<String> result) {
-				maingui.setHoodList(result);
+		//		maingui.setHoodList(result);
 				
 			}
 
@@ -167,7 +136,7 @@ public class ServiceController {
 
 			@Override
 			public void onSuccess(List<String> result) {
-				maingui.setFacList(result);
+		//		maingui.setFacList(result);
 				maingui.goToSearch();
 			}
 
