@@ -37,43 +37,43 @@ public class GUIController extends Composite{
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
 	private HorizontalPanel statusPanel = new HorizontalPanel();
 	private Label facebookLogin = new Label("Not Logged Into Facebook");
-	
+	private List<Weather> weathers;
 	private ServiceController service;
 
-	private List<String> facList = Arrays.asList("Ball Hockey","Baseball Diamonds"
-			,"BasketballCourts"
+	private List<String> facList = Arrays.asList("Ball Hockey","Baseball Diamonds",
+			"Basketball Courts"
 			,"Beaches"
-			,"BowlingGreens"
-			,"CommunityCentres"
-			,"CommunityHalls"
-			,"CricketPitches"
-			,"DiscGolfCourses"
-			,"DogsOff-LeashAreas"
-			,"FieldHockey"
-			,"FieldHouses"
-			,"FoodConcessions"
-			,"FootballFields"
-			,"GolfCourses"
-			,"JoggingTrails"
-			,"LacrosseBoxes"
-			,"LightedFields"
-			,"OutdoorRollerHockeyRinks"
-			,"PicnicSites"
+			,"Bowling Greens"
+			,"Community Centres"
+			,"Community Halls"
+			,"Cricket Pitches"
+			,"Disc Golf Courses"
+			,"Dogs Off-Leash Areas"
+			,"Field Hockey"
+			,"Field Houses"
+			,"Food Concessions"
+			,"Football Fields"
+			,"Golf Courses"
+			,"Jogging Trails"
+			,"Lacrosse Boxes"
+			,"Lighted Fields"
+			,"Outdoor Roller Hockey Rinks"
+			,"Picnic Sites"
 			,"Playgrounds"
 			,"Restaurants"
 			,"Rinks"
-			,"RugbyFields"
-			,"RunningTracks"
-			,"SkateboardParks"
-			,"SoccerFields"
+			,"Rugby Fields"
+			,"Running Tracks"
+			,"Skateboard Parks"
+			,"Soccer Fields"
 			,"Softball"
-			,"SpecialFeature"
-			,"SwimmingPools"
-			,"TennisCourts"
-			,"UltimateFields"
-			,"WadingPool"
+			,"Special Feature"
+			,"Swimming Pools"
+			,"Tennis Courts"
+			,"Ultimate Fields"
+			,"Wading Pool"
 			,"Washroom"
-			,"Water/SprayParks"
+			,"Water/Spray Parks"
 );
 	
 	private List<String> hoodList = Arrays.asList("Arbutus Ridge"
@@ -99,8 +99,6 @@ public class GUIController extends Composite{
 			,"West End"
 			,"West Point Grey");
 	private User user = null;
-	private String weathers;
-	
 	public GUIController(ServiceController service) {
 
 		
@@ -120,6 +118,10 @@ public class GUIController extends Composite{
 	}
 	
 	this.service = service;
+	
+	//service.getWeatherData();
+	getWeatherSource();
+	
 	horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	horizontalPanel.setSize("450px", "300px");
@@ -389,14 +391,21 @@ public class GUIController extends Composite{
 			return date.toString();
 		}
 
-		public String getWeather() {
+		public List<Weather> getWeather() {
 			return weathers;
 		}
 		
-		public void setWeathers(String result) {
+		public void setWeathers(List<Weather> result) {
 			this.weathers = result;
 			
 		}
+
+		public void getWeatherSource() {
+			service.getWeatherSource();
+		//	return null;
+		}
+		
+		
 
 	}
 	

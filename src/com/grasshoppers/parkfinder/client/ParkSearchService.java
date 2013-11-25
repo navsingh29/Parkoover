@@ -25,4 +25,5 @@ public interface ParkSearchService extends RemoteService {
 	Boolean deleteParkRating(int userId, int parkId);
 	Boolean modifyParkRating(int userId, int parkId, int rating, String comment, String time);
 	String getWeatherData();
+//	List<Weather> getWeathers();
 }

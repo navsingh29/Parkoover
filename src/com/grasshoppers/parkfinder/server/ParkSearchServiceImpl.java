@@ -95,6 +95,8 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		return userModel.modifyParkRating(userId, parkId, rating, comment, time);
 	}
 	
+	
+	
 	public String getWeatherData() {
 		String message = "";
 
@@ -110,7 +112,7 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 
 			while ((line = reader.readLine()) != null) {
 				message = message.concat(line);
-				System.out.println(line);
+			//	System.out.println(line);
 			}
 			reader.close();
 
@@ -123,4 +125,10 @@ public class ParkSearchServiceImpl extends RemoteServiceServlet implements
 		return message;
 	}
 	
+/*	public List<Weather> getWeathers() {
+		WeatherParser wp = new WeatherParser(null);
+		return wp.get();
+		
+	}
+*/
 }

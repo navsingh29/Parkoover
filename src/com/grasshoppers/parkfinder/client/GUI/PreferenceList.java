@@ -284,7 +284,7 @@ public class PreferenceList extends Composite {
 			verticalPanel_2.add(buttonPanel);
 			
 			Label blank2 = new Label("===========================================");
-			blank.setStyleName("gwt-Label-Login");
+			blank2.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(blank2);
 			
 			verticalPanel_2.add(new FacebookEventWidget(controller, park));

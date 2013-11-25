@@ -33,7 +33,7 @@ public class WeatherViewer extends Composite {
 	public WeatherViewer(GUIController gui) {
 		curr = 0;
 		this.gui = gui;
-		weathers = new WeatherParser(gui).get();
+		weathers = gui.getWeather();//new WeatherParser(gui).get();		
 		verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
 		constructViewer();

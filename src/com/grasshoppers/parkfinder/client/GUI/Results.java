@@ -154,9 +154,10 @@ public class Results extends Composite {
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 		
-//		WeatherViewer wv = new WeatherViewer(controller);
-//		flexTable.setWidget(3, 0, wv);
-		//wv.setWidth("100%");
+		
+		WeatherViewer wv = new WeatherViewer(controller);
+		flexTable.setWidget(3, 0, wv);
+		wv.setWidth("100%");
 		
 		GoogleMapsWidget map = new GoogleMapsWidget();
 		flexTable.setWidget(4, 0, map);
@@ -333,7 +334,7 @@ public class Results extends Composite {
 			verticalPanel_2.add(chckbxFavourite);
 			
 			Label blank2 = new Label("===========================================");
-			blank.setStyleName("gwt-Label-Login");
+			blank2.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(blank2);
 			
 			verticalPanel_2.add(new FacebookEventWidget(controller, park));
@@ -347,6 +348,7 @@ public class Results extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		}
 }
+
 	
 }
 

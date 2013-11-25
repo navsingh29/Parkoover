@@ -1,6 +1,9 @@
 package com.grasshoppers.parkfinder.client.widget.weather;
 
-public class Weather {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Weather implements Serializable{
 
 	private String 	day;
 	

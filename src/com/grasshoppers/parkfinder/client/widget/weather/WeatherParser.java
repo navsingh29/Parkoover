@@ -1,20 +1,22 @@
 package com.grasshoppers.parkfinder.client.widget.weather;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
+
+
 import com.google.gwt.xml.client.DOMException;  
 import com.google.gwt.xml.client.Document;  
 import com.google.gwt.xml.client.Element;  
 import com.google.gwt.xml.client.Node;  
 import com.google.gwt.xml.client.XMLParser;  
 import com.grasshoppers.parkfinder.client.GUIController;
-import com.grasshoppers.parkfinder.client.ServiceController;
 
 public class WeatherParser {
 
@@ -30,19 +32,22 @@ public class WeatherParser {
 	
 	private Weather			tempWeather;
 	
-	public  WeatherParser(GUIController controller) {
+	public  WeatherParser(String source) {
 		srcLink = "http://api.openweathermap.org/data/2.5/"
 					+"forecast/daily?q=Vancouver&mode=xml&units=metric&cnt=7";
 		weatherList = new ArrayList<Weather>(7);
-		source = controller.getWeather();
+		this.source = source;//controller.getWeatherSource();
 		parse(source);
 	}
 	
-	private void parse(String source) {
+	
+	
+private void parse(String source) {
 		
 		try {
 			//srcLink -> DOM
 			Document doc = XMLParser.parse(source);
+			
 			
 			//parsing starts here
 			

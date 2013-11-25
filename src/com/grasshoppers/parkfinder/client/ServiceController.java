@@ -14,6 +14,7 @@ import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
 import com.grasshoppers.parkfinder.client.modeldata.User;
 import com.grasshoppers.parkfinder.client.widget.weather.Weather;
+import com.grasshoppers.parkfinder.client.widget.weather.WeatherParser;
 
 public class ServiceController {
 
@@ -104,8 +105,6 @@ public class ServiceController {
                 Cookies.setCookie("sid", sessionID, expires, null, "/", false);
 			}
 		});
-		
-		getWeatherData();
 	}
 	
 	public void getSearchAssets() {
@@ -280,17 +279,17 @@ public class ServiceController {
 		
 	}
 
-	public void getWeatherData() {
-		service.getWeatherData(new AsyncCallback<String>() {
+	/*public void getWeatherData() {
+		service.getWeathers(new AsyncCallback<List<Weather>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				Window.alert("Could not retrieve weather data.");
 				
 			}
 
 			@Override
-			public void onSuccess(String result) {
+			public void onSuccess(List<Weather> result) {
 				maingui.setWeathers(result);
 			}
 			
@@ -299,5 +298,26 @@ public class ServiceController {
 		});
 		
 	}
+*/
+	public void getWeatherSource() {
+		service.getWeatherData(new AsyncCallback<String>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Could not retrieve weather source.");
+				
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				maingui.setWeathers(new WeatherParser(result).get());
+				
+			}
+			
+		});
+		
+	}
+
+
 	
 }

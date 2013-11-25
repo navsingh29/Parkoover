@@ -22,4 +22,5 @@ public interface ParkSearchServiceAsync {
 	void deleteParkRating(int userId, int parkId, AsyncCallback<Boolean> callback);
 	void modifyParkRating(int userId, int parkId, int rating, String comment, String time, AsyncCallback<Boolean> callback);
 	void getWeatherData(AsyncCallback<String> callback);
+//	void getWeathers(AsyncCallback<List<Weather>> callback);
 }
