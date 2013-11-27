@@ -178,7 +178,7 @@ public class Park implements Serializable{
 			String parkName1 = p1.getName().toUpperCase();
 			String parkName2 = p2.getName().toUpperCase();
 	
-			return parkName1.compareTo(parkName2);
+			return parkName2.compareTo(parkName1);
 		}	
 	};	
 	
@@ -190,7 +190,7 @@ public class Park implements Serializable{
 			double parkRating1 = p1.getRating();
 			double parkRating2 = p2.getRating();
 
-			return Double.compare(parkRating1, parkRating2);
+			return Double.compare(parkRating2, parkRating1);
 		}	
 	};	
 	
@@ -202,7 +202,7 @@ public class Park implements Serializable{
 			double parkSize1 = p1.getHectares();
 			double parkSize2 = p2.getHectares();
 			
-			return Double.compare(parkSize1, parkSize2);
+			return Double.compare(parkSize2, parkSize1);
 		}	
 	};	
 

@@ -1,28 +1,22 @@
 package com.grasshoppers.parkfinder.client.GUI;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
 import com.google.gwt.user.client.ui.DecoratedStackPanel;
-import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.Command;
@@ -30,6 +24,7 @@ import com.grasshoppers.parkfinder.client.GUIController;
 import com.grasshoppers.parkfinder.client.modeldata.Facility;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
+import com.grasshoppers.parkfinder.client.modeldata.User;
 import com.grasshoppers.parkfinder.client.widget.map.GoogleMapsWidget;
 import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;
 import com.google.gwt.user.client.ui.Image;
@@ -37,6 +32,7 @@ import com.google.gwt.user.client.ui.Image;
 public class Results extends Composite {
 
 	private GUIController controller;
+	private GoogleMapsWidget map;
 	
 	public Results(final GUIController controller, final List<Park> parks) {
 		this.controller = controller;
@@ -154,12 +150,11 @@ public class Results extends Composite {
 		menuBar_3.addItem(mntmMenu_1);
 		mntmMenu_1.setWidth("100px");
 		
-		
 		WeatherViewer wv = new WeatherViewer(controller);
 		flexTable.setWidget(3, 0, wv);
-		wv.setWidth("100%");
 		
-		GoogleMapsWidget map = new GoogleMapsWidget();
+	    map = new GoogleMapsWidget(49.2500, -123.1000, "V6T 1Z4", "vancouver");
+	    map.clearEverything();
 		flexTable.setWidget(4, 0, map);
 		
 		DecoratedStackPanel decoratedStackPanel = new DecoratedStackPanel();
@@ -334,7 +329,7 @@ public class Results extends Composite {
 			verticalPanel_2.add(chckbxFavourite);
 			
 			Label blank2 = new Label("===========================================");
-			blank2.setStyleName("gwt-Label-Login");
+			blank.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(blank2);
 			
 			verticalPanel_2.add(new FacebookEventWidget(controller, park));
@@ -345,10 +340,102 @@ public class Results extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(4, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
+		
+		//----------------------------------------
+		final HorizontalPanel mapButtonPanel = new HorizontalPanel();
+		
+		//plotPark
+		final Button mapPark = new Button("Plot Park");
+		mapPark.addClickHandler(new PlotParkClickHandler(park));
+		
+		mapPark.setStyleName("gwt-RichTextToolbar");
+		mapButtonPanel.add(mapPark);
+		
+		//plotRoute
+		final Button plotRoute = new Button("Plot Route");
+		plotRoute.addClickHandler(new PlotRouteClickHandler(park,this.controller));
+		
+		plotRoute.setStyleName("gwt-RichTextToolbar");
+		mapButtonPanel.add(plotRoute);
+		
+		//GointoStreetview
+		
+		final Button goInToSV = new Button("Street View");
+		goInToSV.addClickHandler(new StreetViewClickHandler(park));
+		goInToSV.setStyleName("gwt-RichTextToolbar");
+		mapButtonPanel.add(goInToSV);
+		
+		verticalPanel_2.add(mapButtonPanel);
+	
+		
+		//-----------------------------------
+		
+		
 		}
-}
+
+	}
+	
+	
+	private class PlotParkClickHandler implements ClickHandler {
+
+		Park p = null;
+		public PlotParkClickHandler(Park p) {
+			// TODO Auto-generated constructor stub
+			super();
+			this.p = p;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			map.plotPark(p.getMap_x_loc(), p.getMap_y_loc());
+		}
+		
+	}
 
 	
-}
+private class PlotRouteClickHandler implements ClickHandler {
+		
+		GUIController gc;
+		Park p = null;
+		User user;
+		public PlotRouteClickHandler(Park p,GUIController gc) {
+			// TODO Auto-generated constructor stub
+			super();
+			this.p = p;
+			this.user =gc.getUser();
+		}
 
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			map.plotRouteFromHomeToPark(user.getAddress(),user.getCity(),p.getMap_x_loc(), p.getMap_y_loc(), "D");
+			
+			
+		}
+		
+	}
+	
+private class StreetViewClickHandler implements ClickHandler {
+		
+		Park p = null;
+		public StreetViewClickHandler(Park p) {
+			// TODO Auto-generated constructor stub
+			super();
+			this.p = p;
+			
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			map.goToNearestStreetView(p.getMap_x_loc(), p.getMap_y_loc());
+			
+		}
+		
+	}
+
+	
+	
+}
