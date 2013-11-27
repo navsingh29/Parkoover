@@ -270,7 +270,7 @@ public class ServiceController {
 
 			@Override
 			public void onSuccess(Boolean result) {
-				Window.alert("Logout Successful");
+				
 				
 			}
 			

@@ -1,12 +1,9 @@
 package com.grasshoppers.parkfinder.client;
 
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -28,9 +25,9 @@ import com.grasshoppers.parkfinder.client.GUI.Search;
 import com.grasshoppers.parkfinder.client.GUI.Signup;
 import com.grasshoppers.parkfinder.client.modeldata.Park;
 import com.grasshoppers.parkfinder.client.modeldata.PreferencePark;
-import com.grasshoppers.parkfinder.shared.StringMethods;
 import com.grasshoppers.parkfinder.client.modeldata.User;
 import com.grasshoppers.parkfinder.client.widget.weather.Weather;
+import com.grasshoppers.parkfinder.shared.StringMethods;
 public class GUIController extends Composite{
 
 	private VerticalPanel verticalPanel = new VerticalPanel();
@@ -99,13 +96,16 @@ public class GUIController extends Composite{
 			,"West End"
 			,"West Point Grey");
 	private User user = null;
+	
+	
+	
+	
+	
 	public GUIController(ServiceController service) {
-
+		this.service = service;
 		
 	
 	initWidget(verticalPanel);
-	
-	
 	
 	
 	String hash = Window.Location.getHash();
@@ -117,22 +117,12 @@ public class GUIController extends Composite{
 	System.out.println(token);
 	}
 	
-	this.service = service;
-	
-	//service.getWeatherData();
-	getWeatherSource();
-	
-	horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-	horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-	horizontalPanel.setSize("450px", "300px");
-	
-	statusPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-	statusPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-	statusPanel.setSize("450px", "30px");
-	statusPanel.add(facebookLogin);
 	
 	
 	
+	
+	
+	final String isToken = token;
 	
 	String sessionID = Cookies.getCookie("sid");
 	if(sessionID==null) {
@@ -153,11 +143,32 @@ public class GUIController extends Composite{
 					setUser(result);
 					buttonToSearch();
 					if(result.isFacebookLogin()) facebookLogin.setText("Logged Into Facebook.");;
+					// Change the following for online
+					if (isToken!=null){ Window.Location.replace("http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+					}
 				}	
 			}
 		});
 	}
-	//if(user!=null&&!user.isFacebookLogin()){
+	
+	
+	
+	//service.getWeatherData();
+		getWeatherSource();
+		
+		horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		horizontalPanel.setSize("450px", "300px");
+		
+		statusPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		statusPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		statusPanel.setSize("450px", "30px");
+		statusPanel.add(facebookLogin);
+	
+	
+	
+	
+	
 	Button facebookLoginButton = new Button("Facebook Login");
 	facebookLoginButton.addClickHandler(new ClickHandler(){
 
@@ -181,11 +192,17 @@ public class GUIController extends Composite{
 	public void goFacebookSignIn() {
 	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&redirect_uri="+GWT.getModuleBaseURL() + "parseloginservice?");
 	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&redirect_uri="+GWT.getModuleBaseURL() + "parseloginservice?");
-		Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&scope=create_event&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&scope=create_event&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&scope=create_event&redirect_uri="+Window.Location.getHref());
+		
+		//Use the following for local development
+		Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=241791142650990&response_type=token&scope=create_event&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+		
 	}
 	
 	
 		public void goToSignUp() {
+			statusPanel.setVisible(false);
 			horizontalPanel.clear();
 			Signup signup = new Signup(this);
 			horizontalPanel.add(signup);
@@ -194,13 +211,13 @@ public class GUIController extends Composite{
 
 		public void logout() {
 			service.logout();
-			facebookLogin.setText("Not Logged Into Facebook.");
-			
 			goToLogIn();
 		}
 		
 		public void goToLogIn() {
-		//	service.logout();
+			facebookLogin.setText("Not Logged Into Facebook.");
+			statusPanel.setVisible(false);
+			service.logout();
 			horizontalPanel.clear();
 			Login login = new Login(this);
 			user = null;
@@ -212,10 +229,13 @@ public class GUIController extends Composite{
 		//	service.getPrefList();
 			horizontalPanel.clear();
 			if (user!=null) {
+				statusPanel.setVisible(true);
 				PreferenceList pList = new PreferenceList(this, user.getPreferenceList());
 				horizontalPanel.add(pList);
-			} else 
+			} else {
 				warnPopup("User not logged in.");
+				goToLogIn();
+			}
 		}
 		
 		public void buttonToSearch() {
@@ -329,6 +349,7 @@ public class GUIController extends Composite{
 			}
 			PreferenceList results = new PreferenceList(this, parks);
 			horizontalPanel.add(results);
+			statusPanel.setVisible(true);
 		}
 		
 		public void warnPopup (String warning) {
@@ -337,9 +358,10 @@ public class GUIController extends Composite{
 
 		public void goToSearch() {
 			horizontalPanel.clear();
-
+			
 			Search search = new Search(this, this.facList, this.hoodList);
 			horizontalPanel.add(search);
+			statusPanel.setVisible(true);
 		}
 
 //=============================================================================================================

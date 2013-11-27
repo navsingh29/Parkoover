@@ -35,9 +35,9 @@ public class FacebookEventWidget extends Composite {
 		final ListBox eventType = new ListBox();
 		eventType.addItem("Select an Activity");
 		
+		Set<String> featureSet = new TreeSet<String>();
 		for(int i=0;i<park.getFacilityList().size();i++){
 			String feature = park.getFacilityList().get(i).getType();
-			Set<String> featureSet = new TreeSet<String>();
 			if(!featureSet.contains(feature)){
 			featureSet.add(feature);
 			eventType.addItem(feature);
@@ -97,9 +97,10 @@ public class FacebookEventWidget extends Composite {
 		final ListBox eventType = new ListBox();
 		eventType.addItem("Select an Activity");
 		
+		
+		Set<String> featureSet = new TreeSet<String>();
 		for(int i=0;i<park.getFacilityList().size();i++){
 			String feature = park.getFacilityList().get(i).getType();
-			Set<String> featureSet = new TreeSet<String>();
 			if(!featureSet.contains(feature)){
 			featureSet.add(feature);
 			eventType.addItem(feature);
