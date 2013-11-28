@@ -1,26 +1,12 @@
 package com.grasshoppers.parkfinder.client.widget.map;
 
-import java.lang.reflect.Array;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.dev.generator.ast.Node;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.TabPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.maps.gwt.client.DirectionsRenderer;
-import com.google.maps.gwt.client.DirectionsRendererOptions;
 import com.google.maps.gwt.client.DirectionsRequest;
 import com.google.maps.gwt.client.DirectionsResult;
 import com.google.maps.gwt.client.DirectionsService;
@@ -33,12 +19,9 @@ import com.google.maps.gwt.client.GoogleMap;
 import com.google.maps.gwt.client.LatLng;
 import com.google.maps.gwt.client.MapOptions;
 import com.google.maps.gwt.client.MapTypeId;
-import com.google.maps.gwt.client.MapTypeRegistry;
 import com.google.maps.gwt.client.Marker;
 import com.google.maps.gwt.client.MarkerOptions;
-import com.google.maps.gwt.client.StreetViewAddressControlOptions;
 import com.google.maps.gwt.client.StreetViewPanorama;
-import com.google.maps.gwt.client.StreetViewPanoramaData;
 import com.google.maps.gwt.client.StreetViewPanoramaOptions;
 import com.google.maps.gwt.client.TravelMode;
 

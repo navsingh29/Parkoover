@@ -32,6 +32,9 @@ public class Park implements Serializable{
 	private double rating;
 	private int count;
 	
+	// Temporary old Rating
+	private double oldRating;
+	
 	public Park() {
 		facilityList = new ArrayList<Facility>();
 	}
@@ -170,6 +173,14 @@ public class Park implements Serializable{
 		this.count = count;
 	}
 	
+	public double getOldRating() {
+		return oldRating;
+	}
+
+	public void setOldRating(double oldRating) {
+		this.oldRating = oldRating;
+	}
+
 	public static Comparator<Park> ParkNameComparator 
 	    = new Comparator<Park>() {
 	
