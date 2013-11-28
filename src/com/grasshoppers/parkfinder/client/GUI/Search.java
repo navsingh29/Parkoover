@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.Image;
 
 public class Search extends Composite {
 
-	private TextBox tbParkSearch;
+	private TextBoxWithGhostText tbParkSearch;
 	private ListBox lbNeighborhood;
 	private ListBox cbFacility;
 	private GUIController controller;
@@ -85,11 +85,12 @@ public class Search extends Composite {
 		menuBar.addItem(mntmMenu);
 		mntmMenu.setWidth("100px");
 		
-		tbParkSearch = new TextBox();
+		tbParkSearch = new TextBoxWithGhostText();
 		tbParkSearch.setStyleName("gwt-Label-Fields");
-		blankSearchText = "Search Me!";
-		tbParkSearch.setText(blankSearchText);
 		tbParkSearch.setStyleName("gwt-HorizontalSplitPanel");
+		//blankSearchText = "Search Me!";
+		tbParkSearch.setGhostText("Search Me!");
+		//tbParkSearch.setStyleName("gwt-HorizontalSplitPanel");
 		flexTable.setWidget(2, 0, tbParkSearch);
 		tbParkSearch.setWidth("75%");
 		

@@ -354,3 +354,7 @@ a:visited {
 	font-family: Candara;
 	font-weight: bold;
 }
+
+.gwt-Ghost-Text{
+	color: grey;
+}

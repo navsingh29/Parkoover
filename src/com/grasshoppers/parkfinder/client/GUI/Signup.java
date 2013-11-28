@@ -46,53 +46,53 @@ public class Signup extends Composite {
 		image = new Image("images/Parkoover10.gif");
 		flexTable.setWidget(0, 0, image);
 		
-		textBoxUsername = new TextBox();
+		textBoxUsername = new TextBoxWithGhostText();
 		textBoxUsername.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxUsername.setAlignment(TextAlignment.CENTER);
-		textBoxUsername.setText("Username");
+		((TextBoxWithGhostText) textBoxUsername).setGhostText("Username");
 		flexTable.setWidget(1, 0, textBoxUsername);
 		flexTable.getCellFormatter().setStyleName(1, 0, "gwt-Label-Login");
 		textBoxUsername.setWidth("75%");
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
-		textBoxPassword = new TextBox();
+		textBoxPassword = new TextBoxWithGhostText();
 		textBoxPassword.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxPassword.setAlignment(TextAlignment.CENTER);
-		textBoxPassword.setText("Password");
+		((TextBoxWithGhostText) textBoxPassword).setGhostText("Password");
 		flexTable.setWidget(2, 0, textBoxPassword);
 		textBoxPassword.setWidth("75%");
 		flexTable.getCellFormatter().setWidth(2, 0, "");
 		flexTable.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
-		textBoxFirstName = new TextBox();
+		textBoxFirstName = new TextBoxWithGhostText();
 		textBoxFirstName.setAlignment(TextAlignment.CENTER);
 		textBoxFirstName.setTextAlignment(TextBoxBase.ALIGN_CENTER);
 		textBoxFirstName.setStyleName("gwt-Label-Login");
-		textBoxFirstName.setText("first name");
+		((TextBoxWithGhostText) textBoxFirstName).setGhostText("first name");
 		flexTable.setWidget(3, 0, textBoxFirstName);
 		textBoxFirstName.setWidth("75%");
 		
-		textBoxLastName = new TextBox();
+		textBoxLastName = new TextBoxWithGhostText();
 		textBoxLastName.setAlignment(TextAlignment.CENTER);
 		textBoxLastName.setTextAlignment(TextBoxBase.ALIGN_CENTER);
 		textBoxLastName.setStyleName("gwt-Label-Login");
-		textBoxLastName.setText("last name");
+		((TextBoxWithGhostText) textBoxLastName).setGhostText("last name");
 		flexTable.setWidget(4, 0, textBoxLastName);
 		textBoxLastName.setWidth("75%");
 		
-		textBoxEmail = new TextBox();
+		textBoxEmail = new TextBoxWithGhostText();
 		textBoxEmail.setAlignment(TextAlignment.CENTER);
 		textBoxEmail.setTextAlignment(TextBoxBase.ALIGN_CENTER);
 		textBoxEmail.setStyleName("gwt-Label-Fields");
-		textBoxEmail.setText("Email");
+		((TextBoxWithGhostText) textBoxEmail).setGhostText("Email");
 	//	flexTable.setWidget(3, 0, textBoxEmail);
 		textBoxEmail.setWidth("75%");
 		
-		textBoxAddress = new TextBox();
+		textBoxAddress = new TextBoxWithGhostText();
 		textBoxAddress.setTextAlignment(TextBoxBase.ALIGN_CENTER);
-		textBoxAddress.setText("Address");
 		textBoxAddress.setStyleName("gwt-Label-Fields");
 		textBoxAddress.setAlignment(TextAlignment.CENTER);
+		((TextBoxWithGhostText) textBoxAddress).setGhostText("Address");
 		flexTable.setWidget(5, 0, textBoxAddress);
 		textBoxAddress.setWidth("75%");
 		
@@ -106,27 +106,27 @@ public class Signup extends Composite {
 					}
 			});
 		
-		txtbxCountry = new TextBox();
+		txtbxCountry = new TextBoxWithGhostText();
 		txtbxCountry.setTextAlignment(TextBoxBase.ALIGN_CENTER);
-		txtbxCountry.setText("Country");
 		txtbxCountry.setStyleName("gwt-Label-Fields");
 		txtbxCountry.setAlignment(TextAlignment.CENTER);
+		((TextBoxWithGhostText) txtbxCountry).setGhostText("Country");
 		flexTable.setWidget(6, 0, txtbxCountry);
 		txtbxCountry.setWidth("75%");
 		
-		txtbxCity = new TextBox();
+		txtbxCity = new TextBoxWithGhostText();
 		txtbxCity.setTextAlignment(TextBoxBase.ALIGN_CENTER);
-		txtbxCity.setText("City");
 		txtbxCity.setStyleName("gwt-Label-Fields");
 		txtbxCity.setAlignment(TextAlignment.CENTER);
+		((TextBoxWithGhostText) txtbxCity).setGhostText("City");
 		flexTable.setWidget(7, 0, txtbxCity);
 		txtbxCity.setWidth("75%");
 		
-		txtbxPostalCode = new TextBox();
+		txtbxPostalCode = new TextBoxWithGhostText();
 		txtbxPostalCode.setTextAlignment(TextBoxBase.ALIGN_CENTER);
-		txtbxPostalCode.setText("Province");
 		txtbxPostalCode.setStyleName("gwt-Label-Fields");
 		txtbxPostalCode.setAlignment(TextAlignment.CENTER);
+		((TextBoxWithGhostText) txtbxPostalCode).setGhostText("Province");
 		flexTable.setWidget(8, 0, txtbxPostalCode);
 		txtbxPostalCode.setWidth("75%");
 		btnNewButton.setStyleName("gwt-RichTextToolbar");

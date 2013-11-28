@@ -112,8 +112,8 @@ public class FacebookEventWidget extends Composite {
 		eventType.addItem("Other");
 		
 		
-		final TextBox eventDescription  = new TextBox();
-		eventDescription.setText("Event Description.");
+		final TextBox eventDescription  = new TextBoxWithGhostText();
+		((TextBoxWithGhostText) eventDescription).setGhostText("Event Description.");
 		eventDescription.setWidth("85%");
 		
 	//	final Date now = new Date();
