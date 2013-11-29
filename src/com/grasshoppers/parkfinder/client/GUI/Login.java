@@ -18,8 +18,8 @@ import com.google.gwt.user.client.ui.Image;
 import com.grasshoppers.parkfinder.client.widget.weather.WeatherViewer;
 
 public class Login extends Composite {
-	private TextBox textBoxUsername;
-	private TextBox textBoxPassword;
+	private TextBoxWithGhostText textBoxUsername;
+	private TextBoxWithGhostText textBoxPassword;
 	private CheckBox chckbxRememberMe;
 	private GUIController controller;
 	
@@ -42,19 +42,21 @@ public class Login extends Composite {
 		Image image = new Image("images/Parkoover10.gif");
 		flexTable.setWidget(0, 0, image);
 		
-		textBoxUsername = new TextBox();
+		textBoxUsername = new TextBoxWithGhostText();
 		textBoxUsername.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxUsername.setAlignment(TextAlignment.CENTER);
-		textBoxUsername.setText("Username");
+		//textBoxUsername.setText("Username");
+		textBoxUsername.setGhostText("Username");
 		flexTable.setWidget(1, 0, textBoxUsername);
 		flexTable.getCellFormatter().setStyleName(1, 0, "gwt-Label-Login");
 		textBoxUsername.setWidth("75%");
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		
-		textBoxPassword = new TextBox();
+		textBoxPassword = new TextBoxWithGhostText();
 		textBoxPassword.setStyleName("gwt-HorizontalSplitPanel");
 		textBoxPassword.setAlignment(TextAlignment.CENTER);
-		textBoxPassword.setText("Password");
+		//textBoxPassword.setText("Password");
+		textBoxPassword.setGhostText("Password");
 		flexTable.setWidget(2, 0, textBoxPassword);
 		textBoxPassword.setWidth("75%");
 		flexTable.getCellFormatter().setWidth(2, 0, "");
