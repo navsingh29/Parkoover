@@ -256,7 +256,7 @@ public class PreferenceList extends Composite {
 					
 					controller.modifyParkRating(controller.getUser().getId(), park.getParkId(),
 							Integer.parseInt(lisb.getValue(lisb.getSelectedIndex())), comm.getValue(), park);
-					alterRating(park);
+					alterRating(park, Integer.parseInt(lisb.getValue(lisb.getSelectedIndex())));
 					Window.alert("Changes saved.");
 					controller.buttonToPrefList();
 				
@@ -273,6 +273,7 @@ public class PreferenceList extends Composite {
 					
 					controller.deleteParkRating(controller.getUser().getId(), park.getParkId(),park);
 					Window.alert("Park deleted from preference list.");
+					alterRating(park);
 					controller.buttonToPrefList();
 				
 				}
@@ -336,9 +337,20 @@ public class PreferenceList extends Composite {
 				p.setOldRating(0);
 			}
 		}
-		
 	}
-	
+public void alterRating(PreferencePark pp, int r){
+		
+		List<Park> parks = controller.getUser().getLastSearch();
+		for (Park p: parks){
+			if(pp.getParkId()==p.getParkId()){
+				int oldCount = p.getCount();
+				double oldRating = p.getRating();
+				double newRating = (oldRating*oldCount-pp.getRating()+r)/oldCount;
+				p.setRating(newRating);
+				p.setOldRating(0);
+			}
+		}
+	}
 
 	
 	

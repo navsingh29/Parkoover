@@ -188,7 +188,9 @@ public class Results extends Composite {
 		
 		for (final Park park: parks) {
 			
+			
 			int avgRating = (int) park.getRating();
+			if (park.getCount()<1) avgRating=0;
 			StringBuffer rating = new StringBuffer();
 			for(int i=0;i<5;i++){
 				if (avgRating-->0)
@@ -205,7 +207,9 @@ public class Results extends Composite {
 			verticalPanel_2.setSize("100%", "100%");
 
 			//Rating
-			Label ratingLabel = new Label("Average Rating: "+round(park.getRating(),1));
+			double parkRating = park.getRating();
+			if (park.getCount()<1) parkRating = 0;
+			Label ratingLabel = new Label("Average Rating: "+round(parkRating,1));
 			ratingLabel.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(ratingLabel);
 			

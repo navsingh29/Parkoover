@@ -240,8 +240,8 @@ public class ServiceController {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("An error occured. Your Facebook Login may have expired or your event time may be invalid.");
-				
+			//	Window.alert("An error occured. Your Facebook Login may have expired or your event time may be invalid.");
+				Window.alert(caught.getMessage());
 			}
 
 			@Override
@@ -249,7 +249,7 @@ public class ServiceController {
 				if (result)
 					Window.alert("Event successfully created");
 				else 
-					Window.alert("An error occured. Your Facebook Login may have expired. Please re-login and try again.");
+					Window.alert("An error occured. Your Facebook Login may have expired or the event dates may be invalid. Please re-login and/or try again.");
 				
 				
 			}
