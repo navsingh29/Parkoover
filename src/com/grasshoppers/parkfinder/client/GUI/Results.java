@@ -1,5 +1,6 @@
 package com.grasshoppers.parkfinder.client.GUI;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,7 +205,7 @@ public class Results extends Composite {
 			verticalPanel_2.setSize("100%", "100%");
 
 			//Rating
-			Label ratingLabel = new Label("Average Rating: "+park.getRating());
+			Label ratingLabel = new Label("Average Rating: "+round(park.getRating(),1));
 			ratingLabel.setStyleName("gwt-Label-Login");
 			verticalPanel_2.add(ratingLabel);
 			
@@ -308,16 +309,36 @@ public class Results extends Composite {
 				public void onClick(ClickEvent event) {
 					//TODO: make a popup appear when checked that allows user to specify
 					// rating and comment, for now they are null
+					
+					
 					if (notInPref) {
+						int myRating = Integer.parseInt(lisb.getValue(lisb.getSelectedIndex()));
+						double currentRating = park.getRating();
+						int ratingCount = park.getCount();
+						
 						
 						controller.createNewParkRating(controller.getUser().getId(), park.getParkId(),
-								Integer.parseInt(lisb.getValue(lisb.getSelectedIndex())), comm.getValue(),park);
+								myRating, comm.getValue(),park);
+						double newRaing = ((currentRating*ratingCount+myRating)/(ratingCount+1));
+						
+						park.setRating(newRaing);
+						park.setOldRating(currentRating);
+						park.setCount(ratingCount+1);
 						Window.alert("Park added to preference list.");
 						controller.goToSavedResult();
 					} else {
 						PreferencePark dummyPark = new PreferencePark();
 						dummyPark.setParkId(park.getParkId());
 						controller.deleteParkRating(controller.getUser().getId(), park.getParkId(), dummyPark);
+						
+						double oldRating = park.getOldRating();
+						if (oldRating==0) oldRating = park.getRating();
+						park.setRating(oldRating);
+						
+						
+						park.setCount(park.getCount()-1);
+						
+						
 						Window.alert("Park deleted from preference list.");
 						controller.goToSavedResult();
 					}
@@ -435,6 +456,14 @@ private class StreetViewClickHandler implements ClickHandler {
 		}
 		
 	}
+
+public double round(double value, int places) {
+    if (places < 0) throw new IllegalArgumentException();
+
+    BigDecimal bd = new BigDecimal(value);
+    bd = bd.setScale(places, BigDecimal.ROUND_HALF_UP);
+    return bd.doubleValue();
+}
 
 	
 	

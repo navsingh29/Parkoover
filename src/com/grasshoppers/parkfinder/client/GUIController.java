@@ -144,7 +144,8 @@ public class GUIController extends Composite{
 					buttonToSearch();
 					if(result.isFacebookLogin()) facebookLogin.setText("Logged Into Facebook.");;
 					// Change the following for online
-					if (isToken!=null){ Window.Location.replace("http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+				//	if (isToken!=null){ Window.Location.replace("http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+					if (isToken!=null){ Window.Location.replace("http://parky.beastspider.cloudbees.net/");
 					}
 				}	
 			}
@@ -193,10 +194,10 @@ public class GUIController extends Composite{
 	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&redirect_uri="+GWT.getModuleBaseURL() + "parseloginservice?");
 	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&redirect_uri="+GWT.getModuleBaseURL() + "parseloginservice?");
 	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&scope=create_event&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
-	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&scope=create_event&redirect_uri="+Window.Location.getHref());
+		Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=354332208044523&response_type=token&scope=create_event&redirect_uri="+Window.Location.getHref());
 		
 		//Use the following for local development
-		Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=241791142650990&response_type=token&scope=create_event&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
+	//	Window.Location.assign("https://www.facebook.com/dialog/oauth?client_id=241791142650990&response_type=token&scope=create_event&redirect_uri=http://127.0.0.1:8888/ParkFinder.html?gwt.codesvr=127.0.0.1:9997");
 		
 	}
 	

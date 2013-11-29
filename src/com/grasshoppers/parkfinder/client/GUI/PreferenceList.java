@@ -256,7 +256,7 @@ public class PreferenceList extends Composite {
 					
 					controller.modifyParkRating(controller.getUser().getId(), park.getParkId(),
 							Integer.parseInt(lisb.getValue(lisb.getSelectedIndex())), comm.getValue(), park);
-					
+					alterRating(park);
 					Window.alert("Changes saved.");
 					controller.buttonToPrefList();
 				
@@ -323,6 +323,31 @@ public class PreferenceList extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	}
 
+	public void alterRating(PreferencePark pp){
+		
+		List<Park> parks = controller.getUser().getLastSearch();
+		for (Park p: parks){
+			if(pp.getParkId()==p.getParkId()){
+				int oldCount = p.getCount();
+				double oldRating = p.getRating();
+				double newRating = (oldRating*oldCount-pp.getRating())/(oldRating-1);
+				p.setRating(newRating);
+				p.setCount(oldCount-1);
+				p.setOldRating(0);
+			}
+		}
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	private class PlotParkClickHandler implements ClickHandler {
 
 		PreferencePark pp = null;

@@ -101,7 +101,7 @@ public class FacebookEventWidget extends Composite {
 		Set<String> featureSet = new TreeSet<String>();
 		for(int i=0;i<park.getFacilityList().size();i++){
 			String feature = park.getFacilityList().get(i).getType();
-			if(!featureSet.contains(feature)){
+			if(!featureSet.contains(feature)&&!feature.equals("Washroom")){
 			featureSet.add(feature);
 			eventType.addItem(feature);
 			}
